@@ -3,6 +3,8 @@ public class ComercializadorEnergia {
     private double custoDiarioEner;
     private static double IMPOSTO = 2.0;
 
+
+
     public double preçoDiaDisp(double consumoDisp){
         return 0;
     }
