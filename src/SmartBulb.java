@@ -49,6 +49,11 @@ public class SmartBulb extends SmartDevice {
         this.tone = NEUTRAL;
     }
 
+    @Override
+    public double custoEnergia() {
+        return 0;
+    }
+
     public void setTone(int t) {
         if (t>WARM) this.tone = WARM;
         else if (t<COLD) this.tone = COLD;
@@ -59,7 +64,6 @@ public class SmartBulb extends SmartDevice {
         return this.tone;
     }
 
-    public double consumoEnergia(){ return 0; }
 
 }
 

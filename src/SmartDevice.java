@@ -19,10 +19,11 @@ import java.util.Objects;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class SmartDevice {
+public abstract class SmartDevice {
 
     private String id;
     private boolean on;
+    private int custoInstalation;
 
     /**
      * Constructor for objects of class SmartDevice
@@ -61,10 +62,6 @@ public class SmartDevice {
     
     public String getID() {return this.id;}
 
-    public SmartDevice clone(){
-        return new SmartDevice(this);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -72,5 +69,7 @@ public class SmartDevice {
         SmartDevice that = (SmartDevice) o;
         return on == that.getOn() && this.getID().equals(that.getID());
     }
+
+    public abstract double custoEnergia();
 
 }

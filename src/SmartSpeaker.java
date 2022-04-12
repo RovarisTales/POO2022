@@ -78,5 +78,10 @@ public class SmartSpeaker extends SmartDevice {
         return this.volume == that.getVolume() && this.getChannel().equals(that.getChannel());
     }
 
+    @Override
+    public double custoEnergia() {
+        return 0;
+    }
+
 
 }
