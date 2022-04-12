@@ -25,10 +25,13 @@ import java.util.HashMap;
  * @version (a version number or a date)
  */
 public class CasaInteligente {
-   
+
+    private String proprietario;
     private String morada;
+    private int NIF;
     private Map<String, SmartDevice> devices; // identificador -> SmartDevice
     private Map<String, List<String>> locations; // Espaço -> Lista codigo dos devices
+    private String comercializadorEn;
 
     /**
      * Constructor for objects of class CasaInteligente
@@ -50,6 +53,10 @@ public class CasaInteligente {
     
     public void setDeviceOn(String devCode) {
         this.devices.get(devCode).turnOn();
+    }
+
+    public void setDeviceOff(String devCode) {
+        this.devices.get(devCode).turnOff();
     }
     
     public boolean existsDevice(String id) {
@@ -97,6 +104,19 @@ public class CasaInteligente {
     public boolean roomHasDevice (String s1, String s2) {
         List<String> l = this.locations.get(s1);
         return l.contains(s2);
+    }
+
+    /**
+     * Ligar e desligar todos os dispositivos de uma divisao
+     * @param b
+     */
+
+    public void setAllOnRoom(boolean b) {
+
+    }
+
+    public void setAllOffRoom(boolean b) {
+
     }
     
 }

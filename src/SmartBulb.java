@@ -25,6 +25,8 @@ public class SmartBulb extends SmartDevice {
     public static final int COLD = 0;
     
     private int tone;
+    private int dimensão;
+    private int custoEnergia;
 
     /**
      * Constructor for objects of class SmartBulb
@@ -56,6 +58,8 @@ public class SmartBulb extends SmartDevice {
     public int getTone() {
         return this.tone;
     }
+
+    public double consumoEnergia(){ return 0; }
 
 }
 

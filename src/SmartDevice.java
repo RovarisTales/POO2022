@@ -1,4 +1,3 @@
- 
 
 /*********************************************************************************/
 /** DISCLAIMER: Este código foi criado e alterado durante as aulas práticas      */
@@ -10,7 +9,6 @@
 /** procurar soluções alternativas, à medida que forem adquirindo mais           */
 /** conhecimentos de POO.                                                        */
 /*********************************************************************************/
-
 
 import java.util.Objects;
 
