@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 
 /**
@@ -24,8 +25,9 @@ import java.util.HashMap;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class CasaInteligente {
-
+public class CasaInteligente
+{
+    //variáveis de instância
     private String proprietario;
     private String morada;
     private int NIF;
@@ -34,21 +36,49 @@ public class CasaInteligente {
     private String comercializadorEn;
 
     /**
-     * Constructor for objects of class CasaInteligente
+     * Construtor por omissão de CasaInteligente.
      */
-    public CasaInteligente() {
-        // initialise instance variables
+    public CasaInteligente()
+    {
+        this.proprietario = "";
         this.morada = "";
+        this.NIF = 0;
+        this.devices = new HashMap<>();
+        this.locations = new HashMap<>();
+        this.comercializadorEn = "";
+
+    }
+
+    /**
+     * Construtor parametrizado de CasaInteligente.
+     * Aceita como parâmetros o nome do proprietario, a morada, o Nif , a estrutura de dados devices, a estrutura de dados locations, e o nome do comercializador de energia
+     *
+     */
+    public CasaInteligente(String proprietario, String morada, int NIF, Map<String, SmartDevice> devices, Map<String, List<String>> locations, String comercializadorEn)
+    {
+        this.proprietario = proprietario;
+        this.morada = morada;
+        this.NIF = NIF;
+        this.devices = devices.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey,e-> e.getValue().clone()));
+        this.locations = locations.entrySet().stream().collect(Collectors.toMap(e->e.getKey(),e-> e.getValue()));
+        this.comercializadorEn = comercializadorEn;
+    }
+
+    public casaInteligente(String proprietario, String morada, int NIF, String comercializadorEn)
+    {
+        this.proprietario = proprietario;
+        this.morada = morada;
+        this.NIF = NIF;
+        this.comercializadorEn = comercializadorEn;
         this.devices = new HashMap<>();
         this.locations = new HashMap<>();
     }
 
-    public CasaInteligente(String morada) {
-        // initialise instance variables
-        this.morada = morada;
-        this.devices = new HashMap<>();
-        this.locations = new HashMap<>();
-    }
+    /**
+     * Constructor for objects of class CasaInteligente
+     */
+
+
 
     
     public void setDeviceOn(String devCode) {
@@ -101,7 +131,8 @@ public class CasaInteligente {
         l.add(s2);
     }
     
-    public boolean roomHasDevice (String s1, String s2) {
+    public boolean roomHasDevice (String s1, String s2)
+    {
         List<String> l = this.locations.get(s1);
         return l.contains(s2);
     }
@@ -111,12 +142,15 @@ public class CasaInteligente {
      * @param b
      */
 
-    public void setAllOnRoom(boolean b) {
+    public void setAllOnRoom(boolean b)
+    {
 
     }
 
-    public void setAllOffRoom(boolean b) {
+    public void setAllOffRoom(boolean b)
+    {
 
     }
-    
+
+
 }
