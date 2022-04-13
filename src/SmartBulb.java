@@ -35,6 +35,7 @@ public class SmartBulb extends SmartDevice {
         // initialise instance variables
         super();
         this.tone = NEUTRAL;
+        this.custoEnergia = 0;
     }
 
     public SmartBulb(String id, int tone,int custoEnergi) {
@@ -54,6 +55,9 @@ public class SmartBulb extends SmartDevice {
         super(n);
         this.tone = tone;
         this.custoEnergia = custo;
+    }
+    public int getCustointslation(){
+        return this.getCustoInstalation();
     }
 
     @Override
