@@ -43,17 +43,11 @@ public abstract class SmartDevice {
     public SmartDevice(String s, boolean b,int custo) {
         this.id = s;
         this.on = b;
-<<<<<<< HEAD
-=======
+
         this.custoInstalation = 0;
     }
 
-    public SmartDevice(String s, boolean b,int custo) {
-        this.id = s;
-        this.on = b;
->>>>>>> fe8db45d3eaa552402d644efe0f0cc4cf26f8bfe
-        this.custoInstalation = custo;
-    }
+
 
     public SmartDevice(SmartDevice umDevice){
         this.id = umDevice.getID();
@@ -78,10 +72,6 @@ public abstract class SmartDevice {
     public void setOn(boolean b) {this.on = b;}
     
     public String getID() {return this.id;}
-
-    public int getCustoInstalation() {
-        return custoInstalation;
-    }
 
     public void setCustoInstalation(int custoInstalation) {
         this.custoInstalation = custoInstalation;

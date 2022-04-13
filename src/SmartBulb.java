@@ -56,7 +56,7 @@ public class SmartBulb extends SmartDevice {
         this.tone = tone;
         this.custoEnergia = custo;
     }
-    public int getCustointslation(){
+    public int getCustoIntslation(){
         return this.getCustoInstalation();
     }
 
