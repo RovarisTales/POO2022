@@ -102,5 +102,13 @@ public class SmartSpeakerTest {
         smartSpe1.setChannel("XPTO");
         assertEquals("XPTO", smartSpe1.getChannel());
     }
+
+    @Test
+    public void testGetMarca() {
+        SmartSpeaker smartSpe1 = new SmartSpeaker("s1");
+        Marca marca1 = new Marca("JBL",10);
+        smartSpe1.setMarca(marca1);
+        assertEquals("JBL", smartSpe1.getMarca().getNome());
+    }
 }
 
