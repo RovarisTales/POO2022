@@ -37,21 +37,38 @@ public class SmartBulb extends SmartDevice {
         this.tone = NEUTRAL;
     }
 
-    public SmartBulb(String id, int tone) {
+    public SmartBulb(String id, int tone,int custoEnergi) {
         // initialise instance variables
         super(id);
         this.tone = tone;
+        this.custoEnergia = custoEnergi;
     }
 
     public SmartBulb(String id) {
         // initialise instance variables
         super(id);
         this.tone = NEUTRAL;
+        this.custoEnergia = 0;
+    }
+    public SmartBulb (int tone, SmartDevice n,int custo){
+        super(n);
+        this.tone = tone;
+        this.custoEnergia = custo;
+    }
+
+    @Override
+    public boolean getOn() {
+        return this.getOn();
+    }
+
+    @Override
+    public String getID() {
+        return this.getID();
     }
 
     @Override
     public double custoEnergia() {
-        return 0;
+        return this.tone*2 + this.custoEnergia;
     }
 
     public void setTone(int t) {
@@ -65,9 +82,29 @@ public class SmartBulb extends SmartDevice {
     }
 
     public SmartBulb clone(){
-        return null;
+        SmartBulb n = new SmartBulb(this.tone,this,this.custoEnergia);
+        return n;
     }
 
+    public int getCustoEnergia() {
+        return this.custoEnergia;
+    }
 
+    public int getDimensão() {
+        return this.dimensão;
+    }
+
+    @Override
+    public void setOn(boolean b) {
+        super.setOn(b);
+    }
+
+    public void setDimensão(int dimensão) {
+        this.dimensão = dimensão;
+    }
+
+    public void setCustoEnergia(int custoEnergia) {
+        this.custoEnergia = custoEnergia;
+    }
 }
 
