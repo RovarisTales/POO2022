@@ -27,9 +27,9 @@ public class SmartSpeaker extends SmartDevice {
 
     public SmartSpeaker(String s) {
         // initialise instance variables
-        super();
+        super(s);
         this.volume = 10;
-        this.channel = s;
+        this.channel = "";
         this.marca = new Marca();
     }
 

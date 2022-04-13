@@ -49,6 +49,15 @@ public class CasaInteligente
 
     }
 
+    public CasaInteligente(String morada){
+        this.proprietario = "";
+        this.morada = morada;
+        this.NIF = 0;
+        this.devices = new HashMap<>();
+        this.locations = new HashMap<>();
+        this.comercializadorEn = "";
+    }
+
     /**
      * Construtor parametrizado de CasaInteligente.
      * Aceita como parâmetros o nome do proprietario, a morada, o Nif , a estrutura de dados devices, a estrutura de dados locations, e o nome do comercializador de energia
