@@ -50,8 +50,17 @@ public class SmartSpeaker extends SmartDevice {
         this.marca.setCusto(custo);
     }
 
+    public SmartSpeaker(String cod,boolean b,int custoInstalacao, String channel, int i,String nome,int custo) {
+        // initialise instance variables
+        super(cod,b,custoInstalacao);
+        this.channel = channel;
+        this.volume = Math.max(i, 0);
+        this.marca.setNome(nome);
+        this.marca.setCusto(custo);
+    }
+
     public SmartSpeaker(SmartSpeaker umSpeaker){
-        super(umSpeaker.getID(), umSpeaker.getOn());
+        super(umSpeaker.getID(), umSpeaker.getOn(), umSpeaker.getCustoInstalation());
         this.channel = umSpeaker.getChannel();
         this.volume = umSpeaker.getVolume();
         this.marca = umSpeaker.getMarca();

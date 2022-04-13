@@ -10,6 +10,10 @@ public class Marca {
     private String nome;
     private int custo;
 
+    /**
+     * Construtor por omissão de Marca.
+     */
+
     public Marca(){
         this.nome = " ";
         this.custo = 10000;

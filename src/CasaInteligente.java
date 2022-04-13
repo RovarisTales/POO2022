@@ -64,7 +64,7 @@ public class CasaInteligente
         this.comercializadorEn = comercializadorEn;
     }
 
-    public casaInteligente(String proprietario, String morada, int NIF, String comercializadorEn)
+    public CasaInteligente(String proprietario, String morada, int NIF, String comercializadorEn)
     {
         this.proprietario = proprietario;
         this.morada = morada;

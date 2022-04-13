@@ -31,21 +31,31 @@ public abstract class SmartDevice {
     public SmartDevice() {
         this.id = "";
         this.on = false;
+        this.custoInstalation = 0;
     }
 
     public SmartDevice(String s) {
         this.id = s;
         this.on = false;
+        this.custoInstalation = 0;
     }
 
     public SmartDevice(String s, boolean b) {
         this.id = s;
         this.on = b;
+        this.custoInstalation = 0;
+    }
+
+    public SmartDevice(String s, boolean b,int custo) {
+        this.id = s;
+        this.on = b;
+        this.custoInstalation = custo;
     }
 
     public SmartDevice(SmartDevice umDevice){
         this.id = umDevice.getID();
         this.on = umDevice.getOn();
+        this.custoInstalation = umDevice.getCustoInstalation();
     }
 
     public void turnOn() {
@@ -61,6 +71,14 @@ public abstract class SmartDevice {
     public void setOn(boolean b) {this.on = b;}
     
     public String getID() {return this.id;}
+
+    public int getCustoInstalation() {
+        return custoInstalation;
+    }
+
+    public void setCustoInstalation(int custoInstalation) {
+        this.custoInstalation = custoInstalation;
+    }
 
     @Override
     public boolean equals(Object o) {
