@@ -1,5 +1,13 @@
 import java.util.Objects;
 
+/**
+ * A classe SmartDCamera é uma sub-classe de SmartDevice.
+ * Permite calcular o custo de energia de uma SmartCamera.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+
 public class SmartCamera extends SmartDevice
 {
     public static final double QUATROK = 1;
@@ -8,6 +16,7 @@ public class SmartCamera extends SmartDevice
 
     private double resolucao;
     private double tamanho_ficheiro;
+
 
     public SmartCamera()
     {
