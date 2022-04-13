@@ -58,6 +58,12 @@ public class SmartBulb extends SmartDevice {
         this.tone = tone;
         this.custoEnergia = custo;
     }
+<<<<<<< HEAD
+    public int getCustoIntslation(){
+        return this.getCustoInstalation();
+    }
+=======
+>>>>>>> 7687608de2bfcccc7f5d0d6226f9062920c55f3d
 
     public SmartBulb(SmartBulb umaBulb){
         super(umaBulb.getID(),umaBulb.getOn(),umaBulb.getCustoInstalation());

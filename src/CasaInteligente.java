@@ -180,6 +180,27 @@ public class CasaInteligente
 
         this.locations.get(quarto).forEach(id -> devices.get(id).setOn(b));
     }
+    public void setAllOnQuarto(String quarto){
+        for(String id : locations.get(quarto)){
+            devices.get(id).setOn(true);
+        }
+    }
+    public void setAllOffQuarto(String quarto){
+        for(String id : locations.get(quarto)){
+            devices.get(id).setOn(false);
+        }
+    }
 
+    public void setAllOnCasa(){
+        for(String quartos : locations.keySet()){
+            setAllOnQuarto(quartos);
+        }
+    }
+
+    public void setAllOffCasa(){
+        for(String quartos : locations.keySet()){
+            setAllOffQuarto(quartos);
+        }
+    }
 
 }
