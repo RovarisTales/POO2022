@@ -64,6 +64,10 @@ public class SmartBulb extends SmartDevice {
         return this.tone;
     }
 
+    public SmartBulb clone(){
+        return null;
+    }
+
 
 }
 

@@ -44,13 +44,17 @@ public class SmartSpeaker extends SmartDevice {
         this.channel = s;
     }
 
-
-
     public SmartSpeaker(String cod, String channel, int i) {
         // initialise instance variables
         super(cod);
         this.channel = channel;
         this.volume = i < 0 ? 0 : i;
+    }
+
+    public SmartSpeaker(SmartSpeaker umSpeaker){
+        this.channel = umSpeaker.getChannel();
+        this.volume = umSpeaker.getVolume();
+        this.marca = umSpeaker.getMarca();
     }
 
     public void volumeUp() {
@@ -69,6 +73,14 @@ public class SmartSpeaker extends SmartDevice {
         this.channel = c;
     }
 
+    public Marca getMarca() {
+        return marca.clone();
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca.clone();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,6 +93,10 @@ public class SmartSpeaker extends SmartDevice {
     @Override
     public double custoEnergia() {
         return 0;
+    }
+
+    public SmartSpeaker clone(){
+        return new SmartSpeaker(this);
     }
 
 

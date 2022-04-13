@@ -72,4 +72,6 @@ public abstract class SmartDevice {
 
     public abstract double custoEnergia();
 
+    public abstract SmartDevice clone();
+
 }
