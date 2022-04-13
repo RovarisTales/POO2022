@@ -74,12 +74,33 @@ public class CasaInteligente
         this.locations = new HashMap<>();
     }
 
+    public String getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(String proprietario) {
+        this.proprietario = proprietario;
+    }
+
+    public int getNIF() {
+        return NIF;
+    }
+
+    public void setNIF(int NIF) {
+        this.NIF = NIF;
+    }
+
+    public String getComercializadorEn() {
+        return comercializadorEn;
+    }
+
+    public void setComercializadorEn(String comercializadorEn) {
+        this.comercializadorEn = comercializadorEn;
+    }
+
     /**
      * Constructor for objects of class CasaInteligente
      */
-
-
-
     
     public void setDeviceOn(String devCode) {
         this.devices.get(devCode).turnOn();
@@ -142,14 +163,13 @@ public class CasaInteligente
      * @param b
      */
 
-    public void setAllOnRoom(boolean b)
+    public void setAllOnOrOffRoom(String quarto,boolean b)
     {
+        /*for(String id : locations.get(quarto)){
+            devices.get(id).setOn(b);
+        }*/
 
-    }
-
-    public void setAllOffRoom(boolean b)
-    {
-
+        this.locations.get(quarto).forEach(id -> devices.get(id).setOn(b));
     }
 
 
