@@ -1,5 +1,9 @@
+import java.util.Objects;
+
 /**
- * Classe para a SmartSpeaker que tem uma Marca.
+ * Uma Marca é uma empresa que contém o seu nome e o custo energético das colunas da marca.
+ * @author Tiago Rodrigues
+ * @version 13/04/2022
  */
 
 public class Marca {
@@ -41,5 +45,19 @@ public class Marca {
         return new Marca(this);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Marca marca = (Marca) o;
+        return (this.custo == marca.getCusto()) && this.nome.equals(marca.getNome());
+    }
 
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nome: ").append(this.nome).append("\n")
+                .append("Custo Energético: ").append(this.custo).append("\n");
+
+        return sb.toString();
+    }
 }

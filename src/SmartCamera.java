@@ -7,4 +7,5 @@ public class SmartCamera extends SmartDevice {
     public double custoEnergia() {
         return 0;
     }
+
 }

@@ -1,24 +1,11 @@
- 
-
-/*********************************************************************************/
-/** DISCLAIMER: Este código foi criado e alterado durante as aulas práticas      */
-/** de POO. Representa uma solução em construção, com base na matéria leccionada */ 
-/** até ao momento da sua elaboração, e resulta da discussão e experimentação    */
-/** durante as aulas. Como tal, não deverá ser visto como uma solução canónica,  */
-/** ou mesmo acabada. É disponibilizado para auxiliar o processo de estudo.      */
-/** Os alunos são encorajados a testar adequadamente o código fornecido e a      */
-/** procurar soluções alternativas, à medida que forem adquirindo mais           */
-/** conhecimentos de POO.                                                        */
-/*********************************************************************************/
-
 /**
  * Um SmartSpeaker é um SmartDevice que além de ligar e desligar permite também
  * reproduzir som.
  * Consegue ligar-se a um canal (por simplificação uma rádio online) e permite
  * a regulação do seu nível de volume.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Tiago Rodrigues
+ * @version 13/04/2022
  */
 public class SmartSpeaker extends SmartDevice {
     public static final int MAX = 20; //volume máximo
@@ -35,6 +22,7 @@ public class SmartSpeaker extends SmartDevice {
         super();
         this.volume = 0;
         this.channel = "";
+        this.marca = new Marca();
     }
 
     public SmartSpeaker(String s) {
@@ -42,16 +30,28 @@ public class SmartSpeaker extends SmartDevice {
         super();
         this.volume = 10;
         this.channel = s;
+        this.marca = new Marca();
     }
 
     public SmartSpeaker(String cod, String channel, int i) {
         // initialise instance variables
         super(cod);
         this.channel = channel;
-        this.volume = i < 0 ? 0 : i;
+        this.volume = Math.max(i, 0);
+        this.marca = new Marca();
+    }
+
+    public SmartSpeaker(String cod, String channel, int i,String nome,int custo) {
+        // initialise instance variables
+        super(cod);
+        this.channel = channel;
+        this.volume = Math.max(i, 0);
+        this.marca.setNome(nome);
+        this.marca.setCusto(custo);
     }
 
     public SmartSpeaker(SmartSpeaker umSpeaker){
+        super(umSpeaker.getID(), umSpeaker.getOn());
         this.channel = umSpeaker.getChannel();
         this.volume = umSpeaker.getVolume();
         this.marca = umSpeaker.getMarca();
@@ -87,12 +87,14 @@ public class SmartSpeaker extends SmartDevice {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         SmartSpeaker that = (SmartSpeaker) o;
-        return this.volume == that.getVolume() && this.getChannel().equals(that.getChannel());
+        return this.volume == that.getVolume() && this.getChannel().equals(that.getChannel())
+                && this.marca.getCusto() == that.getMarca().getCusto()
+                && this.marca.getNome().equals(that.getMarca().getNome());
     }
 
     @Override
     public double custoEnergia() {
-        return 0;
+        return this.marca.getCusto() + (1.5) * this.volume;
     }
 
     public SmartSpeaker clone(){

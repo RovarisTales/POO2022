@@ -39,15 +39,15 @@ public class CasaInteligente {
     public CasaInteligente() {
         // initialise instance variables
         this.morada = "";
-        this.devices = new HashMap();
-        this.locations = new HashMap();
+        this.devices = new HashMap<>();
+        this.locations = new HashMap<>();
     }
 
     public CasaInteligente(String morada) {
         // initialise instance variables
         this.morada = morada;
-        this.devices = new HashMap();
-        this.locations = new HashMap();
+        this.devices = new HashMap<>();
+        this.locations = new HashMap<>();
     }
 
     
