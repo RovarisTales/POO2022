@@ -29,7 +29,7 @@ public class SmartCamera extends SmartDevice
     }
 
     /**
-     * Construtor parametrizado de Ponto.
+     * Construtor parametrizado de SmartCamera.
      * Aceita como parâmetros os valores de resolução e do tamanho do ficheiro
      */
     public SmartCamera(double resolucao, double tamanho_ficheiro)
@@ -40,7 +40,7 @@ public class SmartCamera extends SmartDevice
     }
 
     /**
-     * Construtor parametrizado de Ponto.
+     * Construtor parametrizado de SmartCamera.
      * Aceita como parâmetros os valores de resolução e do tamanho do ficheiro e a string s que contem o id do smart device
      */
     public SmartCamera(String s, double resolucao, double tamanho_ficheiro)
@@ -51,7 +51,7 @@ public class SmartCamera extends SmartDevice
     }
 
     /**
-     * Construtor parametrizado de Ponto.
+     * Construtor parametrizado de SmartCamera.
      * Aceita como parâmetros os valores de resolução e do tamanho do ficheiro
      * e a string s que contem o id do smart device, e o boolean b que contém o estado do smart device
      */
