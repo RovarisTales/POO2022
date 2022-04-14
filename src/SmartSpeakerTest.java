@@ -110,5 +110,19 @@ public class SmartSpeakerTest {
         smartSpe1.setMarca(marca1);
         assertEquals("JBL", smartSpe1.getMarca().getNome());
     }
+
+    @Test
+    public void testCustoEnergia() {
+        SmartSpeaker smartSpe1 = new SmartSpeaker("s1");
+        Marca marca1 = new Marca("JBL",10);
+        smartSpe1.setMarca(marca1);
+        assertEquals(25,smartSpe1.custoEnergia());
+        Marca marca2 = marca1.clone();
+        System.out.println(marca2.toString());
+        marca2.setCusto(20);
+        System.out.println(marca2.toString());
+        smartSpe1.setMarca(marca2);
+        assertEquals(35,smartSpe1.custoEnergia());
+    }
 }
 

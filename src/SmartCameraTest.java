@@ -34,11 +34,23 @@ public class SmartCameraTest {
     public void testConstructor() {
         SmartCamera smartcamera = new SmartCamera();
         assertTrue(smartcamera!=null);
-        smartcamera = new SmartCamera();
+        smartcamera = new SmartCamera(1,10);
         assertTrue(smartcamera!=null);
-        /*
-        smartcamera = new SmartCamera("b1", "RUM", 5);
+        smartcamera = new SmartCamera("c1",1,10);
         assertTrue(smartcamera!=null);
-         */
+    }
+
+    @Test
+    public void testCusto(){
+        SmartCamera smartcamera = new SmartCamera("c1",1,10);
+        assertTrue(smartcamera!=null);
+        assertTrue(10 == smartcamera.custoEnergia());
+    }
+
+    @Test
+    public void testClone(){
+        SmartCamera sm1 = new SmartCamera("c1",1,100);
+        SmartCamera smclone = sm1.clone();
+        assertTrue(sm1.equals(smclone));
     }
 }

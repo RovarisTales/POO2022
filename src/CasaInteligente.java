@@ -91,9 +91,35 @@ public class CasaInteligente
         this.locations = new HashMap<>();
     }
 
+    public CasaInteligente(CasaInteligente umaCasa){
+        this.proprietario = umaCasa.getProprietario();
+        this.morada = umaCasa.getMorada();
+        this.NIF = umaCasa.getNIF();
+        this.comercializadorEn = umaCasa.getComercializadorEn();
+        this.devices = umaCasa.getDevices();
+        this.locations = umaCasa.getLocations();
+    }
+
     /**
      * métodos de instância
      */
+
+    public String getMorada() {
+        return morada;
+    }
+
+    public void setMorada(String morada) {
+        this.morada = morada;
+    }
+
+    public Map<String,SmartDevice> getDevices(){
+        return null;
+    }
+
+
+    public Map<String, List<String>> getLocations() {
+        return locations;
+    }
 
     /**
      * Devolve o nome do proprietario
@@ -303,4 +329,19 @@ public class CasaInteligente
         }
     }
 
+    public CasaInteligente clone(){
+        return new CasaInteligente(this);
+    }
+
+    @Override
+    public String toString() {
+        return "CasaInteligente{" +
+                "proprietario='" + proprietario + '\'' +
+                ", morada='" + morada + '\'' +
+                ", NIF=" + NIF +
+                ", devices=" + devices +
+                ", locations=" + locations +
+                ", comercializadorEn='" + comercializadorEn + '\'' +
+                '}';
+    }
 }

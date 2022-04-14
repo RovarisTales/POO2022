@@ -28,7 +28,7 @@ public class SmartBulb extends SmartDevice{
     
     private int tone;
     private int dimensao;
-    private int custoEnergia;
+    private int custoDiario;
 
     /**
      * Constructor for objects of class SmartBulb
@@ -37,14 +37,14 @@ public class SmartBulb extends SmartDevice{
         // initialise instance variables
         super();
         this.tone = NEUTRAL;
-        this.custoEnergia = 0;
+        this.custoDiario = 0;
     }
 
     public SmartBulb(String id, int tone,int custoEnergi) {
         // initialise instance variables
         super(id);
         this.tone = tone;
-        this.custoEnergia = custoEnergi;
+        this.custoDiario = custoEnergi;
         this.dimensao = 0;
     }
 
@@ -52,42 +52,38 @@ public class SmartBulb extends SmartDevice{
         // initialise instance variables
         super(id);
         this.tone = NEUTRAL;
-        this.custoEnergia = 0;
+        this.custoDiario = 0;
         this.dimensao = 0;
     }
 
-    public SmartBulb(String id,int tone,int custoEnergi,int dimensao)
-    {
+    public SmartBulb(String id,int tone,int custoEnergi,int dimensao) {
         // initialise instance variables
         super(id);
         this.tone = tone;
-        this.custoEnergia = custoEnergi;
+        this.custoDiario = custoEnergi;
         this.dimensao = dimensao;
     }
 
-    public SmartBulb (int tone, SmartDevice n,int custo)
-    {
+    public SmartBulb (int tone, SmartDevice n,int custo) {
         super(n);
         this.tone = tone;
-        this.custoEnergia = custo;
+        this.custoDiario = custo;
     }
 
 
-    public SmartBulb(SmartBulb umaBulb)
-    {
+    public SmartBulb(SmartBulb umaBulb) {
         super(umaBulb.getID(),umaBulb.getOn(),umaBulb.getCustoInstalation());
         this.tone = umaBulb.getTone();
-        this.custoEnergia = umaBulb.getCustoEnergia();
+        this.custoDiario = umaBulb.getCustoDiario();
         this.dimensao = umaBulb.getDimensao();
     }
 
     @Override
     public double custoEnergia() {
-        return this.tone*2 + this.custoEnergia;
+        return this.tone*2 + this.custoDiario;
     }
 
-    public void setTone(int t)
-    {
+    public void setTone(int t) {
         if (t>WARM) this.tone = WARM;
         else if (t<COLD) this.tone = COLD;
         else this.tone = t;
@@ -102,18 +98,17 @@ public class SmartBulb extends SmartDevice{
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         SmartBulb smartBulb = (SmartBulb) o;
         return tone == smartBulb.getTone() && dimensao == smartBulb.getDimensao()
-                && custoEnergia == smartBulb.getCustoEnergia();
+                && custoDiario == smartBulb.getCustoDiario();
     }
 
-    public int getCustoEnergia() {
-        return this.custoEnergia;
+    public int getCustoDiario() {
+        return this.custoDiario;
     }
 
     public int getDimensao() {
@@ -125,7 +120,16 @@ public class SmartBulb extends SmartDevice{
     }
 
     public void setCustoEnergia(int custoEnergia) {
-        this.custoEnergia = custoEnergia;
+        this.custoDiario = custoEnergia;
+    }
+
+    @Override
+    public String toString() {
+        return "SmartBulb{" +
+                "tone=" + tone +
+                ", dimensao=" + dimensao +
+                ", custoEnergia=" + custoDiario +
+                '}';
     }
 }
 

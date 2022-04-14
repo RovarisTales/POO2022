@@ -7,6 +7,12 @@ public class ComercializadorEnergia {
     private double volumeFatura;
     private List<String> faturas;
 
+    public ComercializadorEnergia(){
+        this.nome = "";
+        this.custoDiarioEner = 0;
+        this.volumeFatura = 0;
+        this.faturas = new ArrayList<>();
+    }
     public ComercializadorEnergia(String nome, double custoDiarioEner, double volumeFatura)
     {
         this.nome = nome;
