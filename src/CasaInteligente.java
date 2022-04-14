@@ -11,10 +11,7 @@
 /** conhecimentos de POO.                                                        */
 /*********************************************************************************/
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -91,42 +88,71 @@ public class CasaInteligente
         this.locations = new HashMap<>();
     }
 
-    public CasaInteligente(CasaInteligente umaCasa){
+    public CasaInteligente(CasaInteligente umaCasa)
+    {
         this.proprietario = umaCasa.getProprietario();
         this.morada = umaCasa.getMorada();
         this.NIF = umaCasa.getNIF();
         this.comercializadorEn = umaCasa.getComercializadorEn();
         this.devices = umaCasa.getDevices();
         this.locations = umaCasa.getLocations();
+
     }
 
     /**
      * métodos de instância
      */
 
-    public String getMorada() {
-        return morada;
+    public String getMorada()
+    {
+        return this.morada;
     }
 
-    public void setMorada(String morada) {
+    public void setMorada(String morada)
+    {
         this.morada = morada;
     }
 
-    public Map<String,SmartDevice> getDevices(){
-        return null;
+    public Map<String,SmartDevice> getDevices()
+    {
+        if (this.devices == null) {
+
+            return null;
+        }
+        return this.devices.entrySet()
+                .stream()
+                .collect(Collectors.toMap(e->e.getKey(), e->e.getValue().clone()));
     }
 
-
-    public Map<String, List<String>> getLocations() {
-        return locations;
+    public void setDevices(Map<String, SmartDevice> devices)
+    {
+        this.devices = devices.entrySet()
+                .stream()
+                .collect(Collectors.toMap(e->e.getKey(), e->e.getValue().clone(), (a,b) -> b, HashMap::new));
     }
 
+    public Map<String, List<String>> getLocations()
+    {
+        if (this.locations == null) return null;
+        return this.locations.entrySet().stream().collect(Collectors.toMap(e-> e.getKey(),e->new ArrayList<>(e.getValue())));
+    }
+
+    public void setLocations(Map<String, List<String>> locations)
+    {
+        this.locations = locations;
+    }
+
+    public double custoDiario ()
+    {
+        return this.devices.values().stream().mapToDouble(e-> e.custoEnergia()).sum();
+    }
     /**
      * Devolve o nome do proprietario
      *
      * @return nome do proprietario
      */
-    public String getProprietario() {
+    public String getProprietario()
+    {
         return proprietario;
     }
 
@@ -135,7 +161,8 @@ public class CasaInteligente
      *
      * @param proprietario novo nome do proprietario
      */
-    public void setProprietario(String proprietario) {
+    public void setProprietario(String proprietario)
+    {
         this.proprietario = proprietario;
     }
 
@@ -144,8 +171,9 @@ public class CasaInteligente
      *
      * @return nif do proprietario da casa inteligente
      */
-    public int getNIF() {
-        return NIF;
+    public int getNIF()
+    {
+        return this.NIF;
     }
 
     /**
@@ -153,7 +181,8 @@ public class CasaInteligente
      *
      * @param NIF novo nif do proprietario
      */
-    public void setNIF(int NIF) {
+    public void setNIF(int NIF)
+    {
         this.NIF = NIF;
     }
 
@@ -162,7 +191,8 @@ public class CasaInteligente
      *
      * @return nome do comercializador de energia
      */
-    public String getComercializadorEn() {
+    public String getComercializadorEn()
+    {
         return comercializadorEn;
     }
 
@@ -171,7 +201,8 @@ public class CasaInteligente
      *
      * @param comercializadorEn novo comercializador de energia
      */
-    public void setComercializadorEn(String comercializadorEn) {
+    public void setComercializadorEn(String comercializadorEn)
+    {
         this.comercializadorEn = comercializadorEn;
     }
 
@@ -180,7 +211,8 @@ public class CasaInteligente
      *
      * @param devCode id do device que queremos ligar
      */
-    public void setDeviceOn(String devCode) {
+    public void setDeviceOn(String devCode)
+    {
         this.devices.get(devCode).turnOn();
     }
 
@@ -189,7 +221,8 @@ public class CasaInteligente
      *
      * @param devCode id do device que queremos desligar
      */
-    public void setDeviceOff(String devCode) {
+    public void setDeviceOff(String devCode)
+    {
         this.devices.get(devCode).turnOff();
     }
     /**
@@ -199,7 +232,8 @@ public class CasaInteligente
      *
      * @return verdadeiro ou falso, se existe ou não o dispositivo
      */
-    public boolean existsDevice(String id) {
+    public boolean existsDevice(String id)
+    {
         return this.devices.containsKey(id);
     }
 
@@ -209,7 +243,8 @@ public class CasaInteligente
      * @param s , smart device que queremos adicionar
      *
      */
-    public void addDevice(SmartDevice s) {
+    public void addDevice(SmartDevice s)
+    {
         this.devices.put(s.getID(),s.clone());
     }
 
@@ -220,7 +255,8 @@ public class CasaInteligente
      *
      * @return o SmartDevice de id igual a String s que recebemos como parametro
      */
-    public SmartDevice getDevice(String s) {
+    public SmartDevice getDevice(String s)
+    {
         return this.devices.getOrDefault(s,null);
     }
 
@@ -232,7 +268,8 @@ public class CasaInteligente
      */
     public void setOn(String s, boolean b)
     {
-        for (SmartDevice sd : this.devices.values()){
+        for (SmartDevice sd : this.devices.values())
+        {
             if (s.equals(sd.getID())) sd.setOn(b);
         }
     }
@@ -292,13 +329,13 @@ public class CasaInteligente
     /**
      * Verifica se o quarto de nome s1 contém o device de id s2
      *
-     * @param s1,s2 s1 é  nome do quarto e s2 o id do device
+     * @param sala,device sala é  nome do quarto e device o id do device
      *
      * @return Se contém ou não
      */
-    public boolean roomHasDevice (String s1, String s2)
+    public boolean roomHasDevice (String sala, String device)
     {
-        return this.locations.get(s1).contains(s2);
+        return this.locations.get(sala).contains(device);
         /*
         List<String> l = this.locations.get(s1);
         return l.contains(s2);
@@ -323,18 +360,21 @@ public class CasaInteligente
      * Ligar e desligar todos os dispositivos da casaInteligente
      * @param b
      */
-    public void setAllOnOrOffCasa(boolean b){
+    public void setAllOnOrOffCasa(boolean b)
+    {
         for(String quartos : locations.keySet()){
             setAllOnOrOffRoom(quartos,b);
         }
     }
 
-    public CasaInteligente clone(){
+    public CasaInteligente clone()
+    {
         return new CasaInteligente(this);
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "CasaInteligente{" +
                 "proprietario='" + proprietario + '\'' +
                 ", morada='" + morada + '\'' +
@@ -343,5 +383,19 @@ public class CasaInteligente
                 ", locations=" + locations +
                 ", comercializadorEn='" + comercializadorEn + '\'' +
                 '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CasaInteligente that = (CasaInteligente) o;
+
+        return NIF == that.getNIF() && this.proprietario.equals(that.getProprietario())
+                && this.morada.equals(that.getMorada()) && this.devices.equals(that.getDevices())
+                && this.locations.equals(that.getLocations())
+                && this.comercializadorEn.equals(that.getComercializadorEn());
     }
 }

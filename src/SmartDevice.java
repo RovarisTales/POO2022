@@ -23,7 +23,7 @@ public abstract class SmartDevice {
 
     private String id;
     private boolean on;
-    private int custoInstalation;
+    private double custoInstalation;
 
     /**
      * Constructor for objects of class SmartDevice
@@ -46,7 +46,7 @@ public abstract class SmartDevice {
         this.custoInstalation = 0;
     }
 
-    public SmartDevice(String s, boolean b,int custo) {
+    public SmartDevice(String s, boolean b,double custo) {
         this.id = s;
         this.on = b;
         this.custoInstalation = custo;
@@ -79,11 +79,11 @@ public abstract class SmartDevice {
         return this.id;
     }
 
-    public void setCustoInstalation(int custoInstalation) {
+    public void setCustoInstalation(double custoInstalation) {
         this.custoInstalation = custoInstalation;
     }
 
-    public int getCustoInstalation() {
+    public double getCustoInstalation() {
         return custoInstalation;
     }
 
@@ -99,4 +99,12 @@ public abstract class SmartDevice {
 
     public abstract SmartDevice clone();
 
+    @Override
+    public String toString() {
+        return "SmartDevice{" +
+                "id='" + id + '\'' +
+                ", on=" + on +
+                ", custoInstalation=" + custoInstalation +
+                '}';
+    }
 }

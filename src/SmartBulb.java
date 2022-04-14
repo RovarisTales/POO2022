@@ -69,7 +69,12 @@ public class SmartBulb extends SmartDevice{
         this.tone = tone;
         this.custoDiario = custo;
     }
-
+    public SmartBulb(String cod,boolean b, int custoinst, int tone,int custodia, int dimensao){
+        super(cod,b,custoinst);
+        this.tone = tone;
+        this.custoDiario = custodia;
+        this.dimensao = dimensao;
+    }
 
     public SmartBulb(SmartBulb umaBulb) {
         super(umaBulb.getID(),umaBulb.getOn(),umaBulb.getCustoInstalation());
@@ -126,10 +131,11 @@ public class SmartBulb extends SmartDevice{
     @Override
     public String toString() {
         return "SmartBulb{" +
+                super.toString() +
                 "tone=" + tone +
                 ", dimensao=" + dimensao +
                 ", custoEnergia=" + custoDiario +
-                '}';
+                '}' ;
     }
 }
 

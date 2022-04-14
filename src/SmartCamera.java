@@ -61,6 +61,12 @@ public class SmartCamera extends SmartDevice
         this.resolucao = resolucao;
         this.tamanho_ficheiro = tamanho_ficheiro;
     }
+    public SmartCamera(String s, boolean b,double custoInstalacao, double resolucao, double tamanho_ficheiro)
+    {
+        super(s, b,custoInstalacao);
+        this.resolucao = resolucao;
+        this.tamanho_ficheiro = tamanho_ficheiro;
+    }
 
     /**
      * métodos de instância
@@ -174,6 +180,7 @@ public class SmartCamera extends SmartDevice
     public String toString()
     {
         return "SmartCamera{" +
+                super.toString() +
                 "resolucao=" + resolucao +
                 ", tamanho_ficheiro=" + tamanho_ficheiro +
                 '}';

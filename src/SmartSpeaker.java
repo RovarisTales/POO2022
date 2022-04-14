@@ -50,7 +50,7 @@ public class SmartSpeaker extends SmartDevice {
         this.marca.setCusto(custo);
     }
 
-    public SmartSpeaker(String cod,boolean b,int custoInstalacao, String channel, int i,String nome,int custo) {
+    public SmartSpeaker(String cod,boolean b,double custoInstalacao, String channel, int i,String nome,int custo) {
         // initialise instance variables
         super(cod,b,custoInstalacao);
         this.channel = channel;
@@ -110,5 +110,12 @@ public class SmartSpeaker extends SmartDevice {
         return new SmartSpeaker(this);
     }
 
-
+    @Override
+    public String toString() {
+        return "SmartSpeaker{" + super.toString() +
+                "volume=" + volume +
+                ", channel='" + channel + '\'' +
+                ", marca=" + marca +
+                '}';
+    }
 }

@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class ComercializadorEnergia {
+public class ComercializadorEnergia{
     private String nome;
     private double custoDiarioEner;
     private static double IMPOSTO = 2.0;
@@ -68,7 +68,8 @@ public class ComercializadorEnergia {
         this.volumeFatura = volumeFatura;
     }
 
-    public List<String> getFaturas() {
+    public List<String> getFaturas()
+    {
         return new ArrayList<>(this.faturas);
     }
 
@@ -102,7 +103,6 @@ public class ComercializadorEnergia {
     {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         ComercializadorEnergia that = (ComercializadorEnergia) o;
 
         return this.nome.equals(that.getNome()) && this.custoDiarioEner == that.getCustoDiarioEner()
