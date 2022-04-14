@@ -21,13 +21,13 @@ import java.util.Objects;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class SmartBulb extends SmartDevice {
+public class SmartBulb extends SmartDevice{
     public static final int WARM = 2;
     public static final int NEUTRAL = 1;
     public static final int COLD = 0;
     
     private int tone;
-    private int dimensão;
+    private int dimensao;
     private int custoEnergia;
 
     /**
@@ -45,6 +45,7 @@ public class SmartBulb extends SmartDevice {
         super(id);
         this.tone = tone;
         this.custoEnergia = custoEnergi;
+        this.dimensao = 0;
     }
 
     public SmartBulb(String id) {
@@ -52,20 +53,32 @@ public class SmartBulb extends SmartDevice {
         super(id);
         this.tone = NEUTRAL;
         this.custoEnergia = 0;
+        this.dimensao = 0;
     }
 
-    public SmartBulb (int tone, SmartDevice n,int custo){
+    public SmartBulb(String id,int tone,int custoEnergi,int dimensao)
+    {
+        // initialise instance variables
+        super(id);
+        this.tone = tone;
+        this.custoEnergia = custoEnergi;
+        this.dimensao = dimensao;
+    }
+
+    public SmartBulb (int tone, SmartDevice n,int custo)
+    {
         super(n);
         this.tone = tone;
         this.custoEnergia = custo;
     }
 
 
-    public SmartBulb(SmartBulb umaBulb){
+    public SmartBulb(SmartBulb umaBulb)
+    {
         super(umaBulb.getID(),umaBulb.getOn(),umaBulb.getCustoInstalation());
         this.tone = umaBulb.getTone();
         this.custoEnergia = umaBulb.getCustoEnergia();
-        this.dimensão = umaBulb.getDimensão();
+        this.dimensao = umaBulb.getDimensao();
     }
 
     @Override
@@ -73,7 +86,8 @@ public class SmartBulb extends SmartDevice {
         return this.tone*2 + this.custoEnergia;
     }
 
-    public void setTone(int t) {
+    public void setTone(int t)
+    {
         if (t>WARM) this.tone = WARM;
         else if (t<COLD) this.tone = COLD;
         else this.tone = t;
@@ -88,12 +102,13 @@ public class SmartBulb extends SmartDevice {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         SmartBulb smartBulb = (SmartBulb) o;
-        return tone == smartBulb.getTone() && dimensão == smartBulb.getDimensão()
+        return tone == smartBulb.getTone() && dimensao == smartBulb.getDimensao()
                 && custoEnergia == smartBulb.getCustoEnergia();
     }
 
@@ -101,12 +116,12 @@ public class SmartBulb extends SmartDevice {
         return this.custoEnergia;
     }
 
-    public int getDimensão() {
-        return this.dimensão;
+    public int getDimensao() {
+        return this.dimensao;
     }
 
-    public void setDimensão(int dimensão) {
-        this.dimensão = dimensão;
+    public void setDimensao(int dimensao) {
+        this.dimensao = dimensao;
     }
 
     public void setCustoEnergia(int custoEnergia) {
