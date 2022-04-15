@@ -5,7 +5,7 @@
  * a regulação do seu nível de volume.
  *
  * @author Tiago Rodrigues
- * @version 13/04/2022
+ * @version 15/04/2022
  */
 public class SmartSpeaker extends SmartDevice {
     public static final int MAX = 20; //volume máximo
@@ -15,7 +15,11 @@ public class SmartSpeaker extends SmartDevice {
     private Marca marca;
 
     /**
-     * Constructor for objects of class SmartSpeaker
+     * Constructores para objectos da class SmartSpeaker
+     */
+
+    /**
+     * Construtor por omissão de SmartSpeaker.
      */
     public SmartSpeaker() {
         // initialise instance variables
@@ -25,6 +29,10 @@ public class SmartSpeaker extends SmartDevice {
         this.marca = new Marca();
     }
 
+    /**
+     * Construtor parametrizado de SmartSpeaker.
+     * Aceita como parâmetros o id do SmartSpeaker.
+     */
     public SmartSpeaker(String s) {
         // initialise instance variables
         super(s);
@@ -33,6 +41,10 @@ public class SmartSpeaker extends SmartDevice {
         this.marca = new Marca();
     }
 
+    /**
+     * Construtor parametrizado de SmartSpeaker.
+     * Aceita como parâmetros o id,canal e o volume do SmartSpeaker
+     */
     public SmartSpeaker(String cod, String channel, int i) {
         // initialise instance variables
         super(cod);
@@ -41,6 +53,10 @@ public class SmartSpeaker extends SmartDevice {
         this.marca = new Marca();
     }
 
+    /**
+     * Construtor parametrizado de SmartSpeaker.
+     * Aceita como parâmetros o id,canal e o volume do SmartSpeaker. Recebe parâmetros para a Marca.
+     */
     public SmartSpeaker(String cod, String channel, int i,String nome,int custo) {
         // initialise instance variables
         super(cod);
@@ -50,6 +66,11 @@ public class SmartSpeaker extends SmartDevice {
         this.marca.setCusto(custo);
     }
 
+    /**
+     * Construtor parametrizado de SmartSpeaker.
+     * Aceita como parâmetros o id,se está ligado,custo de instalar o Device,
+     * canal e o volume do SmartSpeaker. Recebe parâmetros para a Marca.
+     */
     public SmartSpeaker(String cod,boolean b,double custoInstalacao, String channel, int i,String nome,int custo) {
         // initialise instance variables
         super(cod,b,custoInstalacao);
@@ -59,6 +80,10 @@ public class SmartSpeaker extends SmartDevice {
         this.marca.setCusto(custo);
     }
 
+    /**
+     * Construtor parametrizado de SmartSpeaker.
+     * Aceita como parâmetro um SmartSpeaker.
+     */
     public SmartSpeaker(SmartSpeaker umSpeaker){
         super(umSpeaker.getID(), umSpeaker.getOn(), umSpeaker.getCustoInstalation());
         this.channel = umSpeaker.getChannel();
@@ -66,13 +91,27 @@ public class SmartSpeaker extends SmartDevice {
         this.marca = umSpeaker.getMarca();
     }
 
+    /**
+     * métodos de instância
+     */
+
+    /**
+     * Método que aumento o volume de uma SmartSpeaker
+     */
     public void volumeUp() {
         if (this.volume<MAX) this.volume++;
     }
 
+    /**
+     * Método que diminui o volume de uma SmartSpeaker
+     */
     public void volumeDown() {
         if (this.volume>0) this.volume--;
     }
+
+    /**
+     * Getters e setters
+     */
 
     public int getVolume() {return this.volume;}
     
@@ -91,6 +130,11 @@ public class SmartSpeaker extends SmartDevice {
     }
 
     @Override
+    /**
+     * Método que verifica se um objeto é igual a outro.
+     *
+     * @return boolean true se os objetos tiveram as atribuições iguais e o inverso.
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -102,20 +146,35 @@ public class SmartSpeaker extends SmartDevice {
     }
 
     @Override
+    /**
+     * Método que calcula o custo de engergia de uma SmartSpeaker
+     *
+     * @return  o custo de energia da SmartSpeaker
+     */
     public double custoEnergia() {
         return this.marca.getCusto() + (1.5) * this.volume;
     }
 
+    /**
+     * Método que faz uma cópia do objecto receptor da mensagem.
+     * Para tal invoca o construtor de cópia.
+     *
+     * @return objecto clone do objecto que recebe a mensagem.
+     */
     public SmartSpeaker clone(){
         return new SmartSpeaker(this);
     }
 
     @Override
+    /**
+     * Método que devolve a representação em String do SmartSpeaker
+     * @return String com o super e o inteiro com o volume, String do canal e a marca.
+     */
     public String toString() {
         return "SmartSpeaker{" + super.toString() +
                 "volume=" + volume +
                 ", channel='" + channel + '\'' +
-                ", marca=" + marca +
+                ", marca=" + marca.toString() +
                 '}';
     }
 }
