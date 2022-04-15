@@ -50,13 +50,13 @@ public class SmartBulb extends SmartDevice{
         this.dimensao = dimensao;
     }
 
-    public SmartBulb (int tone, SmartDevice n,int custo) {
+    public SmartBulb (SmartDevice n,int tone, int custo) {
         super(n);
         this.tone = tone;
         this.custoDiario = custo;
     }
-    public SmartBulb(String cod,boolean b, int custoinst, int tone,int custodia, int dimensao){
-        super(cod,b,custoinst);
+    public SmartBulb(String id,boolean b, int custoinst, int tone,int custodia, int dimensao){
+        super(id,b,custoinst);
         this.tone = tone;
         this.custoDiario = custodia;
         this.dimensao = dimensao;
@@ -67,13 +67,6 @@ public class SmartBulb extends SmartDevice{
         this.tone = umaBulb.getTone();
         this.custoDiario = umaBulb.getCustoDiario();
         this.dimensao = umaBulb.getDimensao();
-    }
-    /*
-    custo de energia arbritario necessario por causa da superclasse
-    */
-    @Override
-    public double custoEnergia() {
-        return this.tone*2 + this.custoDiario;
     }
     /*
     sets e gets da smartbulb
@@ -102,6 +95,13 @@ public class SmartBulb extends SmartDevice{
 
     public void setCustoEnergia(int custoEnergia) {
         this.custoDiario = custoEnergia;
+    }
+    /*
+    custo de energia arbritario necessario por causa da superclasse
+    */
+    @Override
+    public double custoEnergia() {
+        return this.tone*2 + this.custoDiario;
     }
     /*
     clone da Smartbulb a partir do contrutor de classe
