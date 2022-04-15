@@ -68,7 +68,7 @@ public class SmartBulb extends SmartDevice{
         this.custoDiario = umaBulb.getCustoDiario();
         this.dimensao = umaBulb.getDimensao();
     }
-    /*
+    /**
     sets e gets da smartbulb
     */
     public void setTone(int t) {
@@ -96,20 +96,20 @@ public class SmartBulb extends SmartDevice{
     public void setCustoEnergia(int custoEnergia) {
         this.custoDiario = custoEnergia;
     }
-    /*
+    /**
     custo de energia arbritario necessario por causa da superclasse
     */
     @Override
     public double custoEnergia() {
         return this.tone*2 + this.custoDiario;
     }
-    /*
+    /**
     clone da Smartbulb a partir do contrutor de classe
     */
     public SmartBulb clone(){
         return new SmartBulb(this);
     }
-    /*
+    /**
     equals da classe Smartbulb
     */
     
@@ -122,7 +122,7 @@ public class SmartBulb extends SmartDevice{
         return tone == smartBulb.getTone() && dimensao == smartBulb.getDimensao()
                 && custoDiario == smartBulb.getCustoDiario();
     }
-    /*
+    /**
     toString basico
     */
     @Override
