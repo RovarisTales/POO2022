@@ -10,9 +10,9 @@ public class Marca {
     private String nome;
     private int custo;
 
-    /**
-     * Construtor por omissão de Marca.
-     */
+        /**
+         * Construtor por omissão de Marca.
+         */
     public Marca(){
         this.nome = " ";
         this.custo = 10000;
@@ -37,7 +37,7 @@ public class Marca {
     }
 
     /**
-     * métodos de instância
+     * Métodos de instância
      */
 
     public String getNome() {
@@ -62,7 +62,6 @@ public class Marca {
      *
      * @return objecto clone do objecto que recebe a mensagem.
      */
-
     public Marca clone(){
         return new Marca(this);
     }
@@ -84,7 +83,6 @@ public class Marca {
      * Método que devolve a representação em String da Marca
      * @return String com o nome e o inteiro com custo de energia
      */
-
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Nome: ").append(this.nome).append("\n")

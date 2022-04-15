@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class CasaInteligente
+public class  CasaInteligente
 {
     //variáveis de instância
     private String proprietario;
@@ -142,7 +142,7 @@ public class CasaInteligente
         this.locations = locations;
     }
 
-    public double custoDiario ()
+    public double custoDiario()
     {
         return this.devices.values().stream().mapToDouble(e-> e.custoEnergia()).sum();
     }
@@ -282,7 +282,8 @@ public class CasaInteligente
      */
     public void setAllOn(boolean b)
     {
-        for (SmartDevice sd : this.devices.values()){
+        for (SmartDevice sd : this.devices.values())
+        {
             sd.setOn(b);
         }
     }
@@ -315,12 +316,12 @@ public class CasaInteligente
     /**
      * Adiciona a o quarto s1 o device com id s2
      *
-     * @param s1,s2 s1 é  nome do quarto e s2 o id do device
+     * @param sala,device sala é  nome do quarto e device o id do device
      *
      */
-    public void addToRoom (String s1, String s2)
+    public void addToRoom (String sala, String device)
     {
-        this.locations.get(s1).add(s2);
+        this.locations.get(sala).add(device);
         /*
         List<String> l = this.locations.get(s1);
         l.add(s2);

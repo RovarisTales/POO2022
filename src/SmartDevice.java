@@ -25,6 +25,14 @@ public abstract class SmartDevice {
     private boolean on;
     private double custoInstalation;
 
+    /*
+    IDEIA PARA O CUSTO DE INSTALAÇÃO
+    public static final double custoCamera = 2;
+    public static final double custoBulb = 1;
+    public static final double custoSpeaker = 0;
+
+     */
+
     /**
      * Constructor for objects of class SmartDevice
      */

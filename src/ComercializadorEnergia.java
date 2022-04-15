@@ -1,6 +1,7 @@
 import java.util.*;
 
-public class ComercializadorEnergia{
+public class ComercializadorEnergia
+{
     private String nome;
     private double custoDiarioEner;
     private static double IMPOSTO = 2.0;

@@ -69,7 +69,7 @@ public class SmartCamera extends SmartDevice
     }
 
     /**
-     * métodos de instância
+     * Métodos de instância
      */
 
     /**
