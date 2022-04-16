@@ -31,7 +31,7 @@ public class  CasaInteligente
     private Map<String, SmartDevice> devices; // identificador -> SmartDevice
     private Map<String, List<String>> locations; // Espaço -> Lista codigo dos devices
     private String comercializadorEn;
-    //Talvez adicionar quanto a casa gasta
+    private double gastoCasa;
 
     /**
      * Construtor por omissão de CasaInteligente.
@@ -44,6 +44,7 @@ public class  CasaInteligente
         this.devices = new HashMap<>();
         this.locations = new HashMap<>();
         this.comercializadorEn = "";
+        this.gastoCasa = 0;
 
     }
     /**
@@ -57,6 +58,7 @@ public class  CasaInteligente
         this.devices = new HashMap<>();
         this.locations = new HashMap<>();
         this.comercializadorEn = "";
+        this.gastoCasa = 0;
     }
 
     /**
@@ -64,7 +66,7 @@ public class  CasaInteligente
      * Aceita como parâmetros o nome do proprietario, a morada, o Nif , a estrutura de dados devices, a estrutura de dados locations, e o nome do comercializador de energia
      *
      */
-    public CasaInteligente(String proprietario, String morada, int NIF, Map<String, SmartDevice> devices, Map<String, List<String>> locations, String comercializadorEn)
+    public CasaInteligente(String proprietario, String morada, int NIF, Map<String, SmartDevice> devices, Map<String, List<String>> locations, String comercializadorEn,double gasto)
     {
         this.proprietario = proprietario;
         this.morada = morada;
@@ -72,6 +74,7 @@ public class  CasaInteligente
         this.devices = devices.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey,e-> e.getValue().clone()));
         this.locations = locations.entrySet().stream().collect(Collectors.toMap(e->e.getKey(),e-> e.getValue()));
         this.comercializadorEn = comercializadorEn;
+        this.gastoCasa = gasto;
     }
 
     /**
@@ -87,6 +90,7 @@ public class  CasaInteligente
         this.comercializadorEn = comercializadorEn;
         this.devices = new HashMap<>();
         this.locations = new HashMap<>();
+        this.gastoCasa = 0;
     }
 
     public CasaInteligente(CasaInteligente umaCasa)
@@ -97,12 +101,21 @@ public class  CasaInteligente
         this.comercializadorEn = umaCasa.getComercializadorEn();
         this.devices = umaCasa.getDevices();
         this.locations = umaCasa.getLocations();
+        this.gastoCasa = umaCasa.getGastoCasa();
 
     }
 
     /**
      * métodos de instância
      */
+
+    public double getGastoCasa() {
+        return gastoCasa;
+    }
+
+    public void setGastoCasa(double gastoCasa) {
+        this.gastoCasa = gastoCasa;
+    }
 
     public String getMorada()
     {
@@ -323,6 +336,7 @@ public class  CasaInteligente
     public void addToRoom (String sala, String device)
     {
         this.locations.get(sala).add(device);
+        this.gastoCasa = this.gastoCasa + this.devices.get(device).getCustoInstalation();
         /*
         List<String> l = this.locations.get(s1);
         l.add(s2);
@@ -384,6 +398,7 @@ public class  CasaInteligente
                 ", devices=" + devices +
                 ", locations=" + locations +
                 ", comercializadorEn='" + comercializadorEn + '\'' +
+                ", gastoCasa='" + gastoCasa +  '\'' +
                 '}';
     }
 
@@ -398,6 +413,7 @@ public class  CasaInteligente
         return NIF == that.getNIF() && this.proprietario.equals(that.getProprietario())
                 && this.morada.equals(that.getMorada()) && this.devices.equals(that.getDevices())
                 && this.locations.equals(that.getLocations())
-                && this.comercializadorEn.equals(that.getComercializadorEn());
+                && this.comercializadorEn.equals(that.getComercializadorEn())
+                && this.gastoCasa  == that.getGastoCasa();
     }
 }

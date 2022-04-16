@@ -56,7 +56,16 @@ public class Simulacao {
         this.comercializadores = comercializadores.stream().map(ComercializadorEnergia::clone).collect(Collectors.toList());
     }
 
+    public void addCasa(CasaInteligente ci)
+    {
+        this.casas.add(ci);
+    }
+
+    public void addComercializador(ComercializadorEnergia ce){
+        this.comercializadores.add(ce);
+    }
     /**
+     *
      * Método que atualiza fatura dos comercializadores
      * Calcula o consumo total de cada comercializador
      * Calcula qual c
@@ -85,8 +94,10 @@ public class Simulacao {
      */
     public List<String> faturasComercializador (String comercializador)
     {
-        for (ComercializadorEnergia ce : this.comercializadores){
-            if (ce.getNome().equals(comercializador)){
+        for (ComercializadorEnergia ce : this.comercializadores)
+        {
+            if (ce.getNome().equals(comercializador))
+            {
                 return ce.getFaturas();
             }
         }
@@ -118,6 +129,13 @@ public class Simulacao {
         return this.comercializadores.stream().sorted(c).collect(Collectors.toList());
     }
 
+    @Override
+    public String toString() {
+        return "Simulacao{" +
+                "casas=" + casas +
+                ", comercializadores=" + comercializadores +
+                '}';
+    }
 
     /*
     area de criar todas as funções que iremos precisar para alterar coisas q o utilizador pediu
@@ -127,17 +145,17 @@ public class Simulacao {
     {
 
     }
+    IMPORTANTE!!!!!!
+    IMPORTANTE!!!!!
+    IMPORTANTE!!!!
+    IMPORTANTE!!!
+    IMPORTANTE!!
+    IMPORTANTE!
     IMPORTANTE
-    IMPORTANTE
-    IMPORTANTE
-    IMPORTANTE
-    IMPORTANTE
-    IMPORTANTE
-    IMPORTANTE
-    IMPORTANTE
-    IMPORTANTE
-    IMPORTANTE
-    IMPORTANTE
+    IMPORTANTE!
+    IMPORTANTE!!
+    IMPORTANTE!!!
+    IMPORTANTE!!!!
 
 
      */

@@ -96,11 +96,11 @@ public class SmartCamera extends SmartDevice
      */
     public void setResolucao(double resolucao)
     {
-        if (resolucao>QUATROK)
+        if (resolucao==QUATROK)
         {
             this.resolucao = QUATROK;
         }
-        else if (resolucao<HD)
+        else if (resolucao==HD)
         {
             this.resolucao = HD;
         }
