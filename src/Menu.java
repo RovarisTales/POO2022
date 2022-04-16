@@ -10,8 +10,7 @@ public class Menu
     {
         Scanner menu = new Scanner (System.in);
         int aux = 0;
-        while(aux == 0)
-        {
+        while(aux == 0){
             System.out.print("##-----Menu para adicionar Casas e Devices------##\n\n");
             System.out.println("|----------------------------------------------|");
             System.out.print("| Opção 1 - Nova casa                            |\n");
@@ -21,14 +20,13 @@ public class Menu
 
             int opcao = menu.nextInt();
 
-            switch(opcao)
-            {
+            switch(opcao){
                 case 1:
                     int i = 0;
                     CasaInteligente nova = new CasaInteligente();
                     //Não ta funcionando
                     System.out.println("Nome do proprietatário");
-                    String id  = menu.nextLine();
+                 
                     NAO TA FUNCIONANDO VER PQ
                     nova.setProprietario(menu.nextLine());
                     System.out.println("Morada :");
@@ -38,8 +36,7 @@ public class Menu
                     System.out.println("Comercializador de energia :");
                     nova.setComercializadorEn(menu.nextLine());
 
-                    while(i == 0)
-                    {
+                    while(i == 0){
                         System.out.print("##--Menu para adicionar quartos e Devices-------##\n\n");
                         System.out.println("|----------------------------------------------|");
                         System.out.println("|----------------------------------------------|");
@@ -51,8 +48,7 @@ public class Menu
                         int op2 = menu.nextInt();
                         Map<String, Marca> marcas = new HashMap<>();
 
-                        switch (op2)
-                        {
+                        switch (op2){
                             case 1:
                                 //criar novo quarto na casa
                                 System.out.println("Diga o nome do quarto");
@@ -72,8 +68,7 @@ public class Menu
                                 System.out.println("|----------------------------------------------|");
                                 System.out.println("Digite uma opção: ");
 
-                                switch (menu.nextInt())
-                                {
+                                switch (menu.nextInt()){
                                     case 1:
                                         SmartSpeaker sp = new SmartSpeaker(id);
                                         System.out.println("Volume do SmartSpeaker : ");
@@ -82,17 +77,16 @@ public class Menu
                                         sp.setChannel(menu.nextLine());
                                         System.out.println("Qual o nome da Marca ?");
                                         String nome = menu.nextLine();
-                                        if (marcas.containsKey(nome))
-                                        {
+                                        if (marcas.containsKey(nome)){
                                             sp.setMarca(marcas.get(nome));
                                         }
-                                        else
-                                        {
+                                        else{
                                             System.out.println("Qual o custo da Marca ?");
                                             Marca oii = new Marca(nome, menu.nextInt());
                                             sp.setMarca(oii);
                                             marcas.put(nome, oii);
                                         }
+                                        break;
                                         /*
                                         LIGADA OU DESLIGADA
                                          */
@@ -126,7 +120,7 @@ public class Menu
                                 break;
                             default:
                                 i = 1;
-                                break;
+                                
                             }
                         /*
                     //Instalar os devices nos quartos
@@ -147,7 +141,7 @@ public class Menu
                     //Simulação
                     break;
                 default:
-                    aux += 1;
+                    aux = 1;
                     break;
 
             }
