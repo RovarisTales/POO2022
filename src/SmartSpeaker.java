@@ -114,6 +114,11 @@ public class SmartSpeaker extends SmartDevice {
      */
 
     public int getVolume() {return this.volume;}
+
+    public void setVolume(int volume)
+    {
+        this.volume = volume;
+    }
     
     public String getChannel() {return this.channel;}
     

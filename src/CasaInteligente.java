@@ -31,6 +31,7 @@ public class  CasaInteligente
     private Map<String, SmartDevice> devices; // identificador -> SmartDevice
     private Map<String, List<String>> locations; // Espaço -> Lista codigo dos devices
     private String comercializadorEn;
+    //Talvez adicionar quanto a casa gasta
 
     /**
      * Construtor por omissão de CasaInteligente.

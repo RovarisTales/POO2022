@@ -26,6 +26,14 @@ public class SmartCamera extends SmartDevice
     {
         super();
         this.resolucao = HD;
+        this.tamanho_ficheiro = 0;
+    }
+
+    public SmartCamera(String s)
+    {
+        super(s);
+        this.resolucao = HD;
+        this.tamanho_ficheiro = 0;
     }
 
     /**
