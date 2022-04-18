@@ -3,7 +3,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
 
-public class Menu  {
+/*
+TODO
+TODO TRANSFORMAR ISSO EM UMA CLASSE NA QUAL COMERCIALIZADORES E MARCAS SAO VARIAVEIS DE INSTANCIA E DA PRA PEGAR COM GET E SET O Q ESTA AGORA É MT C E O PROFESSOR RECLAMOU Q OS ALUNOS FAZIAM ISSO POR EXEMPLO AS FUNCOES RECEBEREM ARGUMENTOS Q USAMOS EM VARIAS FUNCOES TIPO COMERCIALIZADORES E MARCAS
+TODO IMPORTANTE
+TODO IMPORTANTE
+TODO IMPORTANTE
+
+ */
+public class Menu
+{
 
     public static ComercializadorEnergia criarComercializador(Map < String, ComercializadorEnergia > comercializadores)
     {
@@ -20,33 +29,58 @@ public class Menu  {
         return comer;
     }
 
-    public static void instalarDevices(CasaInteligente nova) {
+    public static void instalarDevices(CasaInteligente nova)
+    {
         Scanner menu = new Scanner(System.in);
-        for (String id : nova.getDevices().keySet()) {
+        for (String id : nova.getDevices().keySet())
+        {
             System.out.println("Deseja instalar o device "  + id + "? ");
             System.out.println();
             System.out.println("1 - Sim  \n2 - Não");
-            if (menu.nextInt() == 1){
-                while (true){
+            if (menu.nextInt() == 1)
+            {
+                while (true)
+                {
                     System.out.println("Em qual quarto deseja adicionar o device " + id + " ?");
                     String quarto = menu.next();
-                    if (nova.getLocations().containsKey(quarto)) {
-                    nova.addToRoom(quarto,id);
-                    break;
+                    if (nova.getLocations().containsKey(quarto))
+                    {
+                        nova.addToRoom(quarto,id);
+                        System.out.println("Deseja deixar o device  "  + id + " ligado ? ");
+                        System.out.println("1 - Sim  \n2 - Não");
+                        if (menu.nextInt() == 1)
+                        {
+                            nova.getDevices().get(id).turnOn();
+                        }
+                        nova.addToRoom(quarto,id);
+
+                        break;
                     }
-                    else {
+                    else
+                    {
                         System.out.println("Bro o quarto não existe Dred, queres um quarto novo? ;)");
-                        System.out.println("1 - Sim  \n   2 - Não");
-                        if (menu.nextInt() == 1) {
+                        System.out.println("1 - Sim  \n2 - Não");
+                        if (menu.nextInt() == 1)
+                        {
                             nova.addRoom(quarto);
                             nova.addToRoom(quarto, id);
+                            break;
+                        }
+                        else
+                        {
                             break;
                         }
                     }
                 }
             }
+            else
+            {
+                break;
+            }
         }
     }
+
+
     public static SmartDevice criarDevice(Map<String, Marca> marcas)
     {
         Scanner menu = new Scanner(System.in);
@@ -62,7 +96,8 @@ public class Menu  {
         System.out.println("|----------------------------------------------|");
         System.out.println("Digite uma opção: ");
 
-        switch (menu.nextInt()) {
+        switch (menu.nextInt())
+        {
             case 1:
                 SmartSpeaker sp = new SmartSpeaker(id);
                 System.out.println("Volume do SmartSpeaker : ");
@@ -71,9 +106,11 @@ public class Menu  {
                 sp.setChannel(menu.next());
                 System.out.println("Qual o nome da Marca ?");
                 String nome = menu.next();
-                if (marcas.containsKey(nome)) {
+                if (marcas.containsKey(nome))
+                {
                     sp.setMarca(marcas.get(nome));
-                } else {
+                } else
+                {
                     System.out.println("Qual o custo da Marca ?");
                     Marca oii = new Marca(nome, menu.nextInt());
                     sp.setMarca(oii);
@@ -84,7 +121,6 @@ public class Menu  {
                                         /*
                                         LIGADA OU DESLIGADA
                                          */
-
             case 2:
                 SmartCamera sc = new SmartCamera(id);
                 System.out.println("Resolução?");
@@ -112,7 +148,6 @@ public class Menu  {
         }
     }
 
-
     public static void criaQuartoDevice(CasaInteligente nova)
     {
         int i = 0;
@@ -129,7 +164,8 @@ public class Menu  {
             int op2 = menu.nextInt();
             Map<String, Marca> marcas = new HashMap<>();
 
-            switch (op2) {
+            switch (op2)
+            {
                 case 1:
                     //criar novo quarto na casa
                     System.out.println("Diga o nome do quarto");
@@ -196,9 +232,7 @@ public class Menu  {
                 switch (opcao) {
                     case 1:
                         simular.addCasa(criarCasa(comercializadores));
-
-                                //ADICIONAR O NOVA NO SIMULACAO
-
+                        break;
 
                     case 2:
                         simular.addComercializador(criarComercializador(comercializadores));//adicionar comercializador

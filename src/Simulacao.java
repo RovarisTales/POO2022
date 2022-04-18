@@ -1,14 +1,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Simulacao {
     List<CasaInteligente> casas;
-    List<ComercializadorEnergia> comercializadores;
+    Map<String,ComercializadorEnergia> comercializadores;
+    //TODO VARIAVEL LOCAL DATE TIME o dia
 
     /**
      * Construtor por omissão de Simulacao.
@@ -16,7 +14,9 @@ public class Simulacao {
     public Simulacao()
     {
         this.casas = new ArrayList<>();
-        this.comercializadores = new ArrayList<>();
+        this.comercializadores = new HashMap<>();
+        //TODO iniciar a variavel O DIA
+
     }
 
     /**
@@ -27,6 +27,9 @@ public class Simulacao {
     {
         File myObj = new File(filename);
         Scanner myReader = new Scanner(myObj);
+        this.casas = new ArrayList<>();
+        this.comercializadores = new HashMap<>();
+        //TODO iniciar a variavel
     }
 
     /**
@@ -46,14 +49,17 @@ public class Simulacao {
         this.casas = casas.stream().map(CasaInteligente::clone).collect(Collectors.toList());
     }
 
-    public List<ComercializadorEnergia> getComercializadores()
+    public Map<String,ComercializadorEnergia> getComercializadores()
     {
-        return this.comercializadores.stream().map(ComercializadorEnergia::clone).collect(Collectors.toList());
+        return this.comercializadores.entrySet()
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, e-> e.getValue().clone()));
     }
 
-    public void setComercializadores(List<ComercializadorEnergia> comercializadores)
+    public void setComercializadores(Map<String,ComercializadorEnergia> comercializadores)
     {
-        this.comercializadores = comercializadores.stream().map(ComercializadorEnergia::clone).collect(Collectors.toList());
+        this.comercializadores = comercializadores.entrySet()
+                .stream().collect(Collectors.toMap(Map.Entry::getKey, e-> e.getValue().clone()));
     }
 
     public void addCasa(CasaInteligente ci)
@@ -62,19 +68,26 @@ public class Simulacao {
     }
 
     public void addComercializador(ComercializadorEnergia ce){
-        this.comercializadores.add(ce);
+        this.comercializadores.put(ce.getNome(),ce);
     }
     /**
      *
      * Método que atualiza fatura dos comercializadores
      * Calcula o consumo total de cada comercializador
-     * Calcula qual c
      */
     public void simular(int dias)
     {
-        //Atualizar fatura comercializadores
-        //calcular consumo total de cada comercializador
-        //calcular qual c
+        for (CasaInteligente ci : this.casas)
+        {
+           String comercializador =  ci.getComercializadorEn();
+           ComercializadorEnergia ce = this.comercializadores.get(comercializador);
+           double preco = dias * ce.preçoDiaDisp(ci.custoDiario());
+           ce.setVolumeFatura(ce.getVolumeFatura() + preco);
+           ci.setGastoCasa(ci.getGastoCasa() + preco);
+           //TODO FAZER LOCAL DATE TIME e atualizar com o tempo pra colocar no fatura
+           int dia3 = 0;
+           ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia3, dia3 + dias);
+        }
     }
 
     /**
@@ -84,7 +97,7 @@ public class Simulacao {
     public ComercializadorEnergia ComercializadorComMaiorFatura()
     {
         Comparator<ComercializadorEnergia> c = (e1, e2) -> (int) (e2.getVolumeFatura() - e1.getVolumeFatura());
-        return this.comercializadores.stream().sorted(c).findFirst().orElse(null);
+        return this.comercializadores.values().stream().sorted(c).findFirst().orElse(null);
     }
 
     //Todas as faturas de um dado comercializador
@@ -94,7 +107,7 @@ public class Simulacao {
      */
     public List<String> faturasComercializador (String comercializador)
     {
-        for (ComercializadorEnergia ce : this.comercializadores)
+        for (ComercializadorEnergia ce : this.comercializadores.values())
         {
             if (ce.getNome().equals(comercializador))
             {
@@ -126,7 +139,7 @@ public class Simulacao {
     public List<ComercializadorEnergia> ordenacaoMaioresConsumidoresEnergia(int tempo)
     {
         Comparator<ComercializadorEnergia> c = (e1, e2) -> (int) (e2.getVolumeFatura() - e1.getVolumeFatura());
-        return this.comercializadores.stream().sorted(c).collect(Collectors.toList());
+        return this.comercializadores.values().stream().sorted(c).collect(Collectors.toList());
     }
 
     @Override
