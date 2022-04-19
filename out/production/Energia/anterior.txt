@@ -1,0 +1,5 @@
+Casas Proprietario=sasa Morada=rua Nif=123 ComercializadorEn=jose GastoCasa=0.0
+Devices:
+ SmartCamera Id=c1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=100.0
+SmartCamera Id=c2 On=false CustoInstallation=0.0 Resolucao=0.6 TamanhoFicheiro=100.0
+Locations: quarto c1 c1cozinha c2 c2

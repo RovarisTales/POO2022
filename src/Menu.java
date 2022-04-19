@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 /*
@@ -9,12 +10,29 @@ TODO TRANSFORMAR ISSO EM UMA CLASSE NA QUAL COMERCIALIZADORES E MARCAS SAO VARIA
 TODO IMPORTANTE
 TODO IMPORTANTE
 TODO IMPORTANTE
-
  */
-public class Menu
-{
+public class Menu{
+    /*
+    private ArrayList<ComercializadorEnergia> comercializadores;
+    private ArrayList<Marca> marcas;
 
-    public static ComercializadorEnergia criarComercializador(Map < String, ComercializadorEnergia > comercializadores)
+    public ArrayList<Marca> getMarcas() {
+        return marcas;
+    }
+
+    public ArrayList<ComercializadorEnergia> getComercializadores() {
+        return comercializadores;
+    }
+
+    public void addComer(ComercializadorEnergia comer){
+        this.comercializadores.add(comer);
+    }
+
+    public void addMarca(Marca m){
+        this.marcas.add(m);
+    }
+    */
+    public static ComercializadorEnergia criarComercializador(Map<String,ComercializadorEnergia> b)
     {
         ComercializadorEnergia comer = new ComercializadorEnergia();
         Scanner menu = new Scanner(System.in);
@@ -24,8 +42,9 @@ public class Menu
         comer.setCustoDiarioEner(menu.nextDouble());
         System.out.println("Volume de fatura :");
         comer.setVolumeFatura(menu.nextDouble());
-        comercializadores.put(comer.getNome(),comer);
-        System.out.println(comercializadores);
+        //b.put(comer.getNome(),comer);
+        //addComer(comer);
+        //System.out.println(comercializadores);
         return comer;
     }
 
@@ -45,7 +64,6 @@ public class Menu
                     String quarto = menu.next();
                     if (nova.getLocations().containsKey(quarto))
                     {
-                        nova.addToRoom(quarto,id);
                         System.out.println("Deseja deixar o device  "  + id + " ligado ? ");
                         System.out.println("1 - Sim  \n2 - Não");
                         if (menu.nextInt() == 1)
@@ -213,8 +231,7 @@ public class Menu
         return nova;
     }
 
-    public static void criarNovoSimular (Simulacao simular)
-    {
+    public static void criarNovoSimular (Simulacao simular) throws IOException {
         Scanner menu = new Scanner(System.in);
         int aux = 0;
         Map<String, ComercializadorEnergia> comercializadores = new HashMap<>();
@@ -225,6 +242,7 @@ public class Menu
                 System.out.print("| Opção 1 - Nova casa                            |\n");
                 System.out.print("| Opção 2 - Novo comercializador                 |\n");
                 System.out.print("| Opção 3 - Simular                              |\n");
+                System.out.print("| Opção 4 - Salvar                               |\n");
                 System.out.print("|------------------------------------------------|\n");
                 System.out.print("Digite uma opção: ");
 
@@ -241,6 +259,8 @@ public class Menu
                     case 3:
                                 //simular
                         break;
+                    case 4:
+                        simular.salvar();
                     default:
                         aux = 1;
 
@@ -250,8 +270,7 @@ public class Menu
     }
 
 
-        public static void main (String[]args) throws FileNotFoundException
-        {
+        public static void main (String[]args) throws IOException {
 
             Scanner menu = new Scanner(System.in);
 
@@ -297,6 +316,7 @@ public class Menu
                     }
                     break;
                 default:
+                    simular.salvar();
                     System.out.println("Fechando Progama");
                     System.exit(0);
 

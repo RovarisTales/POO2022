@@ -1,9 +1,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Simulacao {
+public class Simulacao
+{
     List<CasaInteligente> casas;
     Map<String,ComercializadorEnergia> comercializadores;
     //TODO VARIAVEL LOCAL DATE TIME o dia
@@ -30,6 +33,87 @@ public class Simulacao {
         this.casas = new ArrayList<>();
         this.comercializadores = new HashMap<>();
         //TODO iniciar a variavel
+        while(myReader.hasNextLine())
+        {
+
+        }
+    }
+
+    /*
+    TALVEZ CRIAR UMA CLASSE PRA SALVAR E LER
+     */
+    public void salvar () throws IOException
+    {
+        File myObj = new File("anterior.txt");
+        FileWriter fw = new FileWriter("anterior.txt");
+        fw.write("Comercializadores ");
+        for (ComercializadorEnergia ce : this.comercializadores.values())
+        {
+            fw.write("nome=" + ce.getNome() +" CustoDiarioEner=" + ce.getCustoDiarioEner()
+                    + " Imposto=" + ce.getIMPOSTO() +" VolumeFatura=" + ce.getVolumeFatura() + " Faturas=" + ce.getFaturas());
+
+        }
+        fw.write("\n");
+        fw.write("Casas ");
+        for (CasaInteligente ci : this.casas)
+        {
+            fw.write("Proprietario=" + ci.getProprietario() +" Morada=" + ci.getMorada()
+                    + " Nif=" + ci.getNIF() +" ComercializadorEn=" + ci.getComercializadorEn()
+                    + " GastoCasa=" + ci.getGastoCasa() + "\nDevices:\n");
+            Map<String,SmartDevice> sd = ci.getDevices();
+            for (String id : sd.keySet())
+            {
+                SmartDevice device = sd.get(id);
+                switch (device.getClass().getSimpleName())
+                {
+
+                    case ("SmartBulb"):
+                        SmartBulb sb= (SmartBulb) device;
+                        fw.write("SmartBulb Id=" + sb.getID() + " On=" + sb.getOn() +
+                                " CustoInstallation=" + sb.getCustoInstalation()+ " tone=" + sb.getTone() + " Dimensao=" +sb.getTone()
+                                + " CustoDiario=" + sb.getCustoDiario()+ "\n");
+                        break;
+                    case ("SmartSpeaker"):
+                        SmartSpeaker sp= (SmartSpeaker) device;
+                        fw.write("SmartSpeaker Id=" + sp.getID() +" On=" + sp.getOn() +
+                                " CustoInstallation=" + sp.getCustoInstalation()
+                                + " Volume=" + sp.getVolume() + " Canal=" + sp.getChannel()
+                                + " Marca=" + sp.getMarca().getNome() + " Custo=" + sp.getMarca().getCusto()+ "\n");
+                        break;
+                    case ("SmartCamera"):
+                        SmartCamera sc= (SmartCamera) device;
+                        fw.write("SmartCamera Id=" + sc.getID() +" On=" + sc.getOn() +
+                                " CustoInstallation=" + sc.getCustoInstalation()
+                                + " Resolucao=" + sc.getResolucao() + " TamanhoFicheiro=" + sc.getTamanho_ficheiro()+ "\n");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            fw.write("Locations: ");
+            Map<String,List<String>> l = ci.getLocations();
+            for (String quarto : l.keySet())
+            {
+                fw.write(quarto);
+                /*
+                l.get(quarto).forEach( e -> {
+                    try {
+                        fw.write(" " + e);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+                 */
+                for (String ids : l.get(quarto))
+                {
+                    fw.write(" " + ids + " ");
+                }
+
+            }
+            fw.write("\n");
+
+        }
+       fw.close();
     }
 
     /**
