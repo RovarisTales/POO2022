@@ -99,6 +99,12 @@ public class Menu{
                         if (menu.nextInt() == 1)
                         {
                             nova.addRoom(quarto);
+                            System.out.println("Deseja deixar o device  "  + id + " ligado ? ");
+                            System.out.println("1 - Sim  \n2 - Não");
+                            if (menu.nextInt() == 1)
+                            {
+                                nova.getDevices().get(id).turnOn();
+                            }
                             nova.addToRoom(quarto, id);
                             break;
                         }
