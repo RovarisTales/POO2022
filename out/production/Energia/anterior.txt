@@ -1,6 +1,8 @@
-Comercializadores nome=jose CustoDiarioEner=123.0 Imposto=2.0 VolumeFatura=100.0Faturas=[]
-Casas Proprietario=assa Morada=rua Nif=123 ComercializadorEn=jose GastoCasa=0.0
+Comercializadores nome=jose CustoDiarioEner=109.0 Imposto=2.0 VolumeFatura=10.0 Faturas=[]
+Casas Proprietario=mario Morada=ru Nif=123 ComercializadorEn=jose GastoCasa=0.0
 Devices:
-SmartCamera Id=c1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=100.0
-SmartCamera Id=c2 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=200.0
-Locations: quarto c1 cozinha c2 
+SmartSpeaker Id=id On=false CustoInstallation=0.0 Volume=20 Canal=sala Marca=oi Custo=10
+SmartCamera Id=s1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=10.0
+Locations: sala id
+ s1
+

@@ -106,8 +106,9 @@ public class Simulacao
                  */
                 for (String ids : l.get(quarto))
                 {
-                    fw.write(" " + ids + " ");
+                    fw.write(ids + " ");
                 }
+                fw.write("\n");
 
             }
             fw.write("\n");

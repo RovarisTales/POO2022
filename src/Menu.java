@@ -12,8 +12,46 @@ TODO IMPORTANTE
 TODO IMPORTANTE
  */
 public class Menu{
+    private Map<String,ComercializadorEnergia> comercializadores;
+    private Map<String,Marca> marcas;
 
-    public static ComercializadorEnergia criarComercializador(MarcaComer mc)
+    public Menu(){
+        this.marcas = new HashMap<>();
+        this.comercializadores = new HashMap<>();
+    }
+
+    public void setComercializadores(Map<String, ComercializadorEnergia> comercializadores) {
+        this.comercializadores = comercializadores;
+    }
+
+    public void setMarcas(Map<String, Marca> marcas) {
+        this.marcas = marcas;
+    }
+
+    public Map<String,Marca> getMarcas() {
+        return marcas;
+    }
+
+    public Map<String,ComercializadorEnergia> getComercializadores() {
+        return comercializadores;
+    }
+
+    public void addComer(ComercializadorEnergia comer) {
+        this.comercializadores.put(comer.getNome(),comer);
+    }
+
+    public void addMarca(Marca m) {
+        this.marcas.put(m.getNome(),m);
+    }
+
+    public ArrayList<String> getMarcasString(){
+        ArrayList<String> marca = new ArrayList<>();
+        for(String marc: this.marcas.keySet()){
+            marca.add(marc);
+        }
+        return marca;
+    }
+    public ComercializadorEnergia criarComercializador()
     {
         ComercializadorEnergia comer = new ComercializadorEnergia();
         Scanner menu = new Scanner(System.in);
@@ -23,12 +61,12 @@ public class Menu{
         comer.setCustoDiarioEner(menu.nextDouble());
         System.out.println("Volume de fatura :");
         comer.setVolumeFatura(menu.nextDouble());
-        mc.addComer(comer);
+        this.addComer(comer);
         //System.out.println(comercializadores);
         return comer;
     }
 
-    public static void instalarDevices(CasaInteligente nova)
+    public void instalarDevices(CasaInteligente nova)
     {
         Scanner menu = new Scanner(System.in);
         for (String id : nova.getDevices().keySet())
@@ -79,7 +117,7 @@ public class Menu{
     }
 
 
-    public static SmartDevice criarDevice(MarcaComer mc)
+    public SmartDevice criarDevice()
     {
         Scanner menu = new Scanner(System.in);
         System.out.println("Qual seria o id do device");
@@ -104,15 +142,15 @@ public class Menu{
                 sp.setChannel(menu.next());
                 System.out.println("Qual o nome da Marca ?");
                 String nome = menu.next();
-                if (mc.getMarcas().containsKey(nome))
+                if (this.getMarcas().containsKey(nome))
                 {
-                    sp.setMarca(mc.getMarcas().get(nome));
+                    sp.setMarca(this.getMarcas().get(nome));
                 } else
                 {
                     System.out.println("Qual o custo da Marca ?");
                     Marca oii = new Marca(nome, menu.nextInt());
                     sp.setMarca(oii);
-                    mc.addMarca(oii);
+                    this.addMarca(oii);
                 }
                 System.out.println(sp.toString());
                 return sp;
@@ -146,7 +184,7 @@ public class Menu{
         }
     }
 
-    public static void criaQuartoDevice(CasaInteligente nova,MarcaComer mc)
+    public void criaQuartoDevice(CasaInteligente nova)
     {
         int i = 0;
         while (i == 0) {
@@ -170,7 +208,7 @@ public class Menu{
                     nova.addRoom(menu.next());
                     break;
                 case 2:
-                    nova.addDevice(criarDevice(mc));
+                    nova.addDevice(criarDevice());
                     //criar novo device
 
 
@@ -182,9 +220,9 @@ public class Menu{
     }
 
 
-    public static CasaInteligente criarCasa (MarcaComer mc)
+    public CasaInteligente criarCasa ()
     {
-        System.out.println(mc.getComercializadores());
+        System.out.println(this.getComercializadores());
         Scanner menu = new Scanner(System.in);
         int i = 0;
         CasaInteligente nova = new CasaInteligente();
@@ -197,7 +235,7 @@ public class Menu{
         nova.setNIF(menu.nextInt());
         System.out.println("Comercializador de energia :");
         String comerc = menu.next();
-        if (mc.getComercializadores().containsKey(comerc))
+        if (this.getComercializadores().containsKey(comerc))
         {
             nova.setComercializadorEn(comerc);
         }
@@ -206,15 +244,15 @@ public class Menu{
             System.out.println("COMERCIALIZADOR NAO EXISTE PUTAS");
             return null;
         }
-        criaQuartoDevice(nova,mc);
+        criaQuartoDevice(nova);
         instalarDevices(nova);
         return nova;
     }
 
-    public static void criarNovoSimular (Simulacao simular) throws IOException {
+    public void criarNovoSimular (Simulacao simular) throws IOException {
         Scanner menu = new Scanner(System.in);
         int aux = 0;
-        MarcaComer mc = new MarcaComer();
+
 
         while (aux == 0) {
                 System.out.print("##-----Menu para adicionar Casas e Devices------##\n\n");
@@ -229,12 +267,12 @@ public class Menu{
                 int opcao = menu.nextInt();
                 switch (opcao) {
                     case 1:
-                        simular.addCasa(criarCasa(mc));
+                        simular.addCasa(criarCasa());
                         break;
 
                     case 2:
-                        simular.addComercializador(criarComercializador(mc));//adicionar comercializador
-                        System.out.println(mc);
+                        simular.addComercializador(criarComercializador());//adicionar comercializador
+                        //System.out.println(mc);
                         break;
                     case 3:
                                 //simular
@@ -250,60 +288,7 @@ public class Menu{
     }
 
 
-        public static void main (String[]args) throws IOException {
 
-            Scanner menu = new Scanner(System.in);
-
-            Simulacao simular = new Simulacao();
-            System.out.println("##--Bem vindo a simulação de casas inteligentes--##\n");
-
-            System.out.println("Selecione a sua opção:");
-            System.out.println("|----------------------------------------------|");
-            System.out.println("| Opção 0 - Usar a configuraçao anterior       |");
-            System.out.println("| Opção 1 - Criar nova configuraçao            |");
-            System.out.println("| Para sair aperte qualquer tecla              |");
-            System.out.println("|----------------------------------------------|");
-
-            int input = menu.nextInt();
-            switch (input) {
-                //Ler a configuração anterior
-                case 0:
-                    String arquivo = " ";
-                    simular = new Simulacao(arquivo);
-                    break;
-                // Nova Configuração
-                case 1:
-                    System.out.println("|----------------------------------------------|");
-                    System.out.println("| Opção 0 - Configuração através de ficheiro   |");
-                    System.out.println("| Opção 1 - Configuração manual                |");
-                    System.out.println("| Para sair aperte qualquer tecla              |");
-                    System.out.println("|----------------------------------------------|");
-                    int input1 = menu.nextInt();
-                    switch (input1) {
-                        //Configuração através de ficheiro
-                        case 0:
-                            String arquivo1 = "";
-                            simular = new Simulacao(arquivo1);
-                            break;
-                        //Configuraçao nova
-                        case 1:
-                            simular = new Simulacao();
-                            break;
-                        default:
-                            System.out.println("Fechando Progama");
-                            System.exit(0);
-
-                    }
-                    break;
-                default:
-                    simular.salvar();
-                    System.out.println("Fechando Progama");
-                    System.exit(0);
-
-            }
-            criarNovoSimular(simular);
-            System.out.println(simular);
-        }
 }
 
 
