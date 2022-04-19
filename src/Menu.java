@@ -12,27 +12,8 @@ TODO IMPORTANTE
 TODO IMPORTANTE
  */
 public class Menu{
-    /*
-    private ArrayList<ComercializadorEnergia> comercializadores;
-    private ArrayList<Marca> marcas;
 
-    public ArrayList<Marca> getMarcas() {
-        return marcas;
-    }
-
-    public ArrayList<ComercializadorEnergia> getComercializadores() {
-        return comercializadores;
-    }
-
-    public void addComer(ComercializadorEnergia comer){
-        this.comercializadores.add(comer);
-    }
-
-    public void addMarca(Marca m){
-        this.marcas.add(m);
-    }
-    */
-    public static ComercializadorEnergia criarComercializador(Map<String,ComercializadorEnergia> b)
+    public static ComercializadorEnergia criarComercializador(MarcaComer mc)
     {
         ComercializadorEnergia comer = new ComercializadorEnergia();
         Scanner menu = new Scanner(System.in);
@@ -42,8 +23,7 @@ public class Menu{
         comer.setCustoDiarioEner(menu.nextDouble());
         System.out.println("Volume de fatura :");
         comer.setVolumeFatura(menu.nextDouble());
-        //b.put(comer.getNome(),comer);
-        //addComer(comer);
+        mc.addComer(comer);
         //System.out.println(comercializadores);
         return comer;
     }
@@ -99,7 +79,7 @@ public class Menu{
     }
 
 
-    public static SmartDevice criarDevice(Map<String, Marca> marcas)
+    public static SmartDevice criarDevice(MarcaComer mc)
     {
         Scanner menu = new Scanner(System.in);
         System.out.println("Qual seria o id do device");
@@ -124,15 +104,15 @@ public class Menu{
                 sp.setChannel(menu.next());
                 System.out.println("Qual o nome da Marca ?");
                 String nome = menu.next();
-                if (marcas.containsKey(nome))
+                if (mc.getMarcas().containsKey(nome))
                 {
-                    sp.setMarca(marcas.get(nome));
+                    sp.setMarca(mc.getMarcas().get(nome));
                 } else
                 {
                     System.out.println("Qual o custo da Marca ?");
                     Marca oii = new Marca(nome, menu.nextInt());
                     sp.setMarca(oii);
-                    marcas.put(nome, oii);
+                    mc.addMarca(oii);
                 }
                 System.out.println(sp.toString());
                 return sp;
@@ -166,7 +146,7 @@ public class Menu{
         }
     }
 
-    public static void criaQuartoDevice(CasaInteligente nova)
+    public static void criaQuartoDevice(CasaInteligente nova,MarcaComer mc)
     {
         int i = 0;
         while (i == 0) {
@@ -180,7 +160,7 @@ public class Menu{
             System.out.println("|----------------------------------------------|");
             System.out.println("Digite uma opção:");
             int op2 = menu.nextInt();
-            Map<String, Marca> marcas = new HashMap<>();
+
 
             switch (op2)
             {
@@ -190,7 +170,7 @@ public class Menu{
                     nova.addRoom(menu.next());
                     break;
                 case 2:
-                    nova.addDevice(criarDevice(marcas));
+                    nova.addDevice(criarDevice(mc));
                     //criar novo device
 
 
@@ -202,9 +182,9 @@ public class Menu{
     }
 
 
-    public static CasaInteligente criarCasa (Map <String, ComercializadorEnergia> comercializadores)
+    public static CasaInteligente criarCasa (MarcaComer mc)
     {
-        System.out.println(comercializadores);
+        System.out.println(mc.getComercializadores());
         Scanner menu = new Scanner(System.in);
         int i = 0;
         CasaInteligente nova = new CasaInteligente();
@@ -217,7 +197,7 @@ public class Menu{
         nova.setNIF(menu.nextInt());
         System.out.println("Comercializador de energia :");
         String comerc = menu.next();
-        if (comercializadores.containsKey(comerc))
+        if (mc.getComercializadores().containsKey(comerc))
         {
             nova.setComercializadorEn(comerc);
         }
@@ -226,7 +206,7 @@ public class Menu{
             System.out.println("COMERCIALIZADOR NAO EXISTE PUTAS");
             return null;
         }
-        criaQuartoDevice(nova);
+        criaQuartoDevice(nova,mc);
         instalarDevices(nova);
         return nova;
     }
@@ -234,7 +214,7 @@ public class Menu{
     public static void criarNovoSimular (Simulacao simular) throws IOException {
         Scanner menu = new Scanner(System.in);
         int aux = 0;
-        Map<String, ComercializadorEnergia> comercializadores = new HashMap<>();
+        MarcaComer mc = new MarcaComer();
 
         while (aux == 0) {
                 System.out.print("##-----Menu para adicionar Casas e Devices------##\n\n");
@@ -249,12 +229,12 @@ public class Menu{
                 int opcao = menu.nextInt();
                 switch (opcao) {
                     case 1:
-                        simular.addCasa(criarCasa(comercializadores));
+                        simular.addCasa(criarCasa(mc));
                         break;
 
                     case 2:
-                        simular.addComercializador(criarComercializador(comercializadores));//adicionar comercializador
-                        System.out.println(comercializadores);
+                        simular.addComercializador(criarComercializador(mc));//adicionar comercializador
+                        System.out.println(mc);
                         break;
                     case 3:
                                 //simular

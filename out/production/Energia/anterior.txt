@@ -1,5 +1,6 @@
-Casas Proprietario=sasa Morada=rua Nif=123 ComercializadorEn=jose GastoCasa=0.0
+Comercializadores nome=jose CustoDiarioEner=123.0 Imposto=2.0 VolumeFatura=100.0Faturas=[]
+Casas Proprietario=assa Morada=rua Nif=123 ComercializadorEn=jose GastoCasa=0.0
 Devices:
- SmartCamera Id=c1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=100.0
-SmartCamera Id=c2 On=false CustoInstallation=0.0 Resolucao=0.6 TamanhoFicheiro=100.0
-Locations: quarto c1 c1cozinha c2 c2
+SmartCamera Id=c1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=100.0
+SmartCamera Id=c2 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=200.0
+Locations: quarto c1 cozinha c2 
