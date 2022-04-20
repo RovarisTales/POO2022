@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,7 @@ public class Simulacao
 {
     List<CasaInteligente> casas;
     Map<String,ComercializadorEnergia> comercializadores;
+    LocalDateTime dia;
     //TODO VARIAVEL LOCAL DATE TIME o dia
 
     /**
@@ -56,8 +58,13 @@ public class Simulacao
                         ComercializadorEnergia ce = new ComercializadorEnergia(valores[i].split("=")[1]
                                 ,Double.parseDouble(valores[i+1].split("=")[1]),Double.parseDouble(valores[i+2].split("=")[1])
                                 ,new ArrayList<String>());
-                        while ()
                         this.addComercializador(ce);
+                    }
+                    proximo = myread.nextLine();
+                    while(proximo.equals("EndOfFatura"))
+                    {  
+                        ce.add(proximo);
+                        proximo = myread.nextLine();
                     }
                     System.out.println(this.comercializadores);
 
@@ -97,6 +104,7 @@ public class Simulacao
                 fw.write(fatura + " ");
                 fw.write("\n");
             }
+            fw.write("EndOfFatura");
         }
         fw.write("\n");
         fw.write("Casas ");
@@ -215,7 +223,8 @@ public class Simulacao
            ci.setGastoCasa(ci.getGastoCasa() + preco);
            //TODO FAZER LOCAL DATE TIME e atualizar com o tempo pra colocar no fatura
            int dia3 = 0;
-           ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia3, dia3 + dias);
+            dia.
+           ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia.getDayOfMonth(), );
         }
     }
 
