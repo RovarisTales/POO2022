@@ -4,23 +4,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-/*
-TODO
-TODO TRANSFORMAR ISSO EM UMA CLASSE NA QUAL COMERCIALIZADORES E MARCAS SAO VARIAVEIS DE INSTANCIA E DA PRA PEGAR COM GET E SET O Q ESTA AGORA É MT C E O PROFESSOR RECLAMOU Q OS ALUNOS FAZIAM ISSO POR EXEMPLO AS FUNCOES RECEBEREM ARGUMENTOS Q USAMOS EM VARIAS FUNCOES TIPO COMERCIALIZADORES E MARCAS
-TODO IMPORTANTE
-TODO IMPORTANTE
-TODO IMPORTANTE
- */
+
 public class Menu{
     private Map<String,ComercializadorEnergia> comercializadores;
     private Map<String,Marca> marcas;
 
-    public Menu(){
+    public Menu()
+    {
         this.marcas = new HashMap<>();
         this.comercializadores = new HashMap<>();
     }
 
-    public void setComercializadores(Map<String, ComercializadorEnergia> comercializadores) {
+    public void setComercializadores(Map<String, ComercializadorEnergia> comercializadores)
+    {
         this.comercializadores = comercializadores;
     }
 
@@ -56,7 +52,7 @@ public class Menu{
         ComercializadorEnergia comer = new ComercializadorEnergia();
         Scanner menu = new Scanner(System.in);
         System.out.println("Nome do comercializador ");
-        comer.setNome(menu.next());
+        comer.setNome(menu.nextLine());
         System.out.println("Custo diario energia :");
         comer.setCustoDiarioEner(menu.nextDouble());
         System.out.println("Volume de fatura :");
@@ -233,10 +229,10 @@ public class Menu{
         int i = 0;
         CasaInteligente nova = new CasaInteligente();
         System.out.println("Nome do proprietatário");
-        nova.setProprietario(menu.next());
+        nova.setProprietario(menu.nextLine());
         System.out.println("Morada :");
         //implementar casa com mais de um noime
-        nova.setMorada(menu.next());
+        nova.setMorada(menu.nextLine());
         System.out.println("Nif :");
         nova.setNIF(menu.nextInt());
         System.out.println("Comercializador de energia :");
@@ -281,7 +277,7 @@ public class Menu{
                         //System.out.println(mc);
                         break;
                     case 3:
-                                //simular
+                        simular.simular(7);
                         break;
                     case 4:
                         simular.salvar();
@@ -292,6 +288,7 @@ public class Menu{
 
             }
     }
+
 
 
 

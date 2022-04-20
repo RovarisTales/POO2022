@@ -82,7 +82,7 @@ public class  CasaInteligente
      * Aceita como parâmetros o nome do proprietario  o endereço da morada
      * o nif e o nome do comercializador de energia
      */
-    public CasaInteligente(String proprietario, String morada, int NIF, String comercializadorEn)
+    public CasaInteligente(String proprietario, String morada, int NIF, String comercializadorEn,double gastoCasa)
     {
         this.proprietario = proprietario;
         this.morada = morada;
@@ -90,7 +90,7 @@ public class  CasaInteligente
         this.comercializadorEn = comercializadorEn;
         this.devices = new HashMap<>();
         this.locations = new HashMap<>();
-        this.gastoCasa = 0;
+        this.gastoCasa = gastoCasa;
     }
 
     public CasaInteligente(CasaInteligente umaCasa)

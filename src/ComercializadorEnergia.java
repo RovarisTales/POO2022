@@ -81,12 +81,12 @@ public class ComercializadorEnergia
 
     public void addFatura(int nif, String morada, String proprietario, double preco, int dia1, int dia2)
     {
-        this.faturas.add("ComercializadorEnergia{" +
-                "nome :'" + proprietario + '\'' +
-                "NIF :" + nif +
-                "Preço : " + preco +
-                "Do dia " + dia1 + " até " + dia2 +
-                "Morada: " + morada +
+        this.faturas.add(
+                "nome : '" + proprietario + '\'' +
+                " NIF : " + nif +
+                " Preço : " + preco +
+                " Do dia " + dia1 + " até " + dia2 +
+                " Morada: " + morada +
                 '}');
 
     }

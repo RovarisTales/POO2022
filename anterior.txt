@@ -1,7 +1,16 @@
-Comercializadores nome=jose CustoDiarioEner=1.0 Imposto=2.0 VolumeFatura=1.0 Faturas=[]
-Casas Proprietario=mario Morada=ru Nif=123 ComercializadorEn=jose GastoCasa=0.0
+Comercializadores
+c nome=EDP|CustoDiarioEner=25.0|VolumeFatura=20815.0
+nome : 'Tiago Passos Rodrigues' NIF : 2972 Preço : 20790.0 Do dia 0 até 7 Morada: Perto da faculdade}
+c nome=Ampla|CustoDiarioEner=20.0|VolumeFatura=31394.0
+nome : 'Breno Fernando Guerra Marrão' NIF : 98879 Preço : 31374.0 Do dia 0 até 7 Morada: Rua da fonte seca} 
+Casas
+Proprietario=Breno Fernando Guerra Marrão|Morada=Rua da fonte seca|Nif=98879|ComercializadorEn=Ampla|GastoCasa=31374.0
 Devices:
-SmartSpeaker Id=1 On=false CustoInstallation=0.0 Volume=1 Canal=sal Marca=llll Custo=1
-SmartCamera Id=fs On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=22.0
-Locations: sala 1  fs 
-
+SmartSpeaker Id=s1 On=false CustoInstallation=0.0 Volume=20 Canal=rum Marca=Jbl Custo=20
+SmartBulb Id=b1 On=false CustoInstallation=0.0 tone=2 Dimensao=2 CustoDiario=29
+Locations: Sala b1 Quarto s1 Cozinha
+Proprietario=Tiago Passos Rodrigues|Morada=Perto da faculdade|Nif=2972|ComercializadorEn=EDP|GastoCasa=20790.0
+Devices:
+SmartCamera Id=sc1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=20.0
+SmartBulb Id=b2 On=false CustoInstallation=0.0 tone=2 Dimensao=2 CustoDiario=20
+Locations: Sala sc1 Cozinha b2 

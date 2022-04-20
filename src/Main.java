@@ -21,7 +21,7 @@ public class Main {
             //Ler a configuração anterior
             case 0:
                 String arquivo = " ";
-                simular = new Simulacao(arquivo);
+                simular = new Simulacao("anterior.txt");
                 break;
             // Nova Configuração
             case 1:

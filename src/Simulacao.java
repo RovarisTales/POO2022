@@ -32,13 +32,54 @@ public class Simulacao
         Scanner myReader = new Scanner(myObj);
         this.casas = new ArrayList<>();
         this.comercializadores = new HashMap<>();
+        this.lerArquivo(filename);
         //TODO iniciar a variavel
-        while(myReader.hasNextLine())
-        {
-
-        }
     }
 
+    public void lerArquivo(String filename) throws FileNotFoundException
+    {
+        File myObj = new File(filename);
+        Scanner myReader = new Scanner(myObj);
+        int count = 0;
+        while ()
+        while (myReader.hasNextLine())
+        {
+            String linha = myReader.nextLine();
+            if (valores.length != 1 )
+            {
+                if (linha.equals("Comercializadores"))
+                {
+                    linha = myReader.nextLine();
+                    String[] valores = myReader.nextLine().split("\\|");
+                    for (int i = 1; i< valores.length; i = i+4)
+                    {
+                        ComercializadorEnergia ce = new ComercializadorEnergia(valores[i].split("=")[1]
+                                ,Double.parseDouble(valores[i+1].split("=")[1]),Double.parseDouble(valores[i+2].split("=")[1])
+                                ,new ArrayList<String>());
+                        while ()
+                        this.addComercializador(ce);
+                    }
+                    System.out.println(this.comercializadores);
+
+                }
+                else if (valores[0].equals("Casas"))
+                {
+                    for (int i = 1; i< valores.length; i = i+4)
+                    {
+                        Map<String,SmartDevice> devices = new HashMap<>();
+                        Map<String, List<String>> locations = new HashMap<>();
+
+                        CasaInteligente ci = new CasaInteligente(valores[i].split("=")[1]
+                                ,valores[i+1].split("=")[1],Integer.parseInt(valores[i+2].split("=")[1])
+                                ,valores[i+3].split("=")[1]
+                                ,Double.parseDouble(valores[i+4].split("=")[1]));
+                        this.addCasa(ci);
+                    }
+                }
+
+            }
+        }
+    }
     /*
     TALVEZ CRIAR UMA CLASSE PRA SALVAR E LER
      */
@@ -49,17 +90,21 @@ public class Simulacao
         fw.write("Comercializadores ");
         for (ComercializadorEnergia ce : this.comercializadores.values())
         {
-            fw.write("nome=" + ce.getNome() +" CustoDiarioEner=" + ce.getCustoDiarioEner()
-                    + " Imposto=" + ce.getIMPOSTO() +" VolumeFatura=" + ce.getVolumeFatura() + " Faturas=" + ce.getFaturas());
-
+            fw.write("nome=" + ce.getNome() +"|CustoDiarioEner=" + ce.getCustoDiarioEner()
+                    +"|VolumeFatura=" + ce.getVolumeFatura() + "\n");
+            for (String fatura : ce.getFaturas())
+            {
+                fw.write(fatura + " ");
+                fw.write("\n");
+            }
         }
         fw.write("\n");
         fw.write("Casas ");
         for (CasaInteligente ci : this.casas)
         {
-            fw.write("Proprietario=" + ci.getProprietario() +" Morada=" + ci.getMorada()
-                    + " Nif=" + ci.getNIF() +" ComercializadorEn=" + ci.getComercializadorEn()
-                    + " GastoCasa=" + ci.getGastoCasa() + "\nDevices:\n");
+            fw.write("Proprietario=" + ci.getProprietario() +"|Morada=" + ci.getMorada()
+                    + "|Nif=" + ci.getNIF() +"|ComercializadorEn=" + ci.getComercializadorEn()
+                    + "|GastoCasa=" + ci.getGastoCasa() + "\nDevices:\n");
             Map<String,SmartDevice> sd = ci.getDevices();
             for (String id : sd.keySet())
             {
@@ -106,9 +151,8 @@ public class Simulacao
                  */
                 for (String ids : l.get(quarto))
                 {
-                    fw.write(ids + " ");
+                    fw.write(" " + ids + " ");
                 }
-                fw.write("\n");
 
             }
             fw.write("\n");
