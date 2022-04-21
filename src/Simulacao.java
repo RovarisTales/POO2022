@@ -5,12 +5,15 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.time.Month;
+
+import static java.time.LocalDateTime.now;
 
 public class Simulacao
 {
-    List<CasaInteligente> casas;
-    Map<String,ComercializadorEnergia> comercializadores;
-    LocalDateTime dia;
+    private List<CasaInteligente> casas;
+    private Map<String,ComercializadorEnergia> comercializadores;
+    private LocalDateTime dia;
     //TODO VARIAVEL LOCAL DATE TIME o dia
 
     /**
@@ -20,7 +23,7 @@ public class Simulacao
     {
         this.casas = new ArrayList<>();
         this.comercializadores = new HashMap<>();
-        //TODO iniciar a variavel O DIA
+        this.dia = now();
 
     }
 
@@ -34,8 +37,9 @@ public class Simulacao
         Scanner myReader = new Scanner(myObj);
         this.casas = new ArrayList<>();
         this.comercializadores = new HashMap<>();
+        this.dia = LocalDateTime.of(0, Month.JANUARY, 1, 1, 1, 1);;
         this.lerArquivo(filename);
-        //TODO iniciar a variavel
+
     }
 
     public void lerArquivo(String filename) throws FileNotFoundException
@@ -222,10 +226,12 @@ public class Simulacao
            ce.setVolumeFatura(ce.getVolumeFatura() + preco);
            ci.setGastoCasa(ci.getGastoCasa() + preco);
            //TODO FAZER LOCAL DATE TIME e atualizar com o tempo pra colocar no fatura
-           int dia3 = 0;
-            dia.
-           ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia.getDayOfMonth(), );
+
+
+           ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia.getDayOfMonth(),dia.getDayOfMonth()+dias );
+
         }
+        dia.plusDays(dias);
     }
 
     /**
