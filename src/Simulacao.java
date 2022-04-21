@@ -94,6 +94,7 @@ public class Simulacao
     /*
     TALVEZ CRIAR UMA CLASSE PRA SALVAR E LER
      */
+    //TODO adicionar o dia salvo na file de save
     public void salvar () throws IOException
     {
         File myObj = new File("anterior.txt");
