@@ -38,19 +38,66 @@ public class Simulacao
         this.casas = new ArrayList<>();
         this.comercializadores = new HashMap<>();
         this.dia = LocalDateTime.of(0, Month.JANUARY, 1, 1, 1, 1);;
-        this.lerArquivo(filename);
+        //this.lerArquivo(filename);
 
     }
 
+/*
     public void lerArquivo(String filename) throws FileNotFoundException
     {
         File myObj = new File(filename);
         Scanner myReader = new Scanner(myObj);
-        int count = 0;
-        while ()
+        String linha = myReader.nextLine();
+        this.dia = LocalDateTime.of(0,Integer.parseInt(linha.split("/")[1]), Integer.parseInt(linha.split("/")[0]), 1, 1, 1);
+        String[] inicio = myReader.nextLine().split(" ");
+        while (!inicio[0].equals("Casas"))
+        {
+            String dividir = inicio[1];
+            System.out.println(dividir);
+            String[] atrCom = dividir.split("\\|");
+            ComercializadorEnergia ce = new ComercializadorEnergia(atrCom[0].split("=")[1]
+                    ,Double.parseDouble(atrCom[1].split("=")[1]),Double.parseDouble(atrCom[2].split("=")[1])
+                    ,new ArrayList<String>());
+            String fat = myReader.nextLine();
+            while(!fat.equals("EndOfFatura"))
+            {
+                ce.addFatura(fat);
+                fat = myReader.nextLine();
+            }
+            this.addComercializador(ce);
+            inicio = myReader.nextLine().split(" ");
+        }
+        System.out.println(this.comercializadores);
+        while (!inicio[0].equals("EndOfCasas"))
+        {
+            String dividir = inicio[1];
+            System.out.println(dividir);
+            String[] atrCom = dividir.split("\\|");
+
+            Map<String,SmartDevice> devices = new HashMap<>();
+            Map<String, List<String>> locations = new HashMap<>();
+
+            CasaInteligente ci = new CasaInteligente(valores[i].split("=")[1]
+                    ,valores[i+1].split("=")[1],Integer.parseInt(valores[i+2].split("=")[1])
+                    ,valores[i+3].split("=")[1]
+                    ,Double.parseDouble(valores[i+4].split("=")[1]));
+            String fat = myReader.nextLine();
+            while(!fat.equals("EndOfFatura"))
+            {
+                ce.addFatura(fat);
+                fat = myReader.nextLine();
+            }
+            this.addCasa(ci);
+
+            this.addComercializador(ce);
+            inicio = myReader.nextLine().split(" ");
+        }
+
+
+
+        /*
         while (myReader.hasNextLine())
         {
-            String linha = myReader.nextLine();
             if (valores.length != 1 )
             {
                 if (linha.equals("Comercializadores"))
@@ -66,7 +113,7 @@ public class Simulacao
                     }
                     proximo = myread.nextLine();
                     while(proximo.equals("EndOfFatura"))
-                    {  
+                    {
                         ce.add(proximo);
                         proximo = myread.nextLine();
                     }
@@ -90,34 +137,34 @@ public class Simulacao
 
             }
         }
+
+
     }
-    /*
-    TALVEZ CRIAR UMA CLASSE PRA SALVAR E LER
-     */
-    //TODO adicionar o dia salvo na file de save
+*/
+
     public void salvar () throws IOException
     {
         File myObj = new File("anterior.txt");
         FileWriter fw = new FileWriter("anterior.txt");
-        fw.write("Comercializadores ");
+        fw.write(this.dia.getDayOfMonth()  + "/" + this.dia.getMonthValue());
+        fw.write("\n");
         for (ComercializadorEnergia ce : this.comercializadores.values())
         {
-            fw.write("nome=" + ce.getNome() +"|CustoDiarioEner=" + ce.getCustoDiarioEner()
-                    +"|VolumeFatura=" + ce.getVolumeFatura() + "\n");
+            fw.write("nome=" + ce.getNome() +",CustoDiarioEner=" + ce.getCustoDiarioEner()
+                    +",VolumeFatura=" + ce.getVolumeFatura() + "\n");
             for (String fatura : ce.getFaturas())
             {
                 fw.write(fatura + " ");
-                fw.write("\n");
+                fw.write(",");
             }
-            fw.write("EndOfFatura");
+            fw.write("\n");
         }
-        fw.write("\n");
-        fw.write("Casas ");
+        fw.write("Casas\n");
         for (CasaInteligente ci : this.casas)
         {
-            fw.write("Proprietario=" + ci.getProprietario() +"|Morada=" + ci.getMorada()
-                    + "|Nif=" + ci.getNIF() +"|ComercializadorEn=" + ci.getComercializadorEn()
-                    + "|GastoCasa=" + ci.getGastoCasa() + "\nDevices:\n");
+            fw.write("Proprietario=" + ci.getProprietario() +",Morada=" + ci.getMorada()
+                    + ",Nif=" + ci.getNIF() +",ComercializadorEn=" + ci.getComercializadorEn()
+                    + ",GastoCasa=" + ci.getGastoCasa() + "\nDevices:\n");
             Map<String,SmartDevice> sd = ci.getDevices();
             for (String id : sd.keySet())
             {
@@ -129,49 +176,41 @@ public class Simulacao
                         SmartBulb sb= (SmartBulb) device;
                         fw.write("SmartBulb Id=" + sb.getID() + " On=" + sb.getOn() +
                                 " CustoInstallation=" + sb.getCustoInstalation()+ " tone=" + sb.getTone() + " Dimensao=" +sb.getTone()
-                                + " CustoDiario=" + sb.getCustoDiario()+ "\n");
+                                + " CustoDiario=" + sb.getCustoDiario()+ ";");
                         break;
                     case ("SmartSpeaker"):
                         SmartSpeaker sp= (SmartSpeaker) device;
                         fw.write("SmartSpeaker Id=" + sp.getID() +" On=" + sp.getOn() +
                                 " CustoInstallation=" + sp.getCustoInstalation()
                                 + " Volume=" + sp.getVolume() + " Canal=" + sp.getChannel()
-                                + " Marca=" + sp.getMarca().getNome() + " Custo=" + sp.getMarca().getCusto()+ "\n");
+                                + " Marca=" + sp.getMarca().getNome() + " Custo=" + sp.getMarca().getCusto()+ ";");
                         break;
                     case ("SmartCamera"):
                         SmartCamera sc= (SmartCamera) device;
                         fw.write("SmartCamera Id=" + sc.getID() +" On=" + sc.getOn() +
                                 " CustoInstallation=" + sc.getCustoInstalation()
-                                + " Resolucao=" + sc.getResolucao() + " TamanhoFicheiro=" + sc.getTamanho_ficheiro()+ "\n");
+                                + " Resolucao=" + sc.getResolucao() + " TamanhoFicheiro=" + sc.getTamanho_ficheiro()+ ";");
                         break;
                     default:
                         break;
                 }
             }
-            fw.write("Locations: ");
+            fw.write("\n");
             Map<String,List<String>> l = ci.getLocations();
             for (String quarto : l.keySet())
             {
                 fw.write(quarto);
-                /*
-                l.get(quarto).forEach( e -> {
-                    try {
-                        fw.write(" " + e);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
-                 */
                 for (String ids : l.get(quarto))
                 {
                     fw.write(" " + ids + " ");
                 }
+                fw.write(";");
 
             }
             fw.write("\n");
-
         }
-       fw.close();
+        fw.write("EndOfFile");
+        fw.close();
     }
 
     /**
@@ -227,12 +266,10 @@ public class Simulacao
            ce.setVolumeFatura(ce.getVolumeFatura() + preco);
            ci.setGastoCasa(ci.getGastoCasa() + preco);
 
-
-
            ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia.getDayOfMonth(),dia.getDayOfMonth()+dias );
 
         }
-        dia.plusDays(dias);
+        dia = dia.plusDays(dias);
     }
 
     /**
