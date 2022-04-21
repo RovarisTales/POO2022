@@ -38,36 +38,35 @@ public class Simulacao
         this.casas = new ArrayList<>();
         this.comercializadores = new HashMap<>();
         this.dia = LocalDateTime.of(0, Month.JANUARY, 1, 1, 1, 1);;
-        //this.lerArquivo(filename);
+        this.lerArquivo(filename);
 
     }
 
-/*
     public void lerArquivo(String filename) throws FileNotFoundException
     {
         File myObj = new File(filename);
         Scanner myReader = new Scanner(myObj);
         String linha = myReader.nextLine();
         this.dia = LocalDateTime.of(0,Integer.parseInt(linha.split("/")[1]), Integer.parseInt(linha.split("/")[0]), 1, 1, 1);
-        String[] inicio = myReader.nextLine().split(" ");
-        while (!inicio[0].equals("Casas"))
+        String inicio = myReader.nextLine();
+        while (!inicio.equals("Casas"))
         {
-            String dividir = inicio[1];
-            System.out.println(dividir);
-            String[] atrCom = dividir.split("\\|");
-            ComercializadorEnergia ce = new ComercializadorEnergia(atrCom[0].split("=")[1]
-                    ,Double.parseDouble(atrCom[1].split("=")[1]),Double.parseDouble(atrCom[2].split("=")[1])
-                    ,new ArrayList<String>());
-            String fat = myReader.nextLine();
-            while(!fat.equals("EndOfFatura"))
+            String[] dividida = inicio.split(",");
+            System.out.println(Arrays.toString(dividida));
+            ComercializadorEnergia ce = new ComercializadorEnergia(dividida[0].split("=")[1]
+                    , Double.parseDouble(dividida[1].split("=")[1]), Double.parseDouble(dividida[2].split("=")[1])
+                    , new ArrayList<String>());
+            String fat[] = myReader.nextLine().split(",");
+            for (String fats : fat)
             {
-                ce.addFatura(fat);
-                fat = myReader.nextLine();
+                ce.addFatura(fats);
+
             }
             this.addComercializador(ce);
-            inicio = myReader.nextLine().split(" ");
+            inicio = myReader.nextLine();
         }
         System.out.println(this.comercializadores);
+        /*
         while (!inicio[0].equals("EndOfCasas"))
         {
             String dividir = inicio[1];
@@ -92,6 +91,8 @@ public class Simulacao
             this.addComercializador(ce);
             inicio = myReader.nextLine().split(" ");
         }
+
+         */
 
 
 
@@ -138,9 +139,8 @@ public class Simulacao
             }
         }
 
-
+    */
     }
-*/
 
     public void salvar () throws IOException
     {

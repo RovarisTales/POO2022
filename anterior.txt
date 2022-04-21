@@ -1,11 +1,9 @@
 28/4
-nome=jose2,CustoDiarioEner=12.0,VolumeFatura=200.0
-
-nome=jose,CustoDiarioEner=12.0,VolumeFatura=6223.6
-{nome : 'breno' NIF : 123 Preço : 6123.6 Do dia 21 até 28 Morada: bosta} ,
+nome=jose,CustoDiarioEner=12.0,VolumeFatura=22703.0
+{nome : 'casa' NIF : 123 Preço : 22680.0 Do dia 21 até 28 Morada: rua} ,{nome : 'ola' NIF : 234 Preço : 24680.0 Do dia 21 até 28 Morada: sais}
 Casas
-Proprietario=breno,Morada=bosta,Nif=123,ComercializadorEn=jose,GastoCasa=6123.6
+Proprietario=casa,Morada=rua,Nif=123,ComercializadorEn=jose,GastoCasa=22680.0
 Devices:
-SmartCamera Id=1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=10.0;SmartSpeaker Id=2 On=false CustoInstallation=0.0 Volume=10 Canal=canal Marca=jbl Custo=2;
-quarto 1 ;cozinha 2 ;
+SmartCamera Id=1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=100.0;
+quarto 1 ;
 EndOfFile

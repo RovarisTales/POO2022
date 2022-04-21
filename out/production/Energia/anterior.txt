@@ -1,13 +1,9 @@
 28/4
-nome=a,CustoDiarioEner=10.0,VolumeFatura=2477.0
-{nome : 'ab' NIF : 123 Preço : 2457.0 Do dia 21 até 28 Morada: rua} ,
-nome=b,CustoDiarioEner=30.0,VolumeFatura=21019.0
-{nome : 'abc' NIF : 1234 Preço : 20979.0 Do dia 21 até 28 Morada: rua2} ,
+nome=jose,CustoDiarioEner=12.0,VolumeFatura=22703.0
+{nome : 'casa' NIF : 123 Preço : 22680.0 Do dia 21 até 28 Morada: rua} ,{nome : 'ola' NIF : 234 Preço : 24680.0 Do dia 21 até 28 Morada: sais}
 Casas
-Proprietario=ab,Morada=rua,Nif=123,ComercializadorEn=a,GastoCasa=2457.0
+Proprietario=casa,Morada=rua,Nif=123,ComercializadorEn=jose,GastoCasa=22680.0
 Devices:
-SmartCamera Id=sc1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=1.0 ; SmartBulb  Id=sb1 On=false CustoInstallation=0.0 tone=1 Dimensao=1 CustoDiario=10,Locations: a sc1  sb1 ,b,
-Quarto s1 c1 ; Cozinha s2 c2
-Proprietario=abc,Morada=rua2,Nif=1234,ComercializadorEn=b,GastoCasa=20979.0
-SmartCamera Id=sc2 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=2.0 ; SmartSpeaker  Id=sp1 On=false CustoInstallation=0.0 Volume=22 Canal=3 Marca=jbl Custo=2,Locations: sala sc2 ,gkdfj,lll sp1 ,
+SmartCamera Id=1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=100.0;
+quarto 1 ;
 EndOfFile
