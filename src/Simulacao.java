@@ -14,7 +14,7 @@ public class Simulacao
     private List<CasaInteligente> casas;
     private Map<String,ComercializadorEnergia> comercializadores;
     private LocalDateTime dia;
-    //TODO VARIAVEL LOCAL DATE TIME o dia
+
 
     /**
      * Construtor por omissão de Simulacao.
@@ -226,7 +226,7 @@ public class Simulacao
            double preco = dias * ce.preçoDiaDisp(ci.custoDiario());
            ce.setVolumeFatura(ce.getVolumeFatura() + preco);
            ci.setGastoCasa(ci.getGastoCasa() + preco);
-           //TODO FAZER LOCAL DATE TIME e atualizar com o tempo pra colocar no fatura
+
 
 
            ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia.getDayOfMonth(),dia.getDayOfMonth()+dias );
