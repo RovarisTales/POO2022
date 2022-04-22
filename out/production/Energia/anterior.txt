@@ -1,9 +1,16 @@
-28/4
-nome=jose,CustoDiarioEner=12.0,VolumeFatura=22703.0
-{nome : 'casa' NIF : 123 Preço : 22680.0 Do dia 21 até 28 Morada: rua} ,{nome : 'ola' NIF : 234 Preço : 24680.0 Do dia 21 até 28 Morada: sais}
+29/4
+nome=EDP,CustoDiarioEner=25.0,VolumeFatura=58840.0
+{nome : 'EDP' NIF : 299 Preço : 58590.0 Do dia 22 até 29 Morada: Rua do penis} ,
+nome=Ampla,CustoDiarioEner=20.0,VolumeFatura=160283.0
+{nome : 'Breno' NIF : 209 Preço : 139482.0 Do dia 22 até 29 Morada: Rua da fonte seca} ,{nome : 'Tales Rovaris' NIF : 255 Preço : 20601.0 Do dia 22 até 29 Morada: Nao sei} ,
 Casas
-Proprietario=casa,Morada=rua,Nif=123,ComercializadorEn=jose,GastoCasa=22680.0
-Devices:
-SmartCamera Id=1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=100.0;
-quarto 1 ;
+Proprietario=Breno,Morada=Rua da fonte seca,Nif=209,ComercializadorEn=Ampla,GastoCasa=139482.0
+SmartCamera Id=sc1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=20.0;SmartBulb Id=sb1 On=false CustoInstallation=0.0 tone=2 Dimensao=2 CustoDiario=20;SmartSpeaker Id=sp1 On=false CustoInstallation=0.0 Volume=210 Canal=RUM Marca=Jbl Custo=10;
+Quarto sc1 sp1;Cozinha sb1;
+Proprietario=EDP,Morada=Rua do penis,Nif=299,ComercializadorEn=EDP,GastoCasa=58590.0
+SmartBulb Id=sb2 On=false CustoInstallation=0.0 tone=1 Dimensao=1 CustoDiario=2;SmartCamera Id=sc2 On=false CustoInstallation=0.0 Resolucao=0.6 TamanhoFicheiro=200.0;
+Sala sb2 sc2;Quarto;Cozinha;
+Proprietario=Tales Rovaris,Morada=Nao sei,Nif=255,ComercializadorEn=Ampla,GastoCasa=20601.0
+SmartSpeaker Id=sp2 On=false CustoInstallation=0.0 Volume=15 Canal=PENIS Marca=Jbl Custo=10;SmartBulb Id=sb3 On=false CustoInstallation=0.0 tone=1 Dimensao=1 CustoDiario=20;
+Sala sp2 ;Cozinha sb3 ;
 EndOfFile

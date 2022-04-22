@@ -55,7 +55,7 @@ public class SmartBulb extends SmartDevice{
         this.tone = tone;
         this.custoDiario = custo;
     }
-    public SmartBulb(String id,boolean b, int custoinst, int tone,int custodia, int dimensao){
+    public SmartBulb(String id,boolean b, double custoinst, int tone,int custodia, int dimensao){
         super(id,b,custoinst);
         this.tone = tone;
         this.custoDiario = custodia;

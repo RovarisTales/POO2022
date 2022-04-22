@@ -14,6 +14,7 @@ public class Simulacao
     private List<CasaInteligente> casas;
     private Map<String,ComercializadorEnergia> comercializadores;
     private LocalDateTime dia;
+    private Map<String,Marca> marcas;
 
 
     /**
@@ -24,7 +25,7 @@ public class Simulacao
         this.casas = new ArrayList<>();
         this.comercializadores = new HashMap<>();
         this.dia = now();
-
+        this.marcas = new HashMap<>();
     }
 
     /**
@@ -37,7 +38,8 @@ public class Simulacao
         Scanner myReader = new Scanner(myObj);
         this.casas = new ArrayList<>();
         this.comercializadores = new HashMap<>();
-        this.dia = LocalDateTime.of(0, Month.JANUARY, 1, 1, 1, 1);;
+        this.dia = LocalDateTime.of(0, Month.JANUARY, 1, 1, 1, 1);
+        this.marcas = new HashMap<>();
         this.lerArquivo(filename);
 
     }
@@ -49,10 +51,10 @@ public class Simulacao
         String linha = myReader.nextLine();
         this.dia = LocalDateTime.of(0,Integer.parseInt(linha.split("/")[1]), Integer.parseInt(linha.split("/")[0]), 1, 1, 1);
         String inicio = myReader.nextLine();
+        String[] dividida;
         while (!inicio.equals("Casas"))
         {
-            String[] dividida = inicio.split(",");
-            System.out.println(Arrays.toString(dividida));
+            dividida = inicio.split(",");
             ComercializadorEnergia ce = new ComercializadorEnergia(dividida[0].split("=")[1]
                     , Double.parseDouble(dividida[1].split("=")[1]), Double.parseDouble(dividida[2].split("=")[1])
                     , new ArrayList<String>());
@@ -65,81 +67,62 @@ public class Simulacao
             this.addComercializador(ce);
             inicio = myReader.nextLine();
         }
-        System.out.println(this.comercializadores);
-        /*
-        while (!inicio[0].equals("EndOfCasas"))
+        inicio = myReader.nextLine();
+        while (!inicio.equals("EndOfFile"))
         {
-            String dividir = inicio[1];
-            System.out.println(dividir);
-            String[] atrCom = dividir.split("\\|");
-
-            Map<String,SmartDevice> devices = new HashMap<>();
-            Map<String, List<String>> locations = new HashMap<>();
-
-            CasaInteligente ci = new CasaInteligente(valores[i].split("=")[1]
-                    ,valores[i+1].split("=")[1],Integer.parseInt(valores[i+2].split("=")[1])
-                    ,valores[i+3].split("=")[1]
-                    ,Double.parseDouble(valores[i+4].split("=")[1]));
-            String fat = myReader.nextLine();
-            while(!fat.equals("EndOfFatura"))
+            dividida = inicio.split(",");
+            CasaInteligente ci = new CasaInteligente(dividida[0].split("=")[1]
+                    , dividida[1].split("=")[1], Integer.parseInt(dividida[2].split("=")[1])
+                    , new HashMap<>(), new HashMap<>(), dividida[3].split("=")[1] , Double.parseDouble(dividida[4].split("=")[1] ));
+            inicio = myReader.nextLine();
+            dividida = inicio.split(";");
+            for (int i = 0 ; i < dividida.length ; i++)
             {
-                ce.addFatura(fat);
-                fat = myReader.nextLine();
+                String[] div2 = dividida[i].split(" ");
+                switch (div2[0])
+                {
+                    case("SmartCamera"):
+                        SmartCamera sc = new SmartCamera(div2[1].split("=")[1],Boolean.parseBoolean(div2[2].split("=")[1]),
+                                Double.parseDouble(div2[3].split("=")[1]),Double.parseDouble(div2[4].split("=")[1])
+                                , Double.parseDouble(div2[5].split("=")[1]));
+                        ci.addDevice(sc);
+                        break;
+                    case("SmartBulb"):
+                        SmartBulb sb = new SmartBulb(div2[1].split("=")[1],Boolean.parseBoolean(div2[2].split("=")[1]),
+                                Double.parseDouble(div2[3].split("=")[1]),Integer.parseInt(div2[4].split("=")[1])
+                                , Integer.parseInt(div2[5].split("=")[1]),Integer.parseInt(div2[6].split("=")[1]));
+                        ci.addDevice(sb);
+                        break;
+                    case("SmartSpeaker"):
+                        Marca marca = new Marca(div2[6].split("=")[1]
+                                , Integer.parseInt(div2[7].split("=")[1]));
+                        this.addMarca(marca);
+                        SmartSpeaker sp = new SmartSpeaker(div2[1].split("=")[1],Boolean.parseBoolean(div2[2].split("=")[1]),
+                                Double.parseDouble(div2[3].split("=")[1]),Integer.parseInt(div2[4].split("=")[1])
+                                , (div2[5].split("=")[1]));
+                        sp.setMarca(marca);
+                        ci.addDevice(sp);
+                        break;
+                }
+            }
+            inicio = myReader.nextLine();
+            dividida = inicio.split(";");
+            for (int j = 0 ; j < dividida.length ; j++)
+            {
+                String[] div2 = dividida[j].split(" ");
+                ci.addRoom(div2[0]);
+
+                for (int a = 1 ; a < div2.length ; a ++)
+                {
+                    ci.addToRoom(div2[0],div2[a]);
+                }
             }
             this.addCasa(ci);
+            inicio = myReader.nextLine();
 
-            this.addComercializador(ce);
-            inicio = myReader.nextLine().split(" ");
         }
-
-         */
-
-
-
-        /*
-        while (myReader.hasNextLine())
-        {
-            if (valores.length != 1 )
-            {
-                if (linha.equals("Comercializadores"))
-                {
-                    linha = myReader.nextLine();
-                    String[] valores = myReader.nextLine().split("\\|");
-                    for (int i = 1; i< valores.length; i = i+4)
-                    {
-                        ComercializadorEnergia ce = new ComercializadorEnergia(valores[i].split("=")[1]
-                                ,Double.parseDouble(valores[i+1].split("=")[1]),Double.parseDouble(valores[i+2].split("=")[1])
-                                ,new ArrayList<String>());
-                        this.addComercializador(ce);
-                    }
-                    proximo = myread.nextLine();
-                    while(proximo.equals("EndOfFatura"))
-                    {
-                        ce.add(proximo);
-                        proximo = myread.nextLine();
-                    }
-                    System.out.println(this.comercializadores);
-
-                }
-                else if (valores[0].equals("Casas"))
-                {
-                    for (int i = 1; i< valores.length; i = i+4)
-                    {
-                        Map<String,SmartDevice> devices = new HashMap<>();
-                        Map<String, List<String>> locations = new HashMap<>();
-
-                        CasaInteligente ci = new CasaInteligente(valores[i].split("=")[1]
-                                ,valores[i+1].split("=")[1],Integer.parseInt(valores[i+2].split("=")[1])
-                                ,valores[i+3].split("=")[1]
-                                ,Double.parseDouble(valores[i+4].split("=")[1]));
-                        this.addCasa(ci);
-                    }
-                }
-
-            }
-        }
-
-    */
+        System.out.println(this.comercializadores);
+        System.out.println(this.casas);
     }
 
     public void salvar () throws IOException
@@ -164,7 +147,7 @@ public class Simulacao
         {
             fw.write("Proprietario=" + ci.getProprietario() +",Morada=" + ci.getMorada()
                     + ",Nif=" + ci.getNIF() +",ComercializadorEn=" + ci.getComercializadorEn()
-                    + ",GastoCasa=" + ci.getGastoCasa() + "\nDevices:\n");
+                    + ",GastoCasa=" + ci.getGastoCasa() + "\n");
             Map<String,SmartDevice> sd = ci.getDevices();
             for (String id : sd.keySet())
             {
@@ -202,7 +185,7 @@ public class Simulacao
                 fw.write(quarto);
                 for (String ids : l.get(quarto))
                 {
-                    fw.write(" " + ids + " ");
+                    fw.write(" " + ids );
                 }
                 fw.write(";");
 
@@ -220,6 +203,13 @@ public class Simulacao
     /**
      * Getters e setters
      */
+    public void setMarcas(Map<String, Marca> marcas) {
+        this.marcas = marcas;
+    }
+
+    public Map<String,Marca> getMarcas() {
+        return marcas;
+    }
     public List<CasaInteligente> getCasas()
     {
         return this.casas.stream().map(CasaInteligente::clone).collect(Collectors.toList());
@@ -242,7 +232,9 @@ public class Simulacao
         this.comercializadores = comercializadores.entrySet()
                 .stream().collect(Collectors.toMap(Map.Entry::getKey, e-> e.getValue().clone()));
     }
-
+    public void addMarca(Marca m){
+        this.marcas.put(m.getNome(),m);
+    }
     public void addCasa(CasaInteligente ci)
     {
         this.casas.add(ci);

@@ -5,8 +5,8 @@ public class Main {
     public static void main (String[]args) throws IOException {
 
         Scanner menu = new Scanner(System.in);
-        Menu me = new Menu();
         Simulacao simular = new Simulacao();
+        Menu me = new Menu();
         System.out.println("##--Bem vindo a simulação de casas inteligentes--##\n");
 
         System.out.println("Selecione a sua opção:");

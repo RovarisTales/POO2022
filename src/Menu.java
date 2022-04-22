@@ -4,45 +4,51 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+//TODO LIGAR E DESLIGAR DISPOSiTIVOS
+//TODO ALTERAR CASA
+//TODO CRIAR MENU ESTATICAS
+//TODO MUDANCA DE FORNECEDOR E ALTERAR VALORES DO FORNECEDOR
 
-public class Menu{
-    private Map<String,ComercializadorEnergia> comercializadores;
-    private Map<String,Marca> marcas;
+public class Menu
+{
+
+    private Simulacao simular;
 
     public Menu()
     {
-        this.marcas = new HashMap<>();
-        this.comercializadores = new HashMap<>();
+        this.simular = new Simulacao();
     }
-
+    public Menu(Simulacao simul){
+        this.simular = simul;
+    }
     public void setComercializadores(Map<String, ComercializadorEnergia> comercializadores)
     {
-        this.comercializadores = comercializadores;
+        this.simular.setComercializadores(comercializadores);
     }
 
     public void setMarcas(Map<String, Marca> marcas) {
-        this.marcas = marcas;
+        this.simular.setMarcas(marcas);
     }
 
     public Map<String,Marca> getMarcas() {
-        return marcas;
+        return this.simular.getMarcas();
     }
 
     public Map<String,ComercializadorEnergia> getComercializadores() {
-        return comercializadores;
+        return this.simular.getComercializadores();
     }
 
     public void addComer(ComercializadorEnergia comer) {
-        this.comercializadores.put(comer.getNome(),comer);
+        this.simular.addComercializador(comer);
     }
 
     public void addMarca(Marca m) {
-        this.marcas.put(m.getNome(),m);
+        this.simular.addMarca(m);
     }
 
     public ArrayList<String> getMarcasString(){
         ArrayList<String> marca = new ArrayList<>();
-        for(String marc: this.marcas.keySet()){
+        for(String marc: this.getMarcas().keySet()){
             marca.add(marc);
         }
         return marca;
@@ -57,7 +63,7 @@ public class Menu{
         comer.setCustoDiarioEner(menu.nextDouble());
         System.out.println("Volume de fatura :");
         comer.setVolumeFatura(menu.nextDouble());
-        this.addComer(comer);
+        this.simular.addComercializador(comer);
         //System.out.println(comercializadores);
         return comer;
     }
@@ -144,15 +150,15 @@ public class Menu{
                 sp.setChannel(menu.next());
                 System.out.println("Qual o nome da Marca ?");
                 String nome = menu.next();
-                if (this.getMarcas().containsKey(nome))
+                if (this.simular.getMarcas().containsKey(nome))
                 {
-                    sp.setMarca(this.getMarcas().get(nome));
+                    sp.setMarca(this.simular.getMarcas().get(nome));
                 } else
                 {
                     System.out.println("Qual o custo da Marca ?");
                     Marca oii = new Marca(nome, menu.nextInt());
                     sp.setMarca(oii);
-                    this.addMarca(oii);
+                    this.simular.addMarca(oii);
                 }
                 System.out.println(sp.toString());
                 return sp;
@@ -254,7 +260,7 @@ public class Menu{
     public void criarNovoSimular (Simulacao simular) throws IOException {
         Scanner menu = new Scanner(System.in);
         int aux = 0;
-
+        this.simular = simular;
 
         while (aux == 0) {
                 System.out.print("##-----Menu para adicionar Casas e Devices------##\n\n");
@@ -269,18 +275,18 @@ public class Menu{
                 int opcao = menu.nextInt();
                 switch (opcao) {
                     case 1:
-                        simular.addCasa(criarCasa());
+                        this.simular.addCasa(criarCasa());
                         break;
 
                     case 2:
-                        simular.addComercializador(criarComercializador());//adicionar comercializador
+                        this.simular.addComercializador(criarComercializador());//adicionar comercializador
                         //System.out.println(mc);
                         break;
                     case 3:
-                        simular.simular(7);
+                        this.simular.simular(7);
                         break;
                     case 4:
-                        simular.salvar();
+                        this.simular.salvar();
                     default:
                         aux = 1;
 

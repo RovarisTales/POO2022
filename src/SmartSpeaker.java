@@ -66,12 +66,13 @@ public class SmartSpeaker extends SmartDevice {
         this.marca.setCusto(custo);
     }
 
+
     /**
      * Construtor parametrizado de SmartSpeaker.
      * Aceita como parâmetros o id,se está ligado,custo de instalar o Device,
      * canal e o volume do SmartSpeaker. Recebe parâmetros para a Marca.
      */
-    public SmartSpeaker(String cod,boolean b,double custoInstalacao, String channel, int i,String nome,int custo) {
+    public SmartSpeaker(String cod,boolean b,double custoInstalacao, int i, String channel,String nome,int custo) {
         // initialise instance variables
         super(cod,b,custoInstalacao);
         this.channel = channel;
@@ -80,11 +81,20 @@ public class SmartSpeaker extends SmartDevice {
         this.marca.setCusto(custo);
     }
 
+    public SmartSpeaker(String cod,boolean b,double custoInstalacao, int i, String channel) {
+        // initialise instance variables
+        super(cod,b,custoInstalacao);
+        this.channel = channel;
+        this.volume = Math.max(i, 0);
+        this.marca = new Marca();
+    }
+
     /**
      * Construtor parametrizado de SmartSpeaker.
      * Aceita como parâmetro um SmartSpeaker.
      */
-    public SmartSpeaker(SmartSpeaker umSpeaker){
+    public SmartSpeaker(SmartSpeaker umSpeaker)
+    {
         super(umSpeaker.getID(), umSpeaker.getOn(), umSpeaker.getCustoInstalation());
         this.channel = umSpeaker.getChannel();
         this.volume = umSpeaker.getVolume();
