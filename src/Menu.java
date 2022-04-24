@@ -4,73 +4,148 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-//TODO LIGAR E DESLIGAR DISPOSiTIVOS
-//TODO ALTERAR CASA
 //TODO CRIAR MENU ESTATICAS
-//TODO MUDANCA DE FORNECEDOR E ALTERAR VALORES DO FORNECEDOR
+//TODO ACABAR O ALTERAR DEVICES
+//TODO ALTERAR POR ARQUIVO
 
 public class Menu
 {
 
     private Simulacao simular;
+    private Scanner menu;
 
-    public Menu()
-    {
+    public Menu() {
         this.simular = new Simulacao();
+        this.menu = new Scanner(System.in);
     }
     public Menu(Simulacao simul){
         this.simular = simul;
-    }
-    public void setComercializadores(Map<String, ComercializadorEnergia> comercializadores)
-    {
-        this.simular.setComercializadores(comercializadores);
+        this.menu = new Scanner(System.in);
     }
 
-    public void setMarcas(Map<String, Marca> marcas) {
-        this.simular.setMarcas(marcas);
-    }
 
-    public Map<String,Marca> getMarcas() {
-        return this.simular.getMarcas();
-    }
 
-    public Map<String,ComercializadorEnergia> getComercializadores() {
-        return this.simular.getComercializadores();
-    }
 
-    public void addComer(ComercializadorEnergia comer) {
-        this.simular.addComercializador(comer);
-    }
 
-    public void addMarca(Marca m) {
-        this.simular.addMarca(m);
-    }
 
-    public ArrayList<String> getMarcasString(){
-        ArrayList<String> marca = new ArrayList<>();
-        for(String marc: this.getMarcas().keySet()){
-            marca.add(marc);
-        }
-        return marca;
-    }
     public ComercializadorEnergia criarComercializador()
     {
         ComercializadorEnergia comer = new ComercializadorEnergia();
-        Scanner menu = new Scanner(System.in);
+
         System.out.println("Nome do comercializador ");
-        comer.setNome(menu.nextLine());
+        comer.setNome(this.menu.nextLine());
         System.out.println("Custo diario energia :");
-        comer.setCustoDiarioEner(menu.nextDouble());
+        comer.setCustoDiarioEner(this.menu.nextDouble());
         System.out.println("Volume de fatura :");
-        comer.setVolumeFatura(menu.nextDouble());
+        comer.setVolumeFatura(this.menu.nextDouble());
         this.simular.addComercializador(comer);
         //System.out.println(comercializadores);
         return comer;
     }
 
+    public void alterar ()
+    {
+
+
+        System.out.print("##--Menu para alterar comercializador , quartos e Devices--##\n\n");
+        System.out.println("|----------------------------------------------|");
+        System.out.println("| Opção 1 - Alterar Casa ou device             |");
+        System.out.println("| Opção 2 - Comercializador                    |");
+        System.out.println("|Aperte qualquer outra tecla para acabar criaçao");
+        System.out.println("|----------------------------------------------|");
+
+        switch (menu.nextInt())
+        {
+            case 1:
+                System.out.println("NIF da casa : ");
+                int NIF = menu.nextInt();
+                if (this.simular.getCasas().containsKey(NIF))
+                {
+                    alterarCasa(NIF);
+                }
+                else
+                {
+                    System.out.println("Casa NAO EXISTE");
+                }
+                break;
+            case 2:
+                System.out.println("Qual o nome do comercializador?");
+                String nome = menu.next();
+                if (simular.getComercializadores().containsKey(nome))
+                {
+                    alterarComercializador(nome);
+                }
+                else
+                {
+                    System.out.println("COMERCIALIZADOR NAO EXISTE ");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void alterarCasa(int NIF){
+        System.out.println("|----------------------------------------------|");
+        System.out.println("| Opção 1 - Alterar comercializador            |");
+        System.out.println("| Opção 1 - Alterar devices                    |");
+        System.out.println("|Aperte qualquer outra tecla para acabar alteração");
+        System.out.println("|----------------------------------------------|");
+
+        switch (menu.nextInt()){
+            case 1:
+                System.out.println("Qual o nome do comercializador?");
+                menu.next();
+                String nome = menu.nextLine();
+                if (simular.getComercializadores().containsKey(nome))
+                {
+                    CasaInteligente ci = simular.getCasas().get(NIF);
+                    ci.setComercializadorEn(nome);
+                    simular.addCasa(ci);
+                }
+                else
+                {
+                    System.out.println("COMERCIALIZADOR NAO EXISTE ");
+                }
+                break;
+            case 2:
+                //alterarDevice(this.cas);
+                break;
+            default:
+                break;
+        }
+    }
+
+    //public void alterarDevice()
+    public void alterarComercializador(String nome){
+        System.out.println("|----------------------------------------------|");
+        System.out.println("| Opção 1 - Alterar custo diário               |");
+        System.out.println("| Opção 2 - Alterar volume fatura              |");
+        System.out.println("|Aperte qualquer outra tecla para acabar alteração");
+        System.out.println("|----------------------------------------------|");
+
+        switch (menu.nextInt()){
+            case 1:
+                System.out.println("Custo desejado : ");
+                double custo = menu.nextDouble();
+                ComercializadorEnergia ce = simular.getComercializadores().get(nome);
+                ce.setCustoDiarioEner(custo);
+                simular.addComercializador(ce);
+                break;
+            case 2:
+                System.out.println("Qual o volume de fatura?");
+                double custoFat = menu.nextDouble();
+                ComercializadorEnergia ce2 = simular.getComercializadores().get(nome);
+                ce2.setVolumeFatura(custoFat);
+                simular.addComercializador(ce2);
+                break;
+            default:
+                break;
+        }
+    }
     public void instalarDevices(CasaInteligente nova)
     {
-        Scanner menu = new Scanner(System.in);
+
         for (String id : nova.getDevices().keySet())
         {
             System.out.println("Deseja instalar o device "  + id + "? ");
@@ -125,9 +200,9 @@ public class Menu
     }
 
 
+
     public SmartDevice criarDevice()
     {
-        Scanner menu = new Scanner(System.in);
         System.out.println("Qual seria o id do device");
         String id = menu.next();
         System.out.println("");
@@ -230,7 +305,7 @@ public class Menu
 
     public CasaInteligente criarCasa ()
     {
-        System.out.println(this.getComercializadores());
+        System.out.println(this.simular.getComercializadores());
         Scanner menu = new Scanner(System.in);
         int i = 0;
         CasaInteligente nova = new CasaInteligente();
@@ -243,13 +318,13 @@ public class Menu
         nova.setNIF(menu.nextInt());
         System.out.println("Comercializador de energia :");
         String comerc = menu.next();
-        if (this.getComercializadores().containsKey(comerc))
+        if (this.simular.getComercializadores().containsKey(comerc))
         {
             nova.setComercializadorEn(comerc);
         }
         else
         {
-            System.out.println("COMERCIALIZADOR NAO EXISTE PUTAS");
+            System.out.println("COMERCIALIZADOR NAO EXISTE");
             return null;
         }
         criaQuartoDevice(nova);
@@ -258,7 +333,6 @@ public class Menu
     }
 
     public void criarNovoSimular (Simulacao simular) throws IOException {
-        Scanner menu = new Scanner(System.in);
         int aux = 0;
         this.simular = simular;
 
@@ -268,7 +342,8 @@ public class Menu
                 System.out.print("| Opção 1 - Nova casa                            |\n");
                 System.out.print("| Opção 2 - Novo comercializador                 |\n");
                 System.out.print("| Opção 3 - Simular                              |\n");
-                System.out.print("| Opção 4 - Salvar                               |\n");
+                System.out.print("| Opção 4 - Alterar casa, comercializador, device|\n");
+                System.out.print("| Opção 5 - Salvar                               |\n");
                 System.out.print("|------------------------------------------------|\n");
                 System.out.print("Digite uma opção: ");
 
@@ -285,7 +360,9 @@ public class Menu
                     case 3:
                         this.simular.simular(7);
                         break;
-                    case 4:
+                    case 4 :
+                        alterar();
+                    case 5:
                         this.simular.salvar();
                     default:
                         aux = 1;

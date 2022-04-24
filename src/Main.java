@@ -6,7 +6,7 @@ public class Main {
 
         Scanner menu = new Scanner(System.in);
         Simulacao simular = new Simulacao();
-        Menu me = new Menu();
+        Menu me = new Menu(simular);
         System.out.println("##--Bem vindo a simulação de casas inteligentes--##\n");
 
         System.out.println("Selecione a sua opção:");

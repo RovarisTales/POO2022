@@ -11,7 +11,7 @@ import static java.time.LocalDateTime.now;
 
 public class Simulacao
 {
-    private List<CasaInteligente> casas;
+    private Map<Integer, CasaInteligente> casas;
     private Map<String,ComercializadorEnergia> comercializadores;
     private LocalDateTime dia;
     private Map<String,Marca> marcas;
@@ -22,7 +22,7 @@ public class Simulacao
      */
     public Simulacao()
     {
-        this.casas = new ArrayList<>();
+        this.casas = new HashMap<>();
         this.comercializadores = new HashMap<>();
         this.dia = now();
         this.marcas = new HashMap<>();
@@ -36,7 +36,7 @@ public class Simulacao
     {
         File myObj = new File(filename);
         Scanner myReader = new Scanner(myObj);
-        this.casas = new ArrayList<>();
+        this.casas = new HashMap<>();
         this.comercializadores = new HashMap<>();
         this.dia = LocalDateTime.of(0, Month.JANUARY, 1, 1, 1, 1);
         this.marcas = new HashMap<>();
@@ -143,7 +143,7 @@ public class Simulacao
             fw.write("\n");
         }
         fw.write("Casas\n");
-        for (CasaInteligente ci : this.casas)
+        for (CasaInteligente ci : this.casas.values())
         {
             fw.write("Proprietario=" + ci.getProprietario() +",Morada=" + ci.getMorada()
                     + ",Nif=" + ci.getNIF() +",ComercializadorEn=" + ci.getComercializadorEn()
@@ -210,14 +210,17 @@ public class Simulacao
     public Map<String,Marca> getMarcas() {
         return marcas;
     }
-    public List<CasaInteligente> getCasas()
+    public Map<Integer,CasaInteligente> getCasas()
     {
-        return this.casas.stream().map(CasaInteligente::clone).collect(Collectors.toList());
+        return this.casas.entrySet()
+                .stream()
+                .collect(Collectors.toMap(e-> e.getKey(), e-> e.getValue().clone()));
     }
 
-    public void setCasas(List<CasaInteligente> casas)
+    public void setCasas(Map<Integer,CasaInteligente> casas)
     {
-        this.casas = casas.stream().map(CasaInteligente::clone).collect(Collectors.toList());
+        this.casas = casas.entrySet()
+                .stream().collect(Collectors.toMap(Map.Entry::getKey, e-> e.getValue().clone()));
     }
 
     public Map<String,ComercializadorEnergia> getComercializadores()
@@ -237,7 +240,7 @@ public class Simulacao
     }
     public void addCasa(CasaInteligente ci)
     {
-        this.casas.add(ci);
+        this.casas.put(ci.getNIF (),ci);
     }
 
     public void addComercializador(ComercializadorEnergia ce){
@@ -250,7 +253,7 @@ public class Simulacao
      */
     public void simular(int dias)
     {
-        for (CasaInteligente ci : this.casas)
+        for (CasaInteligente ci : this.casas.values())
         {
            String comercializador =  ci.getComercializadorEn();
            ComercializadorEnergia ce = this.comercializadores.get(comercializador);
@@ -301,7 +304,7 @@ public class Simulacao
     {
         // temos de ver por qual o argumento que queremos ordenar
         Comparator<CasaInteligente> c = (e1, e2) -> (int) (e2.custoDiario() - e1.custoDiario());
-        CasaInteligente ret = this.casas.stream().sorted(c).findFirst().orElse(null);
+        CasaInteligente ret = this.casas.values().stream().sorted(c).findFirst().orElse(null);
         return ret;
     }
 
