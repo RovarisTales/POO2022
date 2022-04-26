@@ -32,6 +32,7 @@ public class  CasaInteligente
     private Map<String, List<String>> locations; // Espaço -> Lista codigo dos devices
     private String comercializadorEn;
     private double gastoCasa;
+    private double gastoEnergia;
 
     /**
      * Construtor por omissão de CasaInteligente.
@@ -111,6 +112,15 @@ public class  CasaInteligente
 
     public double getGastoCasa() {
         return gastoCasa;
+    }
+
+    public double getGastoEnergia() {
+        return gastoCasa;
+    }
+
+
+    public void setGastoEnergia(double gastoEnergia) {
+        this.gastoEnergia= gastoEnergia;
     }
 
     public void setGastoCasa(double gastoCasa) {
@@ -400,6 +410,15 @@ public class  CasaInteligente
                 ", comercializadorEn='" + comercializadorEn + '\'' +
                 ", gastoCasa='" + gastoCasa +  '\'' +
                 '}';
+    }
+
+    public String whereIsDevice(SmartDevice sd){
+        for (String s : this.locations.keySet()){
+            if (roomHasDevice(s,sd.getID())){
+                return s;
+            }
+        }
+        return null;
     }
 
 

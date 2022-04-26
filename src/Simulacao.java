@@ -260,7 +260,7 @@ public class Simulacao
            double preco = dias * ce.preçoDiaDisp(ci.custoDiario());
            ce.setVolumeFatura(ce.getVolumeFatura() + preco);
            ci.setGastoCasa(ci.getGastoCasa() + preco);
-
+           ci.setGastoEnergia(ci.getGastoEnergia() +  ci.custoDiario() * dias);
            ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia.getDayOfMonth(),dia.getDayOfMonth()+dias );
 
         }
@@ -313,10 +313,11 @@ public class Simulacao
      * Método que devolve os maiores consumidores de energia durante um período ordenados.
      * @return List ordenada pelos maiores consumidores.
      */
-    public List<ComercializadorEnergia> ordenacaoMaioresConsumidoresEnergia(int tempo)
+    public List<CasaInteligente> ordenacaoMaioresConsumidoresEnergia()
     {
-        Comparator<ComercializadorEnergia> c = (e1, e2) -> (int) (e2.getVolumeFatura() - e1.getVolumeFatura());
-        return this.comercializadores.values().stream().sorted(c).collect(Collectors.toList());
+        //TODO criar essa  variavel
+        Comparator<CasaInteligente> c = (e1, e2) -> (int) (e2.getGastoEnergia() - e1.getGastoEnergia());
+        return this.casas.values().stream().sorted(c).collect(Collectors.toList());
     }
 
     @Override

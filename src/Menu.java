@@ -4,8 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-//TODO CRIAR MENU ESTATICAS
-//TODO ACABAR O ALTERAR DEVICES
+//TODO MUDAR TODOS OS DEVICES PARA ON/OFF EM UM QUARTO
 //TODO ALTERAR POR ARQUIVO
 
 public class Menu
@@ -88,7 +87,8 @@ public class Menu
     public void alterarCasa(int NIF){
         System.out.println("|----------------------------------------------|");
         System.out.println("| Opção 1 - Alterar comercializador            |");
-        System.out.println("| Opção 1 - Alterar devices                    |");
+        System.out.println("| Opção 2 - Alterar devices                    |");
+        System.out.println("| Opção 3 - Ligar/desligar todos devices quartos|");
         System.out.println("|Aperte qualquer outra tecla para acabar alteração");
         System.out.println("|----------------------------------------------|");
 
@@ -109,14 +109,41 @@ public class Menu
                 }
                 break;
             case 2:
-                //alterarDevice(this.cas);
+                CasaInteligente ci = simular.getCasas().get(NIF);
+                System.out.println("Qual o id do device?");
+                String id = menu.next();
+                SmartDevice sd = ci.getDevices().get(id);
+                if(sd == null)
+                {
+                    System.out.println("O device não existe");
+                    break;
+                }
+                alterarDevice(sd);
+                String quarto = ci.whereIsDevice(sd);
+                ci.addToRoom(quarto, sd.getID());
+                ci.addDevice(sd);
+                break;
+            case 3:
+                FAZER;
                 break;
             default:
                 break;
         }
     }
 
-    //public void alterarDevice()
+    public void alterarDevice(SmartDevice sd)
+    {
+        System.out.println("|----------------------------------------------|");
+        System.out.println("| 1 - Ligar | 2 - Desligar                     |");
+        System.out.println("|Aperte qualquer outra tecla para acabar alteração");
+        System.out.println("|----------------------------------------------|");
+        if (menu.nextInt() == 1){
+            sd.setOn(true);
+        }
+        else {
+            sd.setOn(false);
+        }
+    }
     public void alterarComercializador(String nome){
         System.out.println("|----------------------------------------------|");
         System.out.println("| Opção 1 - Alterar custo diário               |");
@@ -303,6 +330,41 @@ public class Menu
     }
 
 
+    public void estatisticas()
+    {
+        int i = 0;
+        Scanner menu = new Scanner(System.in);
+        System.out.print("##------------Menu para adicionar quartos e Device------------##\n\n");
+        System.out.println("| Opção 1 - ordenacao dos maiores consumidores de energia    |");
+        System.out.println("| Opção 2 - Casa com maior gasto                             |");
+        System.out.println("| Opção 3 - Faturas de um comercializador                    |");
+        System.out.println("| Opção 3 - Comercializador com maior volume de faturação    |");
+        System.out.println("|Aperte qualquer outra tecla para acabar criaçao             |");
+        System.out.println("|------------------------------------------------------------|");
+        System.out.println("Digite uma opção:");
+        int op2 = menu.nextInt();
+
+        switch (op2)
+        {
+            case 1:
+                System.out.println(this.simular.ordenacaoMaioresConsumidoresEnergia());
+                break;
+            case 2:
+                System.out.println(this.simular.casaMaiorGasto());
+                break;
+            case 3:
+                System.out.println("Qual o comercializador : ");
+                menu.next();
+                System.out.println(this.simular.faturasComercializador(menu.nextLine()));
+                break;
+            case 4:
+                System.out.println(this.simular.ComercializadorComMaiorFatura());
+                break;
+            default:
+                break;
+
+        }
+    }
     public CasaInteligente criarCasa ()
     {
         System.out.println(this.simular.getComercializadores());
@@ -344,6 +406,7 @@ public class Menu
                 System.out.print("| Opção 3 - Simular                              |\n");
                 System.out.print("| Opção 4 - Alterar casa, comercializador, device|\n");
                 System.out.print("| Opção 5 - Salvar                               |\n");
+                System.out.print("| Opção 6 - Estatísticas                         |\n");
                 System.out.print("|------------------------------------------------|\n");
                 System.out.print("Digite uma opção: ");
 
@@ -358,12 +421,19 @@ public class Menu
                         //System.out.println(mc);
                         break;
                     case 3:
-                        this.simular.simular(7);
+                        System.out.println("Quantos dias gostaria de simular?");
+                        int n = menu.nextInt();
+                        this.simular.simular(n);
                         break;
                     case 4 :
                         alterar();
+                        break;
                     case 5:
                         this.simular.salvar();
+                        break;
+                    case 6:
+                        estatisticas();
+                        break;
                     default:
                         aux = 1;
 
