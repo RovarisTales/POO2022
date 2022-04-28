@@ -4,8 +4,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-//TODO MUDAR TODOS OS DEVICES PARA ON/OFF EM UM QUARTO
-//TODO ALTERAR POR ARQUIVO
+//TODO MUDAR TODOS OS DEVICES PARA ON/OFF EM UM QUARTO -> TIAGO
+//TODO ALTERAR POR ARQUIVO -> TALES
+//TODO DIAS FATURAS
+//TODO COMENTAR CODIGO
 
 public class Menu
 {
@@ -21,11 +23,6 @@ public class Menu
         this.simular = simul;
         this.menu = new Scanner(System.in);
     }
-
-
-
-
-
 
     public ComercializadorEnergia criarComercializador()
     {
