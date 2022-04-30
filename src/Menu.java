@@ -159,7 +159,7 @@ public class Menu
     /**
      * Liga ou desliga um device.
      *
-     * @param sd ,NIF  O smartDevice que queremos alterar 
+     * @param sd   O smartDevice que queremos alterar
      */
   
     public void alterarDevice(SmartDevice sd)
@@ -168,7 +168,8 @@ public class Menu
         System.out.println("| 1 - Ligar | 2 - Desligar                     |");
         System.out.println("|Aperte qualquer outra tecla para acabar alteração");
         System.out.println("|----------------------------------------------|");
-        if (menu.nextInt() == 1){
+        if (menu.nextInt() == 1)
+        {
             sd.setOn(true);
         }
         else {
@@ -206,6 +207,12 @@ public class Menu
                 break;
         }
     }
+
+    /**
+     * Instalar devices em uma casa.
+     *
+     * @param nova a casa inteligente que queremos instalar os devices
+     */
     public void instalarDevices(CasaInteligente nova)
     {
 
@@ -254,6 +261,7 @@ public class Menu
                         }
                     }
                 }
+                nova.setGastoCasa(nova.getGastoCasa()+nova.getDevices().get(id).getCustoInstalation());
             }
             else
             {
@@ -263,7 +271,11 @@ public class Menu
     }
 
 
-
+    /**
+     * Criar um device
+     *
+     * @return O device que foi criado
+     */
     public SmartDevice criarDevice()
     {
         System.out.println("Qual seria o id do device");
@@ -330,6 +342,11 @@ public class Menu
         }
     }
 
+    /**
+     * Menu que da a opção de criar um quarto ou um device a casa nova
+     *
+     * @param nova a casa inteligente que queremos adicionar quartos/devices
+     */
     public void criaQuartoDevice(CasaInteligente nova)
     {
         int i = 0;
@@ -365,7 +382,9 @@ public class Menu
         }
     }
 
-
+    /**
+     * Menu que permite o utilizador a descobrir estatisticas
+     */
     public void estatisticas()
     {
         int i = 0;
@@ -374,7 +393,7 @@ public class Menu
         System.out.println("| Opção 1 - ordenacao dos maiores consumidores de energia    |");
         System.out.println("| Opção 2 - Casa com maior gasto                             |");
         System.out.println("| Opção 3 - Faturas de um comercializador                    |");
-        System.out.println("| Opção 3 - Comercializador com maior volume de faturação    |");
+        System.out.println("| Opção 4 - Comercializador com maior volume de faturação    |");
         System.out.println("|Aperte qualquer outra tecla para acabar criaçao             |");
         System.out.println("|------------------------------------------------------------|");
         System.out.println("Digite uma opção:");
@@ -401,6 +420,12 @@ public class Menu
 
         }
     }
+
+    /**
+     * Cria uma casa inteligente.
+     *
+     * @return A casa inteligente que foi criada
+     */
     public CasaInteligente criarCasa ()
     {
         System.out.println(this.simular.getComercializadores());
@@ -430,6 +455,11 @@ public class Menu
         return nova;
     }
 
+    /**
+     * Cria o cenario de simualção
+     *
+     * @param simular , aonde vamos armazenar os dados da simulação
+     */
     public void criarNovoSimular (Simulacao simular) throws IOException {
         int aux = 0;
         this.simular = simular;
@@ -477,9 +507,6 @@ public class Menu
 
             }
     }
-
-
-
 
 }
 
