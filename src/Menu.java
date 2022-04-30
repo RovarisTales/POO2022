@@ -8,22 +8,41 @@ import java.util.*;
 //TODO ALTERAR POR ARQUIVO -> TALES
 //TODO DIAS FATURAS
 //TODO COMENTAR CODIGO
-
+/**
+ * A classe menu é a classe q cria a interface de menu que o utilizador ira comunicar com o programa
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
 public class Menu
 {
-
+    //variáveis de instância
     private Simulacao simular;
     private Scanner menu;
 
-    public Menu() {
+    /**
+     * Construtor por omissão de Menu.
+     */
+    public Menu()
+    {
         this.simular = new Simulacao();
         this.menu = new Scanner(System.in);
     }
-    public Menu(Simulacao simul){
+    /**
+     * Construtor parametrizado de menu.
+     * Aceita como parâmetro uma simulação
+     */
+    public Menu(Simulacao simul)
+    {
         this.simular = simul;
         this.menu = new Scanner(System.in);
     }
 
+    /**
+     * Cria um novo comercializador.
+     *
+     * @return O novo comercializador
+     */
     public ComercializadorEnergia criarComercializador()
     {
         ComercializadorEnergia comer = new ComercializadorEnergia();
@@ -39,6 +58,10 @@ public class Menu
         return comer;
     }
 
+    /**
+     * Disponibiliza o menu que nos permite alterar algum comercializador ou uma casa/device
+     *
+     */
     public void alterar ()
     {
 
@@ -81,6 +104,11 @@ public class Menu
         }
     }
 
+    /**
+     * Altera uma casa.
+     *
+     * @param NIF  O NIF da casa que queremos alterar
+     */
     public void alterarCasa(int NIF){
         System.out.println("|----------------------------------------------|");
         System.out.println("| Opção 1 - Alterar comercializador            |");
@@ -128,7 +156,13 @@ public class Menu
         }
     }
 
-    public void alterarDevice(SmartDevice sd)
+    /**
+     * Liga ou desliga um device.
+     *
+     * @param sd ,NIF  O smartDevice que queremos alterar e o NIF da casa a qual pertence esse device
+     */
+    PRECISA REFAZER POIS FAZER SETON E NAO ADICIONAR NA CASA NAO FUNCIONA TALVEZ MANDAR O NIF DA CASA PARA ADIOCONAR ?
+    public void alterarDevice(SmartDevice sd, int NIF)
     {
         System.out.println("|----------------------------------------------|");
         System.out.println("| 1 - Ligar | 2 - Desligar                     |");
@@ -141,6 +175,11 @@ public class Menu
             sd.setOn(false);
         }
     }
+    /**
+     * Altera dados de um comercializador.
+     *
+     * @param nome o nome do comercializador que queremos alterar
+     */
     public void alterarComercializador(String nome){
         System.out.println("|----------------------------------------------|");
         System.out.println("| Opção 1 - Alterar custo diário               |");
