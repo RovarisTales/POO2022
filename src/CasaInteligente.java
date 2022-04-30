@@ -33,6 +33,17 @@ public class  CasaInteligente
     private String comercializadorEn;
     private double gastoCasa;
     private double gastoEnergia;
+
+    public double getGastoSimulacao()
+    {
+        return gastoSimulacao;
+    }
+
+    public void setGastoSimulacao(double gastoSimulacao)
+    {
+        this.gastoSimulacao = gastoSimulacao;
+    }
+
     private double gastoSimulacao;
     /**
      * Construtor por omissão de CasaInteligente.

@@ -402,9 +402,10 @@ public class Menu
         switch (op2)
         {
             case 1:
-                System.out.println(this.simular.ordenacaoMaioresConsumidoresEnergia());
+                System.out.println(this.simular.ordenacaoMaioresConsumidoresEnergia(/*int dia1 , int dia 2*/));
                 break;
             case 2:
+                //Novo metodo ?
                 System.out.println(this.simular.casaMaiorGasto());
                 break;
             case 3:

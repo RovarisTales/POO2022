@@ -261,6 +261,7 @@ public class Simulacao
            ce.setVolumeFatura(ce.getVolumeFatura() + preco);
            ci.setGastoCasa(ci.getGastoCasa() + preco);
            ci.setGastoEnergia(ci.getGastoEnergia() +  ci.custoDiario() * dias);
+           ci.setGastoSimulacao(preco);
            ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia.getDayOfMonth(),dia.getDayOfMonth()+dias );
 
         }
@@ -321,34 +322,12 @@ public class Simulacao
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Simulacao{" +
                 "casas=" + casas +
                 ", comercializadores=" + comercializadores +
                 '}';
     }
-
-    /*
-    area de criar todas as funções que iremos precisar para alterar coisas q o utilizador pediu
-    IMPORTANTE PARA 18 valores
-
-    public int funcoesDeAlteracoes()
-    {
-
-    }
-    IMPORTANTE!!!!!!
-    IMPORTANTE!!!!!
-    IMPORTANTE!!!!
-    IMPORTANTE!!!
-    IMPORTANTE!!
-    IMPORTANTE!
-    IMPORTANTE
-    IMPORTANTE!
-    IMPORTANTE!!
-    IMPORTANTE!!!
-    IMPORTANTE!!!!
-
-
-     */
 
 }
