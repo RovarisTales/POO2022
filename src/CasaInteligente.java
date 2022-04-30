@@ -33,7 +33,7 @@ public class  CasaInteligente
     private String comercializadorEn;
     private double gastoCasa;
     private double gastoEnergia;
-
+    private double gastoSimulacao;
     /**
      * Construtor por omissão de CasaInteligente.
      */
