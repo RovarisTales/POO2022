@@ -159,10 +159,10 @@ public class Menu
     /**
      * Liga ou desliga um device.
      *
-     * @param sd ,NIF  O smartDevice que queremos alterar e o NIF da casa a qual pertence esse device
+     * @param sd ,NIF  O smartDevice que queremos alterar 
      */
-    PRECISA REFAZER POIS FAZER SETON E NAO ADICIONAR NA CASA NAO FUNCIONA TALVEZ MANDAR O NIF DA CASA PARA ADIOCONAR ?
-    public void alterarDevice(SmartDevice sd, int NIF)
+  
+    public void alterarDevice(SmartDevice sd)
     {
         System.out.println("|----------------------------------------------|");
         System.out.println("| 1 - Ligar | 2 - Desligar                     |");
