@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-//TODO MUDAR TODOS OS DEVICES PARA ON/OFF EM UM QUARTO -> TIAGO
 //TODO ALTERAR POR ARQUIVO -> TALES
 //TODO DIAS FATURAS
 //TODO COMENTAR CODIGO
@@ -149,7 +148,19 @@ public class Menu
                 ci.addDevice(sd);
                 break;
             case 3:
-                FAZER;
+                System.out.println("Qual o quarto?");
+                String quarto1 = menu.next();
+                System.out.println("1 - Ligar | 2 - Desligar");
+                CasaInteligente ci1 = simular.getCasas().get(NIF);
+                switch (menu.nextInt()){
+                    case 1:
+                        ci1.setAllOnOrOffRoom(quarto1,true);
+                    case 2:
+                        ci1.setAllOnOrOffRoom(quarto1,false);
+                    default:
+                        System.out.println("Input inválido");
+                        break;
+                }
                 break;
             default:
                 break;
