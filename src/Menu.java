@@ -507,7 +507,7 @@ public class Menu
                         alterar();
                         break;
                     case 5:
-                        this.simular.salvar();
+                        this.simular.salvar("anterior.txt");
                         break;
                     case 6:
                         estatisticas();

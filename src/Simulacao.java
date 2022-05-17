@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -150,8 +147,8 @@ public class Simulacao
 
         //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
 
-    public void salvar () throws IOException
-    {
+    public void salvar (String anterior) throws IOException {
+        /*
         File myObj = new File("anterior.txt");
         FileWriter fw = new FileWriter("anterior.txt");
         fw.write(this.dia.getDayOfMonth()  + "/" + this.dia.getMonthValue());
@@ -219,6 +216,12 @@ public class Simulacao
         }
         fw.write("EndOfFile");
         fw.close();
+
+         */
+        PrintWriter fich = new PrintWriter(anterior);
+        fich.println(this.toString());
+        fich.flush();
+        fich.close();
     }
 
     /**

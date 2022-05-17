@@ -48,7 +48,7 @@ public class Main {
                 }
                 break;
             default:
-                simular.salvar();
+                simular.salvar("anterior.txt");
                 System.out.println("Fechando Progama");
                 System.exit(0);
 
