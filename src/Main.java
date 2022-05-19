@@ -2,7 +2,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main (String[]args) throws IOException {
+    /**
+     * funçao principal que inicializa a Simulaçao do projeto casasinteligentes
+     * @param args
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public static void main (String[]args) throws IOException, ClassNotFoundException {
 
         Scanner menu = new Scanner(System.in);
         Simulacao simular = new Simulacao();
@@ -55,6 +61,6 @@ public class Main {
         }
         me.criarNovoSimular(simular);
 
-        System.out.println(simular);
+        //System.out.println(simular);
     }
 }

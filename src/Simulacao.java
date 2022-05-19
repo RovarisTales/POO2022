@@ -1,13 +1,20 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.time.Month;
 
 import static java.time.LocalDateTime.now;
-
-public class Simulacao
+/**
+ * A classe simulacao é a classe que simula os acontecimentos , guarda as casas e os comerciantes.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class Simulacao implements Serializable
 {
+    //variáveis de instância
     private Map<Integer, CasaInteligente> casas;
     private Map<String,ComercializadorEnergia> comercializadores;
     private LocalDateTime dia;
@@ -29,8 +36,7 @@ public class Simulacao
      * Construtor parametrizado com o nome do ficheiro que queremos ler
      * para fazer as configurações do programa.
      */
-    public Simulacao(String filename) throws FileNotFoundException
-    {
+    public Simulacao(String filename) throws IOException, ClassNotFoundException {
         File myObj = new File(filename);
         Scanner myReader = new Scanner(myObj);
         this.casas = new HashMap<>();
@@ -41,12 +47,90 @@ public class Simulacao
 
     }
 
-    public void lerArquivo(String filename) throws FileNotFoundException
+    /**
+     * Automatiza a simulacao atraves de um arquivo que é dado como parametro
+     *@throws FileNotFoundException
+     * @param filename  ,o nome do arquivo que queremos simular
+     */
+    public void automatizarSimulacao(String filename) throws FileNotFoundException
     {
         File myObj = new File(filename);
         Scanner myReader = new Scanner(myObj);
+        while(myReader.hasNextLine()){
+            String linha = myReader.nextLine();
+            String[] dividida = linha.split(",");
+            String[] dias = dividida[0].split("\\.");
+            int day = this.dia.getDayOfMonth();
+            Month mes = this.dia.getMonth();
+            int ano = this.dia.getYear();
+
+            if(day == (Integer.parseInt(dias[2])) && ano == (Integer.parseInt(dias[0])) && mes.getValue() == (Integer.parseInt(dias[1])) ){
+                continue;
+            }
+            else {
+                simular((day-(Integer.parseInt(dias[2])))*((mes.getValue()-(Integer.parseInt(dias[1])))*30)*((ano-(Integer.parseInt(dias[0])))*365));
+            }
+
+            String um = dividida[1];
+            String dois = dividida[2];
+            if (dividida.length == 3)
+            {
+                CasaInteligente ci = this.casas.get(um);
+                ci.setComercializadorEn(dois);
+                this.addCasa(ci);
+            }
+            else
+            {
+                String tres = dividida[3];
+                switch(tres)
+                {
+                    case "setOn":
+                        CasaInteligente ci = this.casas.get(um);
+                        ci.setDeviceOn(dois);
+                        this.addCasa(ci);
+                    case "setOff":
+                        CasaInteligente ci2 = this.casas.get(um);
+                        ci2.setDeviceOff(dois);
+                        this.addCasa(ci2);
+                    default:
+                        ComercializadorEnergia ce = this.comercializadores.get(um);
+                        ce.setCustoDiarioEner(Double.parseDouble(tres));
+                        this.addComercializador(ce);
+                }
+            }
+
+        }
+    }
+
+    public LocalDateTime getDia() {
+        return this.dia;
+    }
+
+    public void setDia(LocalDateTime dia) {
+        this.dia = dia;
+    }
+
+    /**
+     * funçao que le o arquivo do objecto salvo em binario
+     * @param filename
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public void lerArquivo(String filename) throws IOException, ClassNotFoundException {
+
+        FileInputStream fis = new FileInputStream(filename);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        Simulacao s = (Simulacao) ois.readObject();
+        this.setCasas(s.getCasas());
+        this.setComercializadores(s.getComercializadores());
+        this.setMarcas(s.getMarcas());
+        this.setDia(s.getDia());
+
+        /*
+        File myObj = new File(filename);
+        Scanner myReader = new Scanner(myObj);
         String linha = myReader.nextLine();
-        this.dia = LocalDateTime.of(0,Integer.parseInt(linha.split("/")[1]), Integer.parseInt(linha.split("/")[0]), 1, 1, 1);
+        //this.dia = LocalDateTime.of(0,Integer.parseInt(linha.split("/")[1]), Integer.parseInt(linha.split("/")[0]), 1, 1, 1);
         String inicio = myReader.nextLine();
         String[] dividida;
         while (!inicio.equals("Casas"))
@@ -120,34 +204,19 @@ public class Simulacao
         }
         System.out.println(this.comercializadores);
         System.out.println(this.casas);
+        */
     }
-    
-    
-    //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-        //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
 
-        //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
 
-        //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
 
-        //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
 
-        //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-
-        //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-
-        //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-    //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-    //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-    //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-
-        //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-    //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-    //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-
-        //FIZ NADA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-
-    public void salvar (String anterior) throws IOException {
+    /**
+     * funçao que salva o objecto em  binario em um arquvio anterior
+     * @param anterior
+     * @throws IOException
+     */
+    public void salvar (String anterior) throws IOException
+    {
         /*
         File myObj = new File("anterior.txt");
         FileWriter fw = new FileWriter("anterior.txt");
@@ -218,10 +287,11 @@ public class Simulacao
         fw.close();
 
          */
-        PrintWriter fich = new PrintWriter(anterior);
-        fich.println(this.toString());
-        fich.flush();
-        fich.close();
+        FileOutputStream fich = new FileOutputStream(anterior);
+        ObjectOutputStream ois = new ObjectOutputStream(fich);
+        ois.writeObject(this);
+        ois.flush();
+        ois.close();
     }
 
     /**
@@ -290,7 +360,7 @@ public class Simulacao
            ci.setGastoCasa(ci.getGastoCasa() + preco);
            ci.setGastoEnergia(ci.getGastoEnergia() +  ci.custoDiario() * dias);
            ci.setGastoSimulacao(preco);
-           ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia.getDayOfMonth(),dia.getDayOfMonth()+dias );
+           ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,/*dia.getDayOfMonth(),dia.getDayOfMonth()+dias*/1,1);
 
         }
         dia = dia.plusDays(dias);

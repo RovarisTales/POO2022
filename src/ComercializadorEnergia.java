@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class ComercializadorEnergia
+public class ComercializadorEnergia implements Serializable
 {
     private String nome;
     private double custoDiarioEner;

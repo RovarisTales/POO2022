@@ -11,6 +11,7 @@
 /** conhecimentos de POO.                                                        */
 /*********************************************************************************/
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class  CasaInteligente
+public class  CasaInteligente implements Serializable
 {
     //variáveis de instância
     private String proprietario;

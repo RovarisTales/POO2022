@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -6,7 +7,7 @@ import java.util.Objects;
  * @version 15/04/2022
  */
 
-public class Marca {
+public class Marca implements Serializable {
     private String nome;
     private int custo;
 

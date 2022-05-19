@@ -10,6 +10,7 @@
 /** conhecimentos de POO.                                                        */
 /*********************************************************************************/
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -19,7 +20,7 @@ import java.util.Objects;
  * @author (your name)
  * @version (a version number or a date)
  */
-public abstract class SmartDevice {
+public abstract class SmartDevice implements Serializable {
 
     private String id;
     private boolean on;
@@ -67,6 +68,9 @@ public abstract class SmartDevice {
         this.custoInstalation = umDevice.getCustoInstalation();
     }
 
+    /**
+     * funçoes que ligam e desligam dispositivos
+     */
     public void turnOn() {
         this.on = true;
     }
@@ -74,7 +78,10 @@ public abstract class SmartDevice {
     public void turnOff() {
         this.on = false;
     }
-    
+
+    /**
+     *getters e setters de S martDevice
+     */
     public boolean getOn(){
         return this.on;
     }
@@ -103,6 +110,9 @@ public abstract class SmartDevice {
         return on == that.getOn() && this.getID().equals(that.getID());
     }
 
+    /**
+     * declaraçoes de funçoes abstractas necessarias para subclasses de smartdevice
+     */
     public abstract double custoEnergia();
 
     public abstract SmartDevice clone();

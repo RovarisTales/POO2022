@@ -4,9 +4,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-//TODO ALTERAR POR ARQUIVO -> TALES
-//TODO DIAS FATURAS
-//TODO COMENTAR CODIGO
+//TODO COLOCAR EXCEPTIONS
+
 /**
  * A classe menu é a classe q cria a interface de menu que o utilizador ira comunicar com o programa
  *
@@ -47,7 +46,7 @@ public class Menu
         ComercializadorEnergia comer = new ComercializadorEnergia();
 
         System.out.println("Nome do comercializador ");
-        comer.setNome(this.menu.nextLine());
+        comer.setNome(this.menu.next());
         System.out.println("Custo diario energia :");
         comer.setCustoDiarioEner(this.menu.nextDouble());
         System.out.println("Volume de fatura :");
@@ -400,7 +399,7 @@ public class Menu
     {
         int i = 0;
         Scanner menu = new Scanner(System.in);
-        System.out.print("##------------Menu para adicionar quartos e Device------------##\n\n");
+        System.out.print("##------------ESTATISTICAS------------------------------------##\n\n");
         System.out.println("| Opção 1 - ordenacao dos maiores consumidores de energia    |");
         System.out.println("| Opção 2 - Casa com maior gasto                             |");
         System.out.println("| Opção 3 - Faturas de um comercializador                    |");
