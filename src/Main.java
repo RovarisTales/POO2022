@@ -40,8 +40,8 @@ public class Main {
                 switch (input1) {
                     //Configuração através de ficheiro
                     case 0:
-                        String arquivo1 = "";
-                        simular = new Simulacao(arquivo1);
+                        System.out.println("| Qual o nome do ficheiro ? |");
+                        simular = new Simulacao(menu.nextLine());
                         break;
                     //Configuraçao nova
                     case 1:
