@@ -35,16 +35,6 @@ public class  CasaInteligente implements Serializable
     private double gastoCasa;
     private double gastoEnergia;
 
-    public double getGastoSimulacao()
-    {
-        return gastoSimulacao;
-    }
-
-    public void setGastoSimulacao(double gastoSimulacao)
-    {
-        this.gastoSimulacao = gastoSimulacao;
-    }
-
     private double gastoSimulacao;
     /**
      * Construtor por omissão de CasaInteligente.
@@ -149,6 +139,15 @@ public class  CasaInteligente implements Serializable
         this.morada = morada;
     }
 
+    public double getGastoSimulacao()
+    {
+        return gastoSimulacao;
+    }
+
+    public void setGastoSimulacao(double gastoSimulacao)
+    {
+        this.gastoSimulacao = gastoSimulacao;
+    }
     public Map<String,SmartDevice> getDevices()
     {
         if (this.devices == null) {
@@ -405,6 +404,7 @@ public class  CasaInteligente implements Serializable
         }
     }
 
+
     public CasaInteligente clone()
     {
         return new CasaInteligente(this);
@@ -434,6 +434,13 @@ public class  CasaInteligente implements Serializable
     }
 
 
+    /**
+     * Calcula o preco diario de energia
+     *
+     * @param o, o objecto que iremos comparar
+     *
+     * @return se é igual ou não
+     */
     @Override
     public boolean equals(Object o)
     {

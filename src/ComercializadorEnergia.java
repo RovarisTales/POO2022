@@ -1,20 +1,37 @@
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * O comercializador energia contém a informação referente a um comercializador
+ *
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
 public class ComercializadorEnergia implements Serializable
 {
+    //variáveis de instância
     private String nome;
     private double custoDiarioEner;
     private static double IMPOSTO = 2.0;
     private double volumeFatura;
     private List<String> faturas;
 
+    /**
+     * Construtor por omissão do comercializador de energia.
+     */
     public ComercializadorEnergia(){
         this.nome = "";
         this.custoDiarioEner = 0;
         this.volumeFatura = 0;
         this.faturas = new ArrayList<>();
     }
+    /**
+     * Construtor parametrizado de Comercializador de energia.
+     * Aceita como parametros o nome ,o custo diario de energia e o volume de fatura
+     * @param nome, custoDiarioEner, VolumeFatura
+     *
+     */
     public ComercializadorEnergia(String nome, double custoDiarioEner, double volumeFatura)
     {
         this.nome = nome;
@@ -22,7 +39,14 @@ public class ComercializadorEnergia implements Serializable
         this.volumeFatura = volumeFatura;
         this.faturas = new ArrayList<>();
     }
-
+     /**
+     * Construtor parametrizado de Comercializador de energia.
+     * Aceita como parametros o nome ,o custo diario de energia e o volume de fatura e faturas
+     * @param nome
+     * @param custoDiarioEner
+      * @param faturas
+      * @param volumeFatura
+     */
     public ComercializadorEnergia(String nome, double custoDiarioEner, double volumeFatura, List<String> faturas) {
         this.nome = nome;
         this.custoDiarioEner = custoDiarioEner;
@@ -30,7 +54,13 @@ public class ComercializadorEnergia implements Serializable
         this.faturas = new ArrayList<>(faturas);
 
     }
-
+    /**
+     * Construtor parametrizado de Comercializador de energia.
+     * Aceita como parametros um ComercializadorEnergia
+     * @param umConstrutor
+     *
+     *
+     */
     public ComercializadorEnergia(ComercializadorEnergia umConstrutor){
         this.nome = umConstrutor.getNome();
         this.custoDiarioEner = umConstrutor.getCustoDiarioEner();
@@ -38,6 +68,10 @@ public class ComercializadorEnergia implements Serializable
         this.faturas = umConstrutor.getFaturas();
     }
 
+    /**
+     * métodos de instância
+     *
+     */
     public String getNome() {
         return nome;
     }
@@ -101,12 +135,25 @@ public class ComercializadorEnergia implements Serializable
     public ComercializadorEnergia clone(){
         return new ComercializadorEnergia(this);
     }
-
+    /**
+     * Calcula o preco diario de energia
+     *
+     * @param consumoDisp, o consumo do dispostivio
+     *
+     * @return o preço por dia
+     */
     public double preçoDiaDisp(double consumoDisp)
     {
         return (custoDiarioEner * consumoDisp* (1 + IMPOSTO)) * 0.9;
     }
 
+    /**
+     * Calcula o preco diario de energia
+     *
+     * @param o, o objecto que iremos comparar
+     *
+     * @return se é igual ou não
+     */
     public boolean equals(Object o)
     {
         if (this == o) return true;
