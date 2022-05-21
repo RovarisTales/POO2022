@@ -360,7 +360,7 @@ public class Simulacao implements Serializable
            ci.setGastoCasa(ci.getGastoCasa() + preco);
            ci.setGastoEnergia(ci.getGastoEnergia() +  ci.custoDiario() * dias);
            ci.setGastoSimulacao(preco);
-           ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,/*dia.getDayOfMonth(),dia.getDayOfMonth()+dias*/1,1);
+           ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia.getDayOfMonth(),dia.getDayOfMonth()+dias);
 
         }
         dia = dia.plusDays(dias);

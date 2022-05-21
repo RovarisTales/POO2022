@@ -420,8 +420,8 @@ public class Menu
                 break;
             case 3:
                 System.out.println("Qual o comercializador : ");
-                menu.next();
-                System.out.println(this.simular.faturasComercializador(menu.nextLine()));
+                String comercialiador = menu.next();
+                System.out.println(this.simular.faturasComercializador(comercialiador));
                 break;
             case 4:
                 System.out.println(this.simular.ComercializadorComMaiorFatura());
