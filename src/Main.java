@@ -40,8 +40,8 @@ public class Main {
                 switch (input1) {
                     //Configuração através de ficheiro
                     case 0:
-                        System.out.println("| Qual o nome do ficheiro ? |");
-                        simular = new Simulacao(menu.nextLine());
+                        System.out.println("Qual o nome do ficheiro ? ");
+                        simular = new Simulacao(menu.next(),0);
                         break;
                     //Configuraçao nova
                     case 1:

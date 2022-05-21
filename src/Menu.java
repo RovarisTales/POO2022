@@ -251,7 +251,7 @@ public class Menu
                     }
                     else
                     {
-                        System.out.println("Bro o quarto não existe Dred, queres um quarto novo? ;)");
+                        System.out.println("O quarto não existe , queres um quarto novo? ");
                         System.out.println("1 - Sim  \n2 - Não");
                         if (menu.nextInt() == 1)
                         {
@@ -320,7 +320,7 @@ public class Menu
                     sp.setMarca(oii);
                     this.simular.addMarca(oii);
                 }
-                System.out.println(sp.toString());
+                //System.out.println(sp.toString());
                 return sp;
                                         /*
                                         LIGADA OU DESLIGADA
@@ -332,7 +332,7 @@ public class Menu
                 sc.setResolucao(menu.nextDouble());
                 System.out.println("Tamanho dos ficheiros?");
                 sc.setTamanho_ficheiro(menu.nextDouble());
-                System.out.println(sc.toString());
+                //System.out.println(sc.toString());
                 return sc;
 
             case 3:
@@ -344,7 +344,7 @@ public class Menu
                 sb.setDimensao(menu.nextInt());
                 System.out.println("Custo diário de energia?");
                 sb.setCustoEnergia(menu.nextInt());
-                System.out.println(sb.toString());
+                //System.out.println(sb.toString());
                 return sb;
             default:
                 //nao ha breaks nessa merda
@@ -400,7 +400,7 @@ public class Menu
         int i = 0;
         Scanner menu = new Scanner(System.in);
         System.out.print("##------------ESTATISTICAS------------------------------------##\n\n");
-        System.out.println("| Opção 1 - ordenacao dos maiores consumidores de energia    |");
+        System.out.println("| Opção 1 - Ordenacao dos maiores consumidores de energia    |");
         System.out.println("| Opção 2 - Casa com maior gasto                             |");
         System.out.println("| Opção 3 - Faturas de um comercializador                    |");
         System.out.println("| Opção 4 - Comercializador com maior volume de faturação    |");
@@ -437,9 +437,9 @@ public class Menu
      *
      * @return A casa inteligente que foi criada
      */
-    public CasaInteligente criarCasa ()
+    public void criarCasa ()
     {
-        System.out.println(this.simular.getComercializadores());
+        //System.out.println(this.simular.getComercializadores());
         Scanner menu = new Scanner(System.in);
         int i = 0;
         CasaInteligente nova = new CasaInteligente();
@@ -455,15 +455,15 @@ public class Menu
         if (this.simular.getComercializadores().containsKey(comerc))
         {
             nova.setComercializadorEn(comerc);
+            criaQuartoDevice(nova);
+            instalarDevices(nova);
+            this.simular.addCasa(nova);
         }
         else
         {
-            System.out.println("COMERCIALIZADOR NAO EXISTE");
-            return null;
+            System.out.println("Comercializador não existe\nCasa nao criada");
         }
-        criaQuartoDevice(nova);
-        instalarDevices(nova);
-        return nova;
+
     }
 
     /**
@@ -482,15 +482,16 @@ public class Menu
                 System.out.print("| Opção 2 - Novo comercializador                 |\n");
                 System.out.print("| Opção 3 - Simular                              |\n");
                 System.out.print("| Opção 4 - Alterar casa, comercializador, device|\n");
-                System.out.print("| Opção 5 - Salvar                               |\n");
-                System.out.print("| Opção 6 - Estatísticas                         |\n");
+                System.out.print("| Opção 5 - Salvar  em Binario                   |\n");
+                System.out.print("| Opção 6 - Salvar  em ficheiro de texto         |\n");
+                System.out.print("| Opção 7 - Estatísticas                         |\n");
                 System.out.print("|------------------------------------------------|\n");
                 System.out.print("Digite uma opção: ");
 
                 int opcao = menu.nextInt();
                 switch (opcao) {
                     case 1:
-                        this.simular.addCasa(criarCasa());
+                        criarCasa();
                         break;
 
                     case 2:
@@ -509,9 +510,14 @@ public class Menu
                         this.simular.salvar("anterior.txt");
                         break;
                     case 6:
+                        this.simular.salvarLog("Logs.txt");
+                        break;
+                    case 7:
                         estatisticas();
                         break;
+
                     default:
+                        this.simular.salvar("anterior.txt");
                         aux = 1;
 
                 }

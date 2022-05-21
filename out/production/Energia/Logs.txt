@@ -1,0 +1,15 @@
+10/2
+nome=EDP,CustoDiarioEner=10.0,VolumeFatura=205092.0
+{nome : 'bruno' NIF : 124 Preço : 159516.0 De30/8 até 7/10 Morada: rua2}  ,{nome : 'bruno' NIF : 124 Preço : 45576.0 De 21/1 até 10/2 Morada: rua2} ,
+nome=Elet,CustoDiarioEner=69.0,VolumeFatura=10.0
+ ,
+nome=Vale,CustoDiarioEner=2.0,VolumeFatura=14590.0
+{nome : 'eu' NIF : 123 Preço : 12852.0 De21/30 até 5/7 Morada: rua morada}  ,{nome : 'eu' NIF : 123 Preço : 1728.0 De 1/1 até 21/1 Morada: rua morada} ,
+Casas
+Proprietario=eu,Morada=rua morada,Nif=123,ComercializadorEn=Vale,GastoCasa=14580.0
+SmartCamera Id=sc1 On=false CustoInstallation=0.0 Resolucao=1.0 TamanhoFicheiro=10.0;SmartBulb Id=sb2 On=false CustoInstallation=0.0 tone=1 Dimensao=1 CustoDiario=1;SmartBulb Id=sb1 On=false CustoInstallation=0.0 tone=1 Dimensao=1 CustoDiario=1;
+quarto sc1;sala sb2;banheiro sb1;
+Proprietario=bruno,Morada=rua2,Nif=124,ComercializadorEn=EDP,GastoCasa=205092.0
+SmartCamera Id=sc2 On=false CustoInstallation=0.0 Resolucao=0.6 TamanhoFicheiro=99.0;SmartSpeaker Id=s On=false CustoInstallation=0.0 Volume=10 Canal=00 Marca=jbl Custo=10;
+plaza;quarto s;sala sc2;sauna;
+EndOfFile

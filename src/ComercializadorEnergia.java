@@ -114,14 +114,14 @@ public class ComercializadorEnergia implements Serializable
     }
 
 
-    public void addFatura(int nif, String morada, String proprietario, double preco, int dia1, int dia2)
+    public void addFatura(int nif, String morada, String proprietario, double preco, int dia1, int mes1, int dia2, int mes2)
     {
         this.faturas.add(
                 "{" +
                 "nome : '" + proprietario + '\'' +
                 " NIF : " + nif +
                 " Preço : " + preco +
-                " Do dia " + dia1 + " até " + dia2 +
+                " De " + dia1 +"/"+ mes1 + " até " + dia2 +"/"+ mes2 +
                 " Morada: " + morada +
                 '}');
 

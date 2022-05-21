@@ -43,63 +43,19 @@ public class Simulacao implements Serializable
         this.comercializadores = new HashMap<>();
         this.dia = LocalDateTime.of(0, Month.JANUARY, 1, 1, 1, 1);
         this.marcas = new HashMap<>();
-        this.lerArquivo(filename);
+        this.lerArquivoAnterior(filename);
 
     }
 
-    /**
-     * Automatiza a simulacao atraves de um arquivo que é dado como parametro
-     *@throws FileNotFoundException
-     * @param filename  ,o nome do arquivo que queremos simular
-     */
-    public void automatizarSimulacao(String filename) throws FileNotFoundException
+    public Simulacao(String filename , int i)throws IOException, ClassNotFoundException
     {
         File myObj = new File(filename);
         Scanner myReader = new Scanner(myObj);
-        while(myReader.hasNextLine()){
-            String linha = myReader.nextLine();
-            String[] dividida = linha.split(",");
-            String[] dias = dividida[0].split("\\.");
-            int day = this.dia.getDayOfMonth();
-            Month mes = this.dia.getMonth();
-            int ano = this.dia.getYear();
-
-            if(day == (Integer.parseInt(dias[2])) && ano == (Integer.parseInt(dias[0])) && mes.getValue() == (Integer.parseInt(dias[1])) ){
-                continue;
-            }
-            else {
-                simular((day-(Integer.parseInt(dias[2])))*((mes.getValue()-(Integer.parseInt(dias[1])))*30)*((ano-(Integer.parseInt(dias[0])))*365));
-            }
-
-            String um = dividida[1];
-            String dois = dividida[2];
-            if (dividida.length == 3)
-            {
-                CasaInteligente ci = this.casas.get(um);
-                ci.setComercializadorEn(dois);
-                this.addCasa(ci);
-            }
-            else
-            {
-                String tres = dividida[3];
-                switch(tres)
-                {
-                    case "setOn":
-                        CasaInteligente ci = this.casas.get(um);
-                        ci.setDeviceOn(dois);
-                        this.addCasa(ci);
-                    case "setOff":
-                        CasaInteligente ci2 = this.casas.get(um);
-                        ci2.setDeviceOff(dois);
-                        this.addCasa(ci2);
-                    default:
-                        ComercializadorEnergia ce = this.comercializadores.get(um);
-                        ce.setCustoDiarioEner(Double.parseDouble(tres));
-                        this.addComercializador(ce);
-                }
-            }
-
-        }
+        this.casas = new HashMap<>();
+        this.comercializadores = new HashMap<>();
+        this.dia = LocalDateTime.of(0, Month.JANUARY, 1, 1, 1, 1);
+        this.marcas = new HashMap<>();
+        this.lerArquivo(filename);
     }
 
     public LocalDateTime getDia() {
@@ -116,7 +72,8 @@ public class Simulacao implements Serializable
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public void lerArquivo(String filename) throws IOException, ClassNotFoundException {
+    public void lerArquivoAnterior(String filename) throws IOException, ClassNotFoundException
+    {
 
         FileInputStream fis = new FileInputStream(filename);
         ObjectInputStream ois = new ObjectInputStream(fis);
@@ -126,7 +83,15 @@ public class Simulacao implements Serializable
         this.setMarcas(s.getMarcas());
         this.setDia(s.getDia());
 
-        /*
+    }
+    /**
+     * funçao que le um ficheiro de configuracao
+     * @param filename
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public void lerArquivo(String filename)throws IOException, ClassNotFoundException
+    {
         File myObj = new File(filename);
         Scanner myReader = new Scanner(myObj);
         String linha = myReader.nextLine();
@@ -202,13 +167,138 @@ public class Simulacao implements Serializable
             inicio = myReader.nextLine();
 
         }
-        System.out.println(this.comercializadores);
-        System.out.println(this.casas);
-        */
+    }
+
+    /**
+     * funçao que salva a simulacao em estilo log.txt
+     * @param anterior
+     * @throws IOException
+     */
+    public void salvarLog (String anterior) throws IOException{
+        File myObj = new File(anterior);
+        FileWriter fw = new FileWriter(anterior);
+        fw.write(this.dia.getDayOfMonth()  + "/" + this.dia.getMonthValue());
+        fw.write("\n");
+        for (ComercializadorEnergia ce : this.comercializadores.values())
+        {
+            fw.write("nome=" + ce.getNome() +",CustoDiarioEner=" + ce.getCustoDiarioEner()
+                    +",VolumeFatura=" + ce.getVolumeFatura() + "\n");
+            for (String fatura : ce.getFaturas())
+            {
+                fw.write(fatura + " ");
+                fw.write(",");
+            }
+            fw.write("\n");
+        }
+        fw.write("Casas\n");
+        for (CasaInteligente ci : this.casas.values())
+        {
+            fw.write("Proprietario=" + ci.getProprietario() +",Morada=" + ci.getMorada()
+                    + ",Nif=" + ci.getNIF() +",ComercializadorEn=" + ci.getComercializadorEn()
+                    + ",GastoCasa=" + ci.getGastoCasa() + "\n");
+            Map<String,SmartDevice> sd = ci.getDevices();
+            for (String id : sd.keySet())
+            {
+                SmartDevice device = sd.get(id);
+                switch (device.getClass().getSimpleName())
+                {
+
+                    case ("SmartBulb"):
+                        SmartBulb sb= (SmartBulb) device;
+                        fw.write("SmartBulb Id=" + sb.getID() + " On=" + sb.getOn() +
+                                " CustoInstallation=" + sb.getCustoInstalation()+ " tone=" + sb.getTone() + " Dimensao=" +sb.getTone()
+                                + " CustoDiario=" + sb.getCustoDiario()+ ";");
+                        break;
+                    case ("SmartSpeaker"):
+                        SmartSpeaker sp= (SmartSpeaker) device;
+                        fw.write("SmartSpeaker Id=" + sp.getID() +" On=" + sp.getOn() +
+                                " CustoInstallation=" + sp.getCustoInstalation()
+                                + " Volume=" + sp.getVolume() + " Canal=" + sp.getChannel()
+                                + " Marca=" + sp.getMarca().getNome() + " Custo=" + sp.getMarca().getCusto()+ ";");
+                        break;
+                    case ("SmartCamera"):
+                        SmartCamera sc= (SmartCamera) device;
+                        fw.write("SmartCamera Id=" + sc.getID() +" On=" + sc.getOn() +
+                                " CustoInstallation=" + sc.getCustoInstalation()
+                                + " Resolucao=" + sc.getResolucao() + " TamanhoFicheiro=" + sc.getTamanho_ficheiro()+ ";");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            fw.write("\n");
+            Map<String,List<String>> l = ci.getLocations();
+            for (String quarto : l.keySet())
+            {
+                fw.write(quarto);
+                for (String ids : l.get(quarto))
+                {
+                    fw.write(" " + ids );
+                }
+                fw.write(";");
+
+            }
+            fw.write("\n");
+        }
+        fw.write("EndOfFile");
+        fw.close();
     }
 
 
+    /**
+     * Automatiza a simulacao atraves de um arquivo que é dado como parametro
+     *@throws FileNotFoundException
+     * @param filename  ,o nome do arquivo que queremos simular
+     */
+    public void automatizarSimulacao(String filename) throws FileNotFoundException
+    {
+        File myObj = new File(filename);
+        Scanner myReader = new Scanner(myObj);
+        while(myReader.hasNextLine()){
+            String linha = myReader.nextLine();
+            String[] dividida = linha.split(",");
+            String[] dias = dividida[0].split("\\.");
+            int day = this.dia.getDayOfMonth();
+            Month mes = this.dia.getMonth();
+            int ano = this.dia.getYear();
 
+            if(day == (Integer.parseInt(dias[2])) && ano == (Integer.parseInt(dias[0])) && mes.getValue() == (Integer.parseInt(dias[1])) ){
+                continue;
+            }
+            else {
+                simular((day-(Integer.parseInt(dias[2])))*((mes.getValue()-(Integer.parseInt(dias[1])))*30)*((ano-(Integer.parseInt(dias[0])))*365));
+            }
+
+            String um = dividida[1];
+            String dois = dividida[2];
+            if (dividida.length == 3)
+            {
+                CasaInteligente ci = this.casas.get(um);
+                ci.setComercializadorEn(dois);
+                this.addCasa(ci);
+            }
+            else
+            {
+                String tres = dividida[3];
+                switch(tres)
+                {
+                    case "setOn":
+                        CasaInteligente ci = this.casas.get(um);
+                        ci.setDeviceOn(dois);
+                        this.addCasa(ci);
+                    case "setOff":
+                        CasaInteligente ci2 = this.casas.get(um);
+                        ci2.setDeviceOff(dois);
+                        this.addCasa(ci2);
+                    default:
+                        ComercializadorEnergia ce = this.comercializadores.get(um);
+                        ce.setCustoDiarioEner(Double.parseDouble(tres));
+                        this.addComercializador(ce);
+                }
+            }
+
+        }
+    }
 
     /**
      * funçao que salva o objecto em  binario em um arquvio anterior
@@ -348,6 +438,7 @@ public class Simulacao implements Serializable
      *
      * Método que atualiza fatura dos comercializadores
      * Calcula o consumo total de cada comercializador
+     * @param dias dias a serem simulados
      */
     public void simular(int dias)
     {
@@ -360,10 +451,12 @@ public class Simulacao implements Serializable
            ci.setGastoCasa(ci.getGastoCasa() + preco);
            ci.setGastoEnergia(ci.getGastoEnergia() +  ci.custoDiario() * dias);
            ci.setGastoSimulacao(preco);
-           ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia.getDayOfMonth(),dia.getDayOfMonth()+dias);
+           int dia1 = dia.getDayOfMonth();
+           int mes1 = dia.getMonthValue();
+           dia = dia.plusDays(dias);
+           ce.addFatura(ci.getNIF(),ci.getMorada(),ci.getProprietario(),preco ,dia1,mes1, dia.getDayOfMonth(), dia.getMonthValue());
 
         }
-        dia = dia.plusDays(dias);
     }
 
     /**
